@@ -4,8 +4,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Split Ledger">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F1F3F6">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B0D12">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F2F1EE">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0E0E10">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
@@ -17,21 +17,21 @@
 <style>
 /* ── tokens ────────────────────────────────────────────────────────────── */
 :root{
-  --bg:#F1F3F6;
+  --bg:#F2F1EE;
   --surface:#FFFFFF;
-  --surface-2:#F7F8FA;
-  --ink:#11141B;
-  --ink-2:#3C4453;
-  --muted:#6E7789;
-  --line:#E2E6ED;
-  --line-2:#D2D8E3;
-  --strength:#2B4FD1;
-  --strength-soft:#E7ECFC;
-  --athletic:#C9491F;
-  --athletic-soft:#FBE9E1;
-  --good:#0E7C55;
-  --good-soft:#E2F3EC;
-  --warn:#9A6400;
+  --surface-2:#F8F7F4;
+  --ink:#17171A;
+  --ink-2:#43444A;
+  --muted:#78787E;
+  --line:#E4E2DD;
+  --line-2:#D2CFC9;
+  --strength:#3C4149;
+  --strength-soft:#EDECEA;
+  --athletic:#8A7250;
+  --athletic-soft:#F3EEE5;
+  --good:#5C6A58;
+  --good-soft:#EAEEE7;
+  --warn:#7C6A45;
   --shadow:0 1px 2px rgba(17,20,27,.06), 0 8px 24px -12px rgba(17,20,27,.18);
   --shadow-lift:0 2px 6px rgba(17,20,27,.08), 0 24px 48px -20px rgba(17,20,27,.35);
   --r-s:8px; --r-m:14px; --r-l:20px;
@@ -41,30 +41,30 @@
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --bg:#0B0D12;
-    --surface:#14171F;
-    --surface-2:#1A1E28;
-    --ink:#EDF0F6;
-    --ink-2:#C3CAD8;
-    --muted:#8C95A6;
-    --line:#232936;
-    --line-2:#303849;
-    --strength:#7E9CFF;
-    --strength-soft:#1A2340;
-    --athletic:#FF8A5B;
-    --athletic-soft:#37211A;
-    --good:#4CC79A;
-    --good-soft:#12291F;
-    --warn:#E0A73C;
+    --bg:#0E0E10;
+    --surface:#17171A;
+    --surface-2:#1E1E22;
+    --ink:#F0EFEC;
+    --ink-2:#C6C4BF;
+    --muted:#8A8985;
+    --line:#26262A;
+    --line-2:#35353B;
+    --strength:#AEB4BF;
+    --strength-soft:#22242A;
+    --athletic:#C9A87E;
+    --athletic-soft:#2A231A;
+    --good:#93A88C;
+    --good-soft:#1A211A;
+    --warn:#C2A46E;
     --shadow:0 1px 2px rgba(0,0,0,.5), 0 8px 24px -12px rgba(0,0,0,.7);
     --shadow-lift:0 2px 6px rgba(0,0,0,.5), 0 24px 48px -20px rgba(0,0,0,.9);
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0B0D12; --surface:#14171F; --surface-2:#1A1E28; --ink:#EDF0F6; --ink-2:#C3CAD8;
-  --muted:#8C95A6; --line:#232936; --line-2:#303849;
-  --strength:#7E9CFF; --strength-soft:#1A2340; --athletic:#FF8A5B; --athletic-soft:#37211A;
-  --good:#4CC79A; --good-soft:#12291F; --warn:#E0A73C;
+  --bg:#0E0E10; --surface:#17171A; --surface-2:#1E1E22; --ink:#F0EFEC; --ink-2:#C6C4BF;
+  --muted:#8A8985; --line:#26262A; --line-2:#35353B;
+  --strength:#AEB4BF; --strength-soft:#22242A; --athletic:#C9A87E; --athletic-soft:#2A231A;
+  --good:#93A88C; --good-soft:#1A211A; --warn:#C2A46E;
   --shadow:0 1px 2px rgba(0,0,0,.5), 0 8px 24px -12px rgba(0,0,0,.7);
   --shadow-lift:0 2px 6px rgba(0,0,0,.5), 0 24px 48px -20px rgba(0,0,0,.9);
 }
@@ -313,7 +313,7 @@ textarea{resize:vertical;min-height:64px;font-family:var(--sans)}
   display:grid;place-items:center;color:var(--muted);
 }
 .tick svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.tick[aria-pressed="true"]{background:var(--good);border-color:var(--good);color:#fff}
+.tick[aria-pressed="true"]{background:var(--good);border-color:var(--good);color:var(--surface)}
 .setrow.on input{border-color:color-mix(in srgb,var(--good) 40%,transparent)}
 .addset{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;padding:7px 0 0}
 .resttimer{
@@ -358,11 +358,11 @@ textarea{resize:vertical;min-height:64px;font-family:var(--sans)}
 /* ── account ───────────────────────────────────────────────────────────── */
 #acctBtn.synced{border-color:var(--good)}
 .acct-i{
-  width:22px;height:22px;border-radius:50%;background:var(--good);color:#fff;display:grid;place-items:center;
+  width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--surface);display:grid;place-items:center;
   font-family:var(--disp);font-weight:700;font-size:12px;line-height:1;
 }
 .acct-big{
-  width:40px;height:40px;border-radius:50%;background:var(--strength);color:#fff;display:grid;place-items:center;
+  width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--surface);display:grid;place-items:center;
   font-family:var(--disp);font-weight:700;font-size:17px;flex:none;
 }
 #acctBtn.busy{opacity:.55}
@@ -775,14 +775,13 @@ function viewToday(){
   <section class="hero">
     <div class="date">${DOW[new Date().getDay()]} · ${MON[new Date().getMonth()]} ${new Date().getDate()}</div>
     <h1>${greeting()}</h1>
-    <div class="sub-line"><b>${doneThisWeek}/4</b> sessions logged this week</div>
+    <div class="sub-line"><b>${doneThisWeek}</b> session${doneThisWeek===1?'':'s'} logged this week</div>
     <div class="weekstrip">${strip}</div>
   </section>
   ${resume || card}
   <span class="eyebrow">At a glance</span>
   <div class="stats">
-    <div class="stat"><div class="k">This week</div><div class="v">${doneThisWeek}<small>/4</small></div>
-      <div class="bar"><i style="width:${Math.min(100,doneThisWeek/4*100)}%"></i></div></div>
+    <div class="stat"><div class="k">This week</div><div class="v">${doneThisWeek}</div></div>
     <div class="stat"><div class="k">Week streak</div><div class="v">${streak}<small> wk</small></div>
       <div class="bar"><i style="width:${Math.min(100,streak*20)}%"></i></div></div>
     <div class="stat"><div class="k">Sessions in ${MON[new Date().getMonth()].slice(0,3)}</div><div class="v">${mo.length}</div></div>
