@@ -355,6 +355,47 @@ textarea{resize:vertical;min-height:64px;font-family:var(--sans)}
 }
 @keyframes toast{0%{opacity:0;transform:translate(-50%,8px)}12%{opacity:1;transform:translate(-50%,0)}82%{opacity:1}100%{opacity:0}}
 
+/* ── workout builder ───────────────────────────────────────────────────── */
+.bex{border:1px solid var(--line);background:var(--surface-2);border-radius:12px;padding:11px;margin-bottom:8px}
+.bex-hd{display:flex;align-items:center;gap:8px}
+.bex-hd .idx{font-family:var(--mono);font-size:11px;color:var(--muted);width:18px;flex:none}
+.bex-hd input{flex:1;font-weight:600;background:var(--surface)}
+.bex-x{width:34px;height:34px;border-radius:9px;border:1px solid var(--line-2);display:grid;place-items:center;color:var(--muted);flex:none}
+.bex-x svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px}
+.bex-grid span{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
+.bex-grid input{padding:8px 6px;font-size:14px;text-align:center;font-family:var(--mono);background:var(--surface)}
+.bex .cuein{margin-top:7px;font-size:13.5px;background:var(--surface)}
+.addmv{width:100%;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;
+  padding:11px 0;border:1px dashed var(--line-2);border-radius:11px;margin-bottom:16px}
+
+/* ── movement progress ─────────────────────────────────────────────────── */
+.mv{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid var(--line);width:100%;text-align:left}
+.mv:last-child{border-bottom:0}
+.mv .bd{flex:1;min-width:0}
+.mv .bd b{display:block;font-size:14px;font-weight:600;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mv .bd i{font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.03em}
+.mv .bd i em{font-style:normal;color:var(--good)}
+.mv .bd i em.dn{color:var(--athletic)}
+.spark{width:56px;height:22px;flex:none;overflow:visible}
+.spark path{fill:none;stroke:var(--strength);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.spark circle{fill:var(--strength)}
+.mv .rt{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;flex:none;font-weight:600}
+.mv .rt em{display:block;font-style:normal;font-size:9.5px;color:var(--muted);font-weight:400;letter-spacing:.08em;margin-top:2px}
+.bigchart{width:100%;height:auto;display:block;overflow:visible}
+.bigchart .ar{fill:var(--strength);opacity:.12}
+.bigchart .ln{fill:none;stroke:var(--strength);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.bigchart .gd{stroke:var(--line);stroke-width:1}
+.bigchart .pt{fill:var(--surface);stroke:var(--strength);stroke-width:1.7}
+.bigchart .pt.last{fill:var(--strength)}
+.bigchart text{fill:var(--muted);font-family:var(--mono);font-size:9px}
+
+/* ── row-level delete ──────────────────────────────────────────────────── */
+.hitem-main{flex:1;display:flex;align-items:center;gap:12px;text-align:left;min-width:0}
+.hitem-x{width:34px;height:34px;border-radius:9px;border:1px solid var(--line-2);display:grid;place-items:center;color:var(--muted);flex:none}
+.hitem-x svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.hitem-x:active{color:var(--athletic);border-color:var(--athletic)}
+
 @media (min-width:720px){
   .wrap{padding-bottom:48px}
   .nav{position:static;background:none;backdrop-filter:none;border-top:0;border-bottom:1px solid var(--line);padding:0}
@@ -398,7 +439,7 @@ textarea{resize:vertical;min-height:64px;font-family:var(--sans)}
    equipment) and an Athletic option (unilateral, explosive, reactive).
    ══════════════════════════════════════════════════════════════════════════ */
 const PROGRAM = [
-{ id:'d1', n:1, title:'Lower — Squat', focus:'Quads · Glutes · Adductors · Calves',
+{ id:'d1', n:1, title:'Lower — Squat', focus:'Quads · Glutes · Adductors · Calves', short:'Squat',
   options:[
   { id:'d1s', style:'strength', name:'Squat Day: Barbell Base', mins:65, gear:'Commercial gym',
     blurb:'Heavy bilateral squat, then hypertrophy volume for quads and calves. Built around one hard main lift.',
@@ -424,7 +465,7 @@ const PROGRAM = [
       {nm:'Pallof Press', sets:3, reps:'10 / side', rest:':45', cue:'Resist rotation. Ribs down, glutes on, press slow.'}
     ]}
 ]},
-{ id:'d2', n:2, title:'Upper — Push', focus:'Chest · Front & Side Delts · Triceps',
+{ id:'d2', n:2, title:'Upper — Push', focus:'Chest · Front & Side Delts · Triceps', short:'Push',
   options:[
   { id:'d2s', style:'strength', name:'Press Ladder', mins:60, gear:'Commercial gym',
     blurb:'Flat bench for strength, overhead for the second wave, then incline and isolation volume.',
@@ -450,7 +491,7 @@ const PROGRAM = [
       {nm:'Ab Wheel Rollout', sets:3, reps:'8–10', rest:'1:00', cue:'Posterior pelvic tilt the whole way. Only roll as far as you can hold the brace.'}
     ]}
 ]},
-{ id:'d3', n:3, title:'Lower — Hinge',  focus:'Hamstrings · Glutes · Low Back · Core',
+{ id:'d3', n:3, title:'Lower — Hinge',  focus:'Hamstrings · Glutes · Low Back · Core', short:'Hinge',
   options:[
   { id:'d3s', style:'strength', name:'Pull From The Floor', mins:60, gear:'Commercial gym',
     blurb:'Deadlift as the anchor, then hip thrusts and curls to cover both hamstring functions — hip extension and knee flexion.',
@@ -477,7 +518,7 @@ const PROGRAM = [
       {nm:'Dead Bug (slow, 5s per rep)', sets:3, reps:'8 / side', rest:':45', cue:'Low back glued to the floor. Exhale fully at end range.'}
     ]}
 ]},
-{ id:'d4', n:4, title:'Upper — Pull', focus:'Lats · Mid-Back · Rear Delts · Biceps · Grip',
+{ id:'d4', n:4, title:'Upper — Pull', focus:'Lats · Mid-Back · Rear Delts · Biceps · Grip', short:'Pull',
   options:[
   { id:'d4s', style:'strength', name:'Vertical & Horizontal', mins:55, gear:'Commercial gym',
     blurb:'One heavy vertical pull, one heavy horizontal pull, then rows and arms for volume. Covers every angle of the back.',
@@ -506,10 +547,26 @@ const PROGRAM = [
 
 const ALLOPTS = {};
 PROGRAM.forEach(d => d.options.forEach(o => ALLOPTS[o.id] = {...o, day:d}));
+/* ══════════════════════════════════════════════════════════════════════════
+   RANDOMIZER POOLS — one pool per body section per track. A roll fills each
+   slot from that pool only, so a strength roll never pulls an athletic
+   movement and vice versa.
+   ══════════════════════════════════════════════════════════════════════════ */
+const POOLS = {"d1s":[{"label":"Main squat","opt":false,"opts":[{"nm":"Barbell Back Squat","sets":4,"reps":"4–6","rest":"3:00","cue":"Brace hard. Hips and chest rise together."},{"nm":"Front Squat","sets":4,"reps":"5","rest":"3:00","cue":"Elbows high, upright torso, control the descent."},{"nm":"Safety-Bar Squat","sets":4,"reps":"5","rest":"3:00","cue":"Easier on the shoulders — fight the forward pull."},{"nm":"Paused Back Squat","sets":4,"reps":"4","rest":"3:00","cue":"Two seconds in the hole, no bounce out."},{"nm":"Hack Squat (machine)","sets":4,"reps":"6–8","rest":"2:30","cue":"Deep range with the back supported. Push through mid-foot."}]},{"label":"Second push","opt":false,"opts":[{"nm":"Leg Press","sets":3,"reps":"8–10","rest":"2:00","cue":"Feet mid-platform, knees track over toes."},{"nm":"Hack Squat (machine)","sets":3,"reps":"8–10","rest":"2:00","cue":"Stop one or two reps shy of failure."},{"nm":"Smith Machine Squat","sets":3,"reps":"8–10","rest":"2:00","cue":"Feet slightly forward lets you sit straight down."},{"nm":"Goblet Squat","sets":3,"reps":"12","rest":"1:30","cue":"Elbows inside the knees at the bottom."}]},{"label":"Single leg","opt":false,"opts":[{"nm":"Dumbbell Bulgarian Split Squat","sets":3,"reps":"8 / leg","rest":"1:30","cue":"Rear foot at knee height. Lean in for more glute."},{"nm":"Walking Dumbbell Lunge","sets":3,"reps":"10 / leg","rest":"1:30","cue":"Step long, front shin near vertical."},{"nm":"Dumbbell Step-Up","sets":3,"reps":"8 / leg","rest":"1:30","cue":"Box at knee height. Do not push off the back foot."},{"nm":"Front-Foot-Elevated Split Squat","sets":3,"reps":"10 / leg","rest":"1:30","cue":"The elevation buys you extra quad stretch."}]},{"label":"Hamstring balance","opt":false,"opts":[{"nm":"Romanian Deadlift","sets":3,"reps":"8–10","rest":"2:00","cue":"Moderate load — balance for a squat day, not a max."},{"nm":"Seated Leg Curl","sets":3,"reps":"10–12","rest":"1:30","cue":"Hip flexion pre-stretches the hamstring."},{"nm":"Lying Leg Curl","sets":3,"reps":"10–12","rest":"1:30","cue":"Point the toes to shift work off the calves."},{"nm":"Cable Pull-Through","sets":3,"reps":"12","rest":"1:30","cue":"Hips back, then snap them through. Spine locked."}]},{"label":"Quad isolation","opt":false,"opts":[{"nm":"Leg Extension","sets":3,"reps":"12–15","rest":"1:00","cue":"Pause a second at lockout."},{"nm":"Cyclist Squat (heels elevated)","sets":3,"reps":"10","rest":"1:30","cue":"Heels on plates puts everything on the quad."},{"nm":"Sissy Squat","sets":3,"reps":"10–12","rest":"1:00","cue":"Knees travel forward, hips stay extended."}]},{"label":"Calves","opt":false,"opts":[{"nm":"Standing Calf Raise","sets":4,"reps":"10–12","rest":"1:00","cue":"Full stretch at the bottom, two-second squeeze up top."},{"nm":"Seated Calf Raise","sets":4,"reps":"12–15","rest":"1:00","cue":"Bent knee targets the soleus."},{"nm":"Leg Press Calf Raise","sets":4,"reps":"12","rest":"1:00","cue":"Let the heels drop below the platform."}]},{"label":"Core","opt":false,"opts":[{"nm":"Cable Crunch","sets":3,"reps":"12–15","rest":"1:00","cue":"Round the spine toward the knees. Hips stay fixed."},{"nm":"Weighted Decline Sit-Up","sets":3,"reps":"12","rest":"1:00","cue":"Hold the plate at the chest, control the way down."},{"nm":"Hanging Leg Raise","sets":3,"reps":"10–12","rest":"1:00","cue":"Curl the pelvis at the top. No swinging."},{"nm":"Ab Wheel Rollout","sets":3,"reps":"8–10","rest":"1:00","cue":"Posterior tilt throughout. Only go as far as the brace holds."}]}],"d1a":[{"label":"Jump","opt":false,"opts":[{"nm":"Box Jump (step down)","sets":5,"reps":"3","rest":"1:30","cue":"Land quiet. Step down every rep."},{"nm":"Trap-Bar Jump","sets":5,"reps":"3","rest":"1:30","cue":"Light bar, maximum height. Absorb softly."},{"nm":"Squat Jump","sets":5,"reps":"5","rest":"1:30","cue":"Continuous, minimal ground time."},{"nm":"Depth Jump to Box","sets":4,"reps":"3","rest":"2:00","cue":"Drop from a low box, rebound instantly. Advanced."},{"nm":"Hurdle Hop (stick the landing)","sets":4,"reps":"4","rest":"1:30","cue":"Hold each landing for a full second."}]},{"label":"Squat pattern","opt":false,"opts":[{"nm":"Front Squat","sets":4,"reps":"5","rest":"2:30","cue":"Elbows high, athletic squat pattern."},{"nm":"Safety-Bar Squat","sets":4,"reps":"5","rest":"2:30","cue":"Fight the bar pulling you forward."},{"nm":"Paused Back Squat","sets":4,"reps":"4","rest":"2:30","cue":"Own the bottom position."},{"nm":"Tempo Goblet Squat","sets":4,"reps":"8","rest":"2:00","cue":"Three seconds down, one-second pause, drive up."}]},{"label":"Single leg","opt":false,"opts":[{"nm":"Dumbbell Reverse Lunge","sets":3,"reps":"8 / leg","rest":"1:30","cue":"Step back and down. Loads the glute and hamstring."},{"nm":"Rear-Foot-Elevated Split Squat","sets":3,"reps":"8 / leg","rest":"1:30","cue":"Slow down, drive up. Knee tracks the toes."},{"nm":"Walking Dumbbell Lunge","sets":3,"reps":"10 / leg","rest":"1:30","cue":"Long stride, tall chest."},{"nm":"High Box Step-Up","sets":3,"reps":"8 / leg","rest":"1:30","cue":"Drive through the heel. No push-off below."}]},{"label":"Frontal plane","opt":false,"opts":[{"nm":"Lateral Lunge (goblet)","sets":3,"reps":"8 / side","rest":"1:15","cue":"Hips back over the working leg, trail leg straight."},{"nm":"Cossack Squat","sets":3,"reps":"8 / side","rest":"1:15","cue":"Sink deep, keep the heel down."},{"nm":"Lateral Sled Drag","sets":3,"reps":"20 yd / side","rest":"1:15","cue":"Stay low, push through the outside edge."},{"nm":"Banded Lateral Walk","sets":3,"reps":"15 / side","rest":"1:00","cue":"Band at the ankles, feet never come together."}]},{"label":"Reactive","opt":false,"opts":[{"nm":"Skater Bound (stick)","sets":3,"reps":"5 / side","rest":"1:00","cue":"Hold the landing a full second before the next rep."},{"nm":"Lateral Bound to Box","sets":3,"reps":"5 / side","rest":"1:00","cue":"Cover distance sideways, land absorbed."},{"nm":"Single-Leg Pogo","sets":3,"reps":"10 / side","rest":"1:00","cue":"Stiff ankle, minimal knee bend, fast off the floor."},{"nm":"5-10-5 Shuttle","sets":4,"reps":"1","rest":"1:30","cue":"Full recovery between runs. Sharp changes of direction."}]},{"label":"Knee & groin insurance","opt":false,"opts":[{"nm":"Copenhagen Plank","sets":3,"reps":"20–30s / side","rest":"0:45","cue":"The best groin-strain reducer there is. Start bent-knee."},{"nm":"Nordic Hamstring Curl","sets":3,"reps":"5","rest":"2:00","cue":"Slow lower, push back up with the hands."},{"nm":"Reverse Nordic","sets":3,"reps":"8","rest":"1:00","cue":"Lean back from the knees. Brutal quad stretch under load."},{"nm":"Slider Adductor Slide","sets":3,"reps":"10 / side","rest":"0:45","cue":"Control the slide out, pull back with the inner thigh."}]},{"label":"Ankle","opt":false,"opts":[{"nm":"Single-Leg Calf Raise","sets":3,"reps":"12 / leg","rest":"0:45","cue":"Full range off a step. Ankle stiffness is free speed."},{"nm":"Pogo Hops","sets":3,"reps":"20","rest":"0:45","cue":"Bounce off the balls of the feet, knees nearly locked."},{"nm":"Tibialis Raise","sets":3,"reps":"15","rest":"0:45","cue":"Back to a wall, pull the toes up. Protects the shins."}]},{"label":"Core","opt":false,"opts":[{"nm":"Pallof Press","sets":3,"reps":"10 / side","rest":"0:45","cue":"Resist rotation. Ribs down, glutes on."},{"nm":"Suitcase Carry","sets":3,"reps":"40 yd / side","rest":"1:00","cue":"Heavy, and do not lean."},{"nm":"Side Plank with Hip Lift","sets":3,"reps":"10 / side","rest":"0:45","cue":"Lateral chain — protects the low back when sprinting."},{"nm":"Dead Bug","sets":3,"reps":"8 / side","rest":"0:45","cue":"Low back glued down, exhale fully at end range."}]}],"d2s":[{"label":"Main press","opt":false,"opts":[{"nm":"Barbell Bench Press","sets":4,"reps":"4–6","rest":"3:00","cue":"Shoulder blades pinned, bar to the lower chest."},{"nm":"Close-Grip Bench Press","sets":4,"reps":"5–6","rest":"3:00","cue":"Hands shoulder width, elbows tucked. Triceps-biased."},{"nm":"Incline Barbell Press","sets":4,"reps":"5–6","rest":"3:00","cue":"Thirty degrees. Upper chest and front delt."},{"nm":"Paused Bench Press","sets":4,"reps":"4","rest":"3:00","cue":"One second on the chest, no bounce."}]},{"label":"Overhead","opt":false,"opts":[{"nm":"Standing Overhead Press","sets":3,"reps":"5–6","rest":"2:30","cue":"Glutes squeezed, ribs down, head through at lockout."},{"nm":"Seated Dumbbell Shoulder Press","sets":3,"reps":"8–10","rest":"2:00","cue":"Back supported. Full range, no bouncing off the bottom."},{"nm":"Push Press","sets":3,"reps":"5","rest":"2:30","cue":"Dip and drive from the legs, lower under control."},{"nm":"Machine Shoulder Press","sets":3,"reps":"10","rest":"2:00","cue":"Good when the bench day already cooked you."}]},{"label":"Chest volume","opt":false,"opts":[{"nm":"Incline Dumbbell Press","sets":3,"reps":"8–10","rest":"2:00","cue":"Stretch at the bottom, stop short of touching up top."},{"nm":"Flat Dumbbell Press","sets":3,"reps":"10","rest":"2:00","cue":"Wider range than the bar. Control the eccentric."},{"nm":"Machine Chest Press","sets":3,"reps":"10–12","rest":"1:30","cue":"Safe to push close to failure."},{"nm":"Cable Fly","sets":3,"reps":"12–15","rest":"1:15","cue":"Slight elbow bend, squeeze at the midline."}]},{"label":"Compound finisher","opt":false,"opts":[{"nm":"Weighted Dip","sets":3,"reps":"6–8","rest":"2:00","cue":"Lean forward for chest, upright for triceps."},{"nm":"Decline Dumbbell Press","sets":3,"reps":"8–10","rest":"2:00","cue":"Lower chest with the shoulders out of the way."},{"nm":"Weighted Push-Up","sets":3,"reps":"12","rest":"1:30","cue":"Plate on the back. Body rigid start to finish."},{"nm":"Machine Chest Press","sets":3,"reps":"10","rest":"1:30","cue":"Straight sets to near failure."}]},{"label":"Side delts","opt":false,"opts":[{"nm":"Cable Lateral Raise","sets":3,"reps":"12–15","rest":"1:00","cue":"One arm, cable behind the body. Lead with the elbow."},{"nm":"Dumbbell Lateral Raise","sets":3,"reps":"12–15","rest":"1:00","cue":"Stop at shoulder height, no shrugging."},{"nm":"Machine Lateral Raise","sets":3,"reps":"12–15","rest":"1:00","cue":"Constant tension throughout."},{"nm":"Wide-Grip Upright Row","sets":3,"reps":"12","rest":"1:00","cue":"Wide grip keeps the shoulder happy."}]},{"label":"Triceps","opt":false,"opts":[{"nm":"Overhead Cable Triceps Extension","sets":3,"reps":"10–12","rest":"1:00","cue":"Full overhead stretch — that is where the long head grows."},{"nm":"Skull Crusher","sets":3,"reps":"10","rest":"1:00","cue":"Lower to the forehead, elbows still."},{"nm":"Overhead Dumbbell Extension","sets":3,"reps":"12","rest":"1:00","cue":"One heavy dumbbell, both hands."}]},{"label":"Triceps finisher","opt":true,"opts":[{"nm":"Triceps Pushdown","sets":2,"reps":"12–15","rest":"0:45","cue":"Superset it with the lateral raises if time is short."},{"nm":"Rope Pushdown","sets":2,"reps":"15","rest":"0:45","cue":"Spread the rope at the bottom."},{"nm":"Bench Dip","sets":2,"reps":"15","rest":"0:45","cue":"Feet out for more load."}]},{"label":"Balance","opt":false,"opts":[{"nm":"Face Pull","sets":3,"reps":"15","rest":"0:45","cue":"Non-negotiable on a push day. Pull to the eyes."},{"nm":"Band Pull-Apart","sets":3,"reps":"20","rest":"0:45","cue":"Straight arms, squeeze the shoulder blades."},{"nm":"Reverse Pec Deck","sets":3,"reps":"15","rest":"0:45","cue":"Rear delts — the muscle that keeps you pressing pain-free."}]}],"d2a":[{"label":"Ballistic","opt":false,"opts":[{"nm":"Med-Ball Chest Pass","sets":5,"reps":"3","rest":"1:00","cue":"Maximum intent. Stop the set when speed drops."},{"nm":"Plyo Push-Up","sets":5,"reps":"3","rest":"1:00","cue":"Leave the floor every rep, land soft."},{"nm":"Med-Ball Overhead Slam","sets":5,"reps":"5","rest":"1:00","cue":"Full body. Drive the ball through the floor."},{"nm":"Med-Ball Rotational Throw","sets":4,"reps":"4 / side","rest":"1:00","cue":"Turn the back hip through. Power comes from the ground."}]},{"label":"Press pattern","opt":false,"opts":[{"nm":"Half-Kneeling Landmine Press","sets":4,"reps":"6 / arm","rest":"1:30","cue":"Shoulder-friendly arc. Down-knee glute squeezed."},{"nm":"Single-Arm Dumbbell Push Press","sets":4,"reps":"5 / arm","rest":"1:30","cue":"Dip, drive, punch overhead, lower slowly."},{"nm":"Z-Press","sets":4,"reps":"6","rest":"1:30","cue":"Seated on the floor, legs straight. Nowhere to cheat."},{"nm":"Tall-Kneeling Overhead Press","sets":4,"reps":"8","rest":"1:30","cue":"No leg drive available — pure shoulder and core."}]},{"label":"Chest anchor","opt":false,"opts":[{"nm":"Incline Dumbbell Press","sets":3,"reps":"8","rest":"2:00","cue":"Your strength anchor for the day."},{"nm":"Weighted Push-Up","sets":3,"reps":"10","rest":"1:30","cue":"Rigid plank, full lockout."},{"nm":"Flat Dumbbell Press","sets":3,"reps":"8–10","rest":"2:00","cue":"Controlled, heavy-ish."},{"nm":"Ring or TRX Push-Up","sets":3,"reps":"12","rest":"1:30","cue":"Instability recruits the whole shoulder girdle."}]},{"label":"Triceps","opt":false,"opts":[{"nm":"Dip (bodyweight, controlled)","sets":3,"reps":"8–10","rest":"1:30","cue":"Three-second lowering. Add weight past 12 clean reps."},{"nm":"Close-Grip Push-Up","sets":3,"reps":"15","rest":"1:00","cue":"Elbows brushing the ribs."},{"nm":"Triceps Pushdown","sets":3,"reps":"12","rest":"1:00","cue":"Simple volume to finish the arms."}]},{"label":"Shoulder stability","opt":false,"opts":[{"nm":"Bottoms-Up Kettlebell Press","sets":3,"reps":"8 / arm","rest":"1:00","cue":"Light bell. Crushing grip switches on the cuff."},{"nm":"Turkish Get-Up","sets":3,"reps":"3 / side","rest":"1:30","cue":"Slow and deliberate. Every joint has to cooperate."},{"nm":"Kettlebell Arm Bar","sets":3,"reps":"30s / side","rest":"1:00","cue":"Opens the chest and packs the shoulder."},{"nm":"Prone Y-T-W Raise","sets":3,"reps":"10","rest":"0:45","cue":"Light or no weight. Quality only."}]},{"label":"Balance pull","opt":false,"opts":[{"nm":"Face Pull","sets":3,"reps":"15","rest":"0:45","cue":"Thumbs back at the finish."},{"nm":"Band Pull-Apart","sets":3,"reps":"20","rest":"0:45","cue":"Straight arms, slow return."},{"nm":"Prone Trap Raise","sets":3,"reps":"12","rest":"0:45","cue":"Thumbs up, lift to a Y. Lower traps."}]},{"label":"Core","opt":false,"opts":[{"nm":"Ab Wheel Rollout","sets":3,"reps":"8–10","rest":"1:00","cue":"Only roll as far as the brace holds."},{"nm":"Hollow Body Hold","sets":3,"reps":"30s","rest":"0:45","cue":"Low back pressed flat. Shorten the levers if it lifts."},{"nm":"Plank Shoulder Tap","sets":3,"reps":"20","rest":"0:45","cue":"Hips dead still — that is the whole exercise."},{"nm":"Bear Crawl","sets":3,"reps":"20 yd","rest":"1:00","cue":"Knees an inch off the floor, back flat."}]}],"d3s":[{"label":"Main hinge","opt":false,"opts":[{"nm":"Deadlift (conventional)","sets":4,"reps":"3–5","rest":"3:00","cue":"Take the slack out first. Reset every rep."},{"nm":"Trap-Bar Deadlift","sets":4,"reps":"4–6","rest":"3:00","cue":"Easier on the back, still brutally effective."},{"nm":"Sumo Deadlift","sets":4,"reps":"3–5","rest":"3:00","cue":"Knees out, push the floor apart."},{"nm":"Deficit Deadlift","sets":4,"reps":"4","rest":"3:00","cue":"Stand on a plate. Longer range off the floor."},{"nm":"Rack Pull","sets":4,"reps":"5","rest":"2:30","cue":"Just below the knee. Overload the lockout."}]},{"label":"Glutes","opt":false,"opts":[{"nm":"Barbell Hip Thrust","sets":3,"reps":"8–10","rest":"2:00","cue":"Chin tucked, ribs down, one-second squeeze."},{"nm":"Barbell Glute Bridge","sets":3,"reps":"12","rest":"1:30","cue":"Shorter range, same job. Easier to set up."},{"nm":"Cable Pull-Through","sets":3,"reps":"12–15","rest":"1:15","cue":"Hips back, then snap through."},{"nm":"Machine Hip Thrust","sets":3,"reps":"10","rest":"2:00","cue":"Load it heavy without the setup fight."}]},{"label":"Hamstring — knee flexion","opt":false,"opts":[{"nm":"Seated Leg Curl","sets":3,"reps":"10–12","rest":"1:30","cue":"Seated beats lying for the stretch position."},{"nm":"Lying Leg Curl","sets":3,"reps":"10–12","rest":"1:30","cue":"Hips pressed down the whole set."},{"nm":"Nordic Hamstring Curl","sets":3,"reps":"6","rest":"2:00","cue":"The strain-prevention gold standard."},{"nm":"Slider Leg Curl","sets":3,"reps":"10","rest":"1:30","cue":"Hips high, heels drag out and back."}]},{"label":"Hamstring — hip extension","opt":false,"opts":[{"nm":"Weighted Back Extension (45°)","sets":3,"reps":"10–12","rest":"1:30","cue":"Round slightly for glutes, stay flat for erectors."},{"nm":"Good Morning","sets":3,"reps":"10","rest":"1:30","cue":"Light bar. Pure hinge groove."},{"nm":"Single-Leg Romanian Deadlift","sets":3,"reps":"8 / leg","rest":"1:15","cue":"Hips square, back leg locked."},{"nm":"Stiff-Leg Deadlift","sets":3,"reps":"8","rest":"2:00","cue":"Bar close, hamstrings loaded from the first inch."}]},{"label":"Calves","opt":false,"opts":[{"nm":"Seated Calf Raise","sets":3,"reps":"12–15","rest":"1:00","cue":"Bent knee targets the soleus."},{"nm":"Standing Calf Raise","sets":3,"reps":"10–12","rest":"1:00","cue":"Pause at the top and the bottom."}]},{"label":"Core","opt":false,"opts":[{"nm":"Hanging Leg Raise","sets":3,"reps":"10–12","rest":"1:00","cue":"Curl the pelvis at the top."},{"nm":"Weighted Plank","sets":3,"reps":"45s","rest":"1:00","cue":"Plate on the back, glutes and quads switched on."},{"nm":"Cable Woodchop","sets":3,"reps":"12 / side","rest":"1:00","cue":"Rotate from the hips, arms just hold on."},{"nm":"Ab Wheel Rollout","sets":3,"reps":"10","rest":"1:00","cue":"Slow out, slower back."}]},{"label":"Carry","opt":true,"opts":[{"nm":"Suitcase Carry","sets":3,"reps":"40 yd / side","rest":"1:00","cue":"Heavy. The obliques earn their keep here."},{"nm":"Farmer's Carry","sets":3,"reps":"40 yd","rest":"1:00","cue":"Tall posture, shoulders packed down."},{"nm":"Zercher Carry","sets":3,"reps":"30 yd","rest":"1:30","cue":"Bar in the elbow crease. Everything works."}]}],"d3a":[{"label":"Horizontal power","opt":false,"opts":[{"nm":"Standing Broad Jump","sets":5,"reps":"3","rest":"1:30","cue":"Full reset between reps. Chase distance, land soft."},{"nm":"Bounding","sets":4,"reps":"20 yd","rest":"1:30","cue":"Long, floating strides. Cover ground, not steps."},{"nm":"Single-Leg Broad Jump","sets":4,"reps":"3 / side","rest":"1:30","cue":"Stick every landing before the next rep."},{"nm":"Sprint Start (10 yd)","sets":6,"reps":"1","rest":"1:30","cue":"Aggressive first three steps, then relax."}]},{"label":"Speed pull","opt":false,"opts":[{"nm":"Trap-Bar Deadlift (speed work)","sets":5,"reps":"3","rest":"1:30","cue":"Sixty to seventy percent. Every rep as fast as possible."},{"nm":"Speed Deadlift","sets":5,"reps":"2","rest":"1:30","cue":"Bar speed is the whole point. Stop when it slows."},{"nm":"Hang High Pull","sets":5,"reps":"3","rest":"1:30","cue":"Explode from the hips, elbows lead."},{"nm":"Kettlebell Snatch","sets":5,"reps":"5 / arm","rest":"1:15","cue":"One smooth arc. Punch through at the top."}]},{"label":"Ballistic hinge","opt":false,"opts":[{"nm":"Kettlebell Swing (chest height)","sets":5,"reps":"10","rest":"1:00","cue":"Snap the hips, do not squat it."},{"nm":"Single-Arm Kettlebell Swing","sets":4,"reps":"8 / arm","rest":"1:00","cue":"Resist the rotation on every rep."},{"nm":"Band-Resisted Hip Thrust","sets":4,"reps":"12","rest":"1:00","cue":"Hardest at lockout, where the glute is shortest."}]},{"label":"Hamstring durability","opt":false,"opts":[{"nm":"Nordic Hamstring Curl","sets":3,"reps":"5–6","rest":"2:00","cue":"Slow lower, push back up. Non-negotiable."},{"nm":"Slider Leg Curl","sets":3,"reps":"10","rest":"1:30","cue":"Hips stay high the entire set."},{"nm":"Single-Leg Romanian Deadlift","sets":3,"reps":"8 / leg","rest":"1:15","cue":"Balance is part of the exercise."},{"nm":"Razor Curl","sets":3,"reps":"8","rest":"1:30","cue":"Hip flexion into knee flexion. Ferocious."}]},{"label":"Glute / single leg","opt":false,"opts":[{"nm":"Single-Leg Hip Thrust","sets":3,"reps":"10 / side","rest":"1:15","cue":"Ribs down, drive through the heel."},{"nm":"High Box Step-Up","sets":3,"reps":"8 / leg","rest":"1:15","cue":"No push-off from the trailing foot."},{"nm":"Reverse Hyper","sets":3,"reps":"15","rest":"1:15","cue":"Control the swing. Great for the low back."}]},{"label":"Drive","opt":false,"opts":[{"nm":"Sled Push","sets":4,"reps":"25 yd","rest":"1:30","cue":"Low body angle, short choppy steps."},{"nm":"Backward Sled Drag","sets":4,"reps":"25 yd","rest":"1:30","cue":"Knees-over-toes loading. Kind to sore knees."},{"nm":"Hill Sprint","sets":6,"reps":"20 yd","rest":"2:00","cue":"Walk back down. Quality over quantity."},{"nm":"Weighted Incline Walk","sets":3,"reps":"3 min","rest":"1:00","cue":"Steep and steady. Builds the engine without the pounding."}]},{"label":"Core","opt":false,"opts":[{"nm":"Side Plank with Hip Lift","sets":3,"reps":"10 / side","rest":"0:45","cue":"Directly protects the low back when sprinting."},{"nm":"Pallof Press","sets":3,"reps":"10 / side","rest":"0:45","cue":"Press slow, resist the pull."},{"nm":"Dead Bug","sets":3,"reps":"8 / side","rest":"0:45","cue":"Exhale fully at end range."},{"nm":"Copenhagen Plank","sets":3,"reps":"25s / side","rest":"0:45","cue":"Adductor insurance."}]}],"d4s":[{"label":"Vertical pull","opt":false,"opts":[{"nm":"Weighted Pull-Up","sets":4,"reps":"5–6","rest":"2:30","cue":"Full hang to chin over the bar."},{"nm":"Weighted Chin-Up","sets":4,"reps":"5–6","rest":"2:30","cue":"Supinated grip brings the biceps in."},{"nm":"Heavy Lat Pulldown","sets":4,"reps":"8","rest":"2:00","cue":"Use it when bodyweight is still the ceiling."},{"nm":"Assisted Pull-Up","sets":4,"reps":"8","rest":"2:00","cue":"Least assistance that lets you finish clean."}]},{"label":"Horizontal pull","opt":false,"opts":[{"nm":"Barbell Row (bent-over)","sets":4,"reps":"6–8","rest":"2:30","cue":"Torso at forty-five degrees, bar to the navel."},{"nm":"Pendlay Row","sets":4,"reps":"5","rest":"2:30","cue":"Dead stop on the floor every rep."},{"nm":"T-Bar Row","sets":4,"reps":"8","rest":"2:00","cue":"Chest up, drive the elbows past the ribs."},{"nm":"Chest-Supported Row","sets":4,"reps":"10","rest":"2:00","cue":"Pad removes the low back from the equation."}]},{"label":"Row volume","opt":false,"opts":[{"nm":"Chest-Supported Row","sets":3,"reps":"10–12","rest":"1:30","cue":"Pure mid-back, no cheating."},{"nm":"Seated Cable Row","sets":3,"reps":"10–12","rest":"1:30","cue":"Let the shoulder blades travel forward, then squeeze."},{"nm":"Seal Row","sets":3,"reps":"10","rest":"1:30","cue":"Face down on a bench. Zero body english."},{"nm":"Single-Arm Dumbbell Row","sets":3,"reps":"10 / arm","rest":"1:30","cue":"Full stretch to full retraction."}]},{"label":"Lat volume","opt":false,"opts":[{"nm":"Neutral-Grip Lat Pulldown","sets":3,"reps":"10–12","rest":"1:30","cue":"Elbows down and back, hold the squeeze."},{"nm":"Straight-Arm Pulldown","sets":3,"reps":"12–15","rest":"1:00","cue":"Isolates the lat without the arms."},{"nm":"Wide-Grip Lat Pulldown","sets":3,"reps":"12","rest":"1:30","cue":"Thumbs over the bar, pull with the elbows."}]},{"label":"Rear delts","opt":false,"opts":[{"nm":"Face Pull","sets":3,"reps":"15","rest":"1:00","cue":"High cable, rope to eye level."},{"nm":"Reverse Pec Deck","sets":3,"reps":"15","rest":"1:00","cue":"Constant tension, no momentum."},{"nm":"Rear-Delt Dumbbell Fly","sets":3,"reps":"15","rest":"1:00","cue":"Chest on an incline bench, light weight."}]},{"label":"Biceps","opt":false,"opts":[{"nm":"Barbell Curl","sets":3,"reps":"8–10","rest":"1:15","cue":"Elbows pinned to the ribs."},{"nm":"EZ-Bar Curl","sets":3,"reps":"10","rest":"1:15","cue":"Kinder on the wrists than a straight bar."},{"nm":"Cable Curl","sets":3,"reps":"12","rest":"1:00","cue":"Tension all the way through the top."}]},{"label":"Biceps stretch","opt":false,"opts":[{"nm":"Incline Dumbbell Curl","sets":3,"reps":"10–12","rest":"1:00","cue":"Arms behind the body — the growth position."},{"nm":"Hammer Curl","sets":3,"reps":"10–12","rest":"1:00","cue":"Brachialis and forearm. Thickness."},{"nm":"Preacher Curl","sets":3,"reps":"10","rest":"1:00","cue":"No swing available. Control the bottom."},{"nm":"Spider Curl","sets":3,"reps":"12","rest":"1:00","cue":"Chest on an incline, arms hanging straight down."}]},{"label":"Traps & grip","opt":true,"opts":[{"nm":"Barbell Shrug","sets":3,"reps":"12","rest":"1:00","cue":"Straight up and down, pause at the top."},{"nm":"Farmer's Carry","sets":3,"reps":"40 yd","rest":"1:00","cue":"As heavy as you can hold."},{"nm":"Plate Pinch Hold","sets":3,"reps":"30s","rest":"0:45","cue":"Two smooth plates, fingers only."}]}],"d4a":[{"label":"Explosive pull","opt":false,"opts":[{"nm":"Explosive Pull-Up (chest to bar)","sets":5,"reps":"3","rest":"1:30","cue":"Accelerate all the way up. Stop when speed drops."},{"nm":"Kettlebell High Pull","sets":5,"reps":"5","rest":"1:15","cue":"Hips first, elbows finish it."},{"nm":"Hang Power Clean","sets":5,"reps":"3","rest":"2:00","cue":"Violent hip extension, fast elbows. Technique first."},{"nm":"Band-Resisted Pull-Up","sets":4,"reps":"5","rest":"1:30","cue":"Band adds tension at the top where you are strongest."}]},{"label":"Single-arm row","opt":false,"opts":[{"nm":"Single-Arm Dumbbell Row","sets":4,"reps":"8 / arm","rest":"1:30","cue":"Let the shoulder blade travel."},{"nm":"Meadows Row","sets":3,"reps":"8 / arm","rest":"1:15","cue":"Landmine, staggered stance. Big stretch on the lat."},{"nm":"Landmine Row","sets":3,"reps":"8 / arm","rest":"1:15","cue":"Angled path hits lat and rear delt together."},{"nm":"Single-Arm Cable Row","sets":3,"reps":"10 / arm","rest":"1:15","cue":"Rotate slightly into the stretch."}]},{"label":"Bodyweight pull","opt":false,"opts":[{"nm":"Chin-Up","sets":3,"reps":"6–8","rest":"1:30","cue":"Two-second lower on every rep."},{"nm":"Pull-Up","sets":3,"reps":"6–8","rest":"1:30","cue":"Full hang each rep. No kipping."},{"nm":"Feet-Elevated Inverted Row","sets":3,"reps":"10–12","rest":"1:15","cue":"Body rigid, chest to the bar, pause."},{"nm":"Ring Row","sets":3,"reps":"12","rest":"1:15","cue":"Rotate the rings out as you pull."}]},{"label":"Horizontal volume","opt":false,"opts":[{"nm":"Feet-Elevated Inverted Row","sets":3,"reps":"10–12","rest":"1:15","cue":"Pause at the top of every rep."},{"nm":"Seated Cable Row","sets":3,"reps":"12","rest":"1:15","cue":"Squeeze and hold for a beat."},{"nm":"Chest-Supported Row","sets":3,"reps":"12","rest":"1:15","cue":"Strict, no momentum."}]},{"label":"Carry & grip","opt":false,"opts":[{"nm":"Farmer's Carry","sets":4,"reps":"40 yd","rest":"1:30","cue":"Tall posture, shoulders packed down."},{"nm":"Suitcase Carry","sets":3,"reps":"40 yd / side","rest":"1:00","cue":"Do not lean toward the weight."},{"nm":"Plate Pinch Hold","sets":3,"reps":"30s","rest":"0:45","cue":"Grip is the last link in every pull."},{"nm":"Dead Hang","sets":3,"reps":"30s","rest":"1:00","cue":"Decompresses the shoulders and builds grip."}]},{"label":"Shoulder health","opt":false,"opts":[{"nm":"Face Pull + External Rotation","sets":3,"reps":"15","rest":"0:45","cue":"Earns you every heavy press you will do."},{"nm":"Prone Y-T-W Raise","sets":3,"reps":"10","rest":"0:45","cue":"Light. Quality only."},{"nm":"Band Pull-Apart","sets":3,"reps":"20","rest":"0:45","cue":"Straight arms, slow return."}]},{"label":"Arms","opt":false,"opts":[{"nm":"Hammer Curl","sets":3,"reps":"10","rest":"0:45","cue":"Brachialis and forearm in one movement."},{"nm":"Chin-Up Iso Hold","sets":3,"reps":"20s","rest":"1:00","cue":"Chin over the bar, hold. Grip and biceps together."},{"nm":"Zottman Curl","sets":3,"reps":"10","rest":"0:45","cue":"Curl up supinated, lower pronated."}]},{"label":"Rotational core","opt":true,"opts":[{"nm":"Cable Woodchop","sets":3,"reps":"12 / side","rest":"1:00","cue":"Rotate from the hips."},{"nm":"Med-Ball Rotational Throw","sets":4,"reps":"4 / side","rest":"1:00","cue":"Turn the back hip through."},{"nm":"Pallof Press","sets":3,"reps":"10 / side","rest":"0:45","cue":"Anti-rotation. Ribs down."}]}]};
+
+const CUSTOM_DAY = {id:'custom', n:'—', title:'Custom', short:'Custom', focus:'Your own build'};
+
+/* Look up a workout by id — the four built-in days, or one you built yourself. */
+function getOpt(id){
+  if(ALLOPTS[id]) return ALLOPTS[id];
+  const c = (S.custom||[]).find(x=>x.id===id);
+  return c ? {...c, day:CUSTOM_DAY, custom:true} : null;
+}
+function dayTag(o){ return o.day.id==='custom' ? 'Your workout' : `Day ${o.day.n} · ${o.day.short}`; }
 
 /* ══════════════════════════════════════ state ═══════════════════════════ */
 const KEY = 'splitledger.v1';
-const blank = { units:'lb', theme:'auto', scheduled:{}, sessions:[], draft:null };
+const blank = { units:'lb', theme:'auto', scheduled:{}, sessions:[], custom:[], draft:null };
 let S = load();
 
 function load(){
@@ -565,6 +622,8 @@ function toast(msg){
   setTimeout(()=>el.remove(), 2500);
 }
 function svgCheck(){ return '<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>'; }
+function svgTrash(){ return '<svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>'; }
+function svgX(){ return '<svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>'; }
 function styleName(st){ return st==='strength' ? 'Strength' : 'Athletic'; }
 function volumeOf(sess){
   let v=0;
@@ -574,6 +633,7 @@ function volumeOf(sess){
   return Math.round(v);
 }
 function sessOn(date){ return S.sessions.find(s=>s.date===date); }
+function sessName(s){ const o = getOpt(s.workoutId); return (o && o.name) || s.name || 'Session'; }
 function fmtVol(v){ return v>=1000 ? (v/1000).toFixed(v>=10000?0:1)+'k' : String(v); }
 
 /* ══════════════════════════════════════ routing ═════════════════════════ */
@@ -606,25 +666,28 @@ function viewToday(){
   const doneThisWeek = wk.filter(d=>sessOn(d)).length;
   const sch = S.scheduled[t];
   const done = sessOn(t);
-  const opt = sch ? ALLOPTS[sch.workoutId] : null;
+  const opt = sch ? getOpt(sch.workoutId) : null;
 
   const strip = wk.map(d=>{
-    const dt = fromIso(d), s = S.scheduled[d], o = s?ALLOPTS[s.workoutId]:null, fin = sessOn(d);
+    const dt = fromIso(d), s = S.scheduled[d], o = s?getOpt(s.workoutId):null, fin = sessOn(d);
     const cls = ['ws', fin?'done':(o?'has':''), o&&o.style==='athletic'?'ath':'', d===t?'today':''].filter(Boolean).join(' ');
     return `<button class="${cls}" data-day="${d}"><span class="d">${DOW[dt.getDay()][0]}</span><span class="n">${dt.getDate()}</span><span class="dot"></span></button>`;
   }).join('');
 
   let card;
   if(done){
-    const o = ALLOPTS[done.workoutId];
+    const o = getOpt(done.workoutId);
     card = `<div class="card session-card done">
-      <div class="sc-head"><h2>${esc(o?o.name:'Workout')}</h2><span class="pill done">${svgCheck()} Logged</span></div>
+      <div class="sc-head"><h2>${esc(sessName(done))}</h2><span class="pill done">${svgCheck()} Logged</span></div>
       <div class="sc-meta">
         <span class="pill">${done.durationMin} min</span>
         <span class="pill">${fmtVol(done.volume)} ${S.units} volume</span>
         <span class="pill">${done.setCount} sets</span>
       </div>
-      <button class="btn ghost" data-hist="${done.id}">View session</button>
+      <div class="row">
+        <button class="btn ghost" data-hist="${done.id}">View session</button>
+        <button class="icon-btn" style="width:46px;height:46px" data-delsess="${done.id}" aria-label="Delete this session">${svgTrash()}</button>
+      </div>
     </div>`;
   } else if(opt){
     card = `<div class="card session-card ${opt.style==='athletic'?'ath':''}">
@@ -632,7 +695,7 @@ function viewToday(){
         <div style="flex:1">
           <div class="sc-meta" style="margin-bottom:6px">
             <span class="pill ${opt.style}">${styleName(opt.style)}</span>
-            <span class="pill">Day ${opt.day.n} · ${esc(opt.day.title.split('—')[1].trim())}</span>
+            <span class="pill">${esc(dayTag(opt))}</span>
           </div>
           <h2>${esc(opt.name)}</h2>
         </div>
@@ -649,13 +712,14 @@ function viewToday(){
         <button class="btn" data-start="${opt.id}" data-date="${t}"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg>Start workout</button>
         <button class="icon-btn" style="width:46px;height:46px" data-day="${t}" aria-label="Edit">
           <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button>
+        <button class="icon-btn" style="width:46px;height:46px" data-unschedule="${t}" aria-label="Remove from calendar">${svgTrash()}</button>
       </div>
     </div>`;
   } else {
     const next = suggestNext();
     card = `<div class="card session-card" style="--x:0">
       <div class="sc-head"><h2 style="font-size:18px">Nothing scheduled</h2></div>
-      <p style="margin:0;color:var(--muted);font-size:13.5px">Based on your history, next up in the rotation is <b style="color:var(--ink)">Day ${next.day.n} — ${esc(next.day.title.split('—')[1].trim())}</b>.</p>
+      <p style="margin:0;color:var(--muted);font-size:13.5px">Based on your history, next up in the rotation is <b style="color:var(--ink)">${esc(dayTag(next))}</b>.</p>
       <div class="row">
         <button class="btn" data-day="${t}">Schedule today</button>
         <button class="btn ghost" data-start="${next.id}" data-date="${t}" style="width:auto;padding:13px 16px;white-space:nowrap">Start now</button>
@@ -668,8 +732,8 @@ function viewToday(){
   const vol = mo.reduce((a,s)=>a+s.volume,0);
 
   let resume = '';
-  if(S.draft && ALLOPTS[S.draft.workoutId]){
-    const dr = ALLOPTS[S.draft.workoutId];
+  if(S.draft && getOpt(S.draft.workoutId)){
+    const dr = getOpt(S.draft.workoutId);
     const mins = Math.round((S.draft.elapsed||0)/60);
     const dn = Object.values(S.draft.entries).reduce((a,arr)=>a+arr.filter(x=>x.done).length,0);
     resume = `<div class="card session-card ${dr.style==='athletic'?'ath':''}" style="margin-top:0">
@@ -706,11 +770,11 @@ function greeting(){
 }
 function suggestNext(){
   const last = [...S.sessions].sort((a,b)=>a.date<b.date?1:-1)[0];
-  if(!last) return ALLOPTS['d1s'];
-  const o = ALLOPTS[last.workoutId];
+  if(!last) return getOpt('d1s');
+  const o = getOpt(last.workoutId);
   const i = PROGRAM.findIndex(d=>d.id===(o?o.day.id:'d1'));
   const nd = PROGRAM[(i+1)%4];
-  return ALLOPTS[nd.options[0].id];
+  return getOpt(nd.options[0].id);
 }
 function weekStreak(){
   // consecutive weeks (ending with the current or last week) containing 3+ sessions
@@ -729,11 +793,14 @@ function upcoming(){
   if(!list.length) return `<div class="card" style="padding:18px"><div class="empty">No sessions scheduled ahead. Open the calendar to plan your week.</div>
     <button class="btn ghost" data-goto="cal">Open calendar</button></div>`;
   return `<div class="card" style="padding:4px 14px">${list.map(d=>{
-    const s = S.scheduled[d], o = ALLOPTS[s.workoutId]; if(!o) return '';
-    return `<button class="hitem" data-day="${d}">
-      <span class="rail ${o.style==='athletic'?'ath':''}"></span>
-      <span class="bd"><b>${esc(o.name)}</b><i>${relDay(d)}${s.time?' · '+fmtTime(s.time):''}</i></span>
-      <span class="rt">~${o.mins}m</span></button>`;
+    const s = S.scheduled[d], o = getOpt(s.workoutId); if(!o) return '';
+    return `<div class="hitem">
+      <button class="hitem-main" data-day="${d}">
+        <span class="rail ${o.style==='athletic'?'ath':''}"></span>
+        <span class="bd"><b>${esc(o.name)}</b><i>${relDay(d)}${s.time?' · '+fmtTime(s.time):''}</i></span>
+        <span class="rt">~${o.mins}m</span></button>
+      <button class="hitem-x" data-unschedule="${d}" aria-label="Remove ${esc(o.name)} from the calendar">${svgTrash()}</button>
+    </div>`;
   }).join('')}</div>`;
 }
 
@@ -747,7 +814,7 @@ function viewCal(){
     const d = new Date(start); d.setDate(start.getDate()+i);
     const key = iso(d), out = d.getMonth()!==m;
     const sch = S.scheduled[key], fin = sessOn(key);
-    const o = sch?ALLOPTS[sch.workoutId]:null;
+    const o = sch?getOpt(sch.workoutId):null;
     let dots='';
     if(fin) dots = '<i class="dot-done"></i>';
     else if(o) dots = `<i class="dot-${o.style==='athletic'?'ath':'str'}"></i>`;
@@ -807,6 +874,30 @@ function viewLib(){
           </div>
         </button>`).join('')}
     </div>`).join('')}
+  <span class="eyebrow">Your workouts</span>
+  ${(S.custom||[]).length ? (S.custom||[]).map(c=>`
+    <button class="opt ${c.style==='athletic'?'ath':''}" data-open="${c.id}">
+      <div class="opt-top">
+        <h4>${esc(c.name)}</h4>
+        <span class="pill ${c.style}">${styleName(c.style)}</span>
+      </div>
+      ${c.focus?`<p>${esc(c.focus)}</p>`:''}
+      <div class="opt-foot">
+        <span class="pill">~${c.mins} min</span>
+        <span class="pill">${c.ex.length} movements</span>
+        ${c.gear?`<span class="pill">${esc(c.gear)}</span>`:''}
+      </div>
+    </button>`).join('')
+  : `<p style="color:var(--muted);font-size:13.5px;margin:0 2px 12px;line-height:1.55">
+      Build your own session — name it, pick a track, and list your movements with sets, reps, and rest.
+      It shows up in the calendar picker and logs exactly like the built-in workouts.</p>`}
+  <div class="row" style="margin-bottom:6px">
+    <button class="btn ghost" data-build="new">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Build one</button>
+    <button class="btn ghost" data-roll>
+      <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.5 6.2L3 16M3 21v-5h5"/></svg>Randomize</button>
+  </div>
+
   <span class="eyebrow">How to run it</span>
   <div class="card" style="padding:16px;display:flex;flex-direction:column;gap:11px;font-size:13.5px;color:var(--ink-2);line-height:1.55">
     <div><b style="font-family:var(--disp)">Weekly shape.</b> Mon Day 1 · Tue Day 2 · Thu Day 3 · Fri Day 4. Keep at least one rest day between the two lower sessions.</div>
@@ -814,6 +905,108 @@ function viewLib(){
     <div><b style="font-family:var(--disp)">Effort.</b> Main lifts at RPE 8 (two reps left). Accessories at RPE 9. Jumps and throws never to fatigue.</div>
     <div><b style="font-family:var(--disp)">Deload.</b> Every 5th–6th week, cut sets in half and keep the loads. You will come back stronger than you left.</div>
   </div>`;
+}
+
+
+/* ── per-movement history ──────────────────────────────────────────────── */
+function e1rm(w,r){ w=+w||0; r=+r||0; return r ? w*(1+r/30) : 0; }
+
+/* One entry per movement you have logged, with a point per session. */
+function movementStats(){
+  const asc = [...S.sessions].sort((a,b)=> a.date<b.date ? -1 : 1);
+  const map = {};
+  asc.forEach(s=>{
+    Object.entries(s.entries||{}).forEach(([nm,sets])=>{
+      const done = (sets||[]).filter(x=>x.done && +x.r>0);
+      if(!done.length) return;
+      const loaded = done.some(x=>+x.w>0);
+      const m = map[nm] || (map[nm] = {nm, mode:'reps', points:[]});
+      if(loaded) m.mode = 'load';
+      const top = done.reduce((a,b)=>
+        (loaded ? e1rm(b.w,b.r) > e1rm(a.w,a.r) : (+b.r) > (+a.r)) ? b : a, done[0]);
+      m.points.push({
+        date:s.date, w:+top.w||0, r:+top.r, sets:done.length,
+        vol:done.reduce((a,x)=>a+(+x.w||0)*(+x.r),0)
+      });
+    });
+  });
+  return Object.values(map).map(m=>{
+    m.points.forEach(p=> p.m = m.mode==='load' ? Math.round(e1rm(p.w,p.r)) : p.r);
+    m.sessions = m.points.length;
+    m.best  = m.points.reduce((a,b)=> b.m>a.m ? b : a, m.points[0]);
+    m.first = m.points[0];
+    m.last  = m.points[m.points.length-1];
+    m.delta = m.last.m - m.first.m;
+    return m;
+  }).sort((a,b)=> b.sessions-a.sessions || b.best.m-a.best.m);
+}
+function topSet(m,p){ return m.mode==='load' ? `${p.w}×${p.r}` : `${p.r} reps`; }
+function metricLabel(m){ return m.mode==='load' ? 'e1RM' : 'reps'; }
+
+function spark(vals){
+  if(vals.length<2) return `<svg class="spark" viewBox="0 0 56 22" aria-hidden="true"><circle cx="28" cy="11" r="2.2"/></svg>`;
+  const mn=Math.min(...vals), mx=Math.max(...vals), rng=(mx-mn)||1;
+  const pt=vals.map((v,i)=>[2+i*(52/(vals.length-1)), 19-((v-mn)/rng)*16]);
+  const d=pt.map((q,i)=>`${i?'L':'M'}${q[0].toFixed(1)} ${q[1].toFixed(1)}`).join(' ');
+  const l=pt[pt.length-1];
+  return `<svg class="spark" viewBox="0 0 56 22" aria-hidden="true"><path d="${d}"/><circle cx="${l[0].toFixed(1)}" cy="${l[1].toFixed(1)}" r="2.2"/></svg>`;
+}
+
+function bigChart(m){
+  const pts=m.points, W=320, H=160, L=36, R=10, T=14, B=26;
+  const vals=pts.map(p=>p.m);
+  const mn=Math.min(...vals), mx=Math.max(...vals);
+  const lo=Math.max(0, Math.floor((mn - (mx-mn||mn*0.1||1)*0.35))), hi=Math.ceil(mx + (mx-mn||mx*0.1||1)*0.2) || 1;
+  const rng=(hi-lo)||1;
+  const X=i=> pts.length===1 ? L+(W-L-R)/2 : L + i*(W-L-R)/(pts.length-1);
+  const Y=v=> T + (1-(v-lo)/rng)*(H-T-B);
+  const line=pts.map((p,i)=>`${i?'L':'M'}${X(i).toFixed(1)} ${Y(p.m).toFixed(1)}`).join(' ');
+  const area=`${line} L${X(pts.length-1).toFixed(1)} ${(H-B).toFixed(1)} L${X(0).toFixed(1)} ${(H-B).toFixed(1)} Z`;
+  const ticks=[lo, Math.round((lo+hi)/2), hi];
+  const every=Math.max(1, Math.ceil(pts.length/4));
+  return `<svg class="bigchart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(m.nm)} over ${pts.length} sessions">
+    ${ticks.map(v=>`<line class="gd" x1="${L}" x2="${W-R}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/>
+      <text x="${L-6}" y="${(Y(v)+3).toFixed(1)}" text-anchor="end">${v}</text>`).join('')}
+    ${pts.length>1?`<path class="ar" d="${area}"/>`:''}
+    <path class="ln" d="${line}"/>
+    ${pts.map((p,i)=>`<circle class="pt ${i===pts.length-1?'last':''}" cx="${X(i).toFixed(1)}" cy="${Y(p.m).toFixed(1)}" r="3.2"/>`).join('')}
+    ${pts.map((p,i)=> i%every===0||i===pts.length-1
+      ? `<text x="${X(i).toFixed(1)}" y="${H-8}" text-anchor="middle">${fromIso(p.date).getMonth()+1}/${fromIso(p.date).getDate()}</text>` : '').join('')}
+  </svg>`;
+}
+
+function openMovement(nm){
+  const m = movementStats().find(x=>x.nm===nm); if(!m) return;
+  const unit = m.mode==='load' ? S.units : '';
+  const dir = m.delta>0 ? 'up' : m.delta<0 ? 'down' : 'flat';
+  sheet(`
+    <div class="sheet-hd">
+      <div style="flex:1">
+        <div class="sub">${m.sessions} session${m.sessions>1?'s':''} · since ${MON[fromIso(m.first.date).getMonth()].slice(0,3)} ${fromIso(m.first.date).getDate()}</div>
+        <h2>${esc(m.nm)}</h2>
+      </div>
+      <button class="icon-btn" data-close aria-label="Close">${svgX()}</button>
+    </div>
+    <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-top:0">
+      <div class="stat"><div class="k">Best set</div><div class="v" style="font-size:20px">${topSet(m,m.best)}</div></div>
+      <div class="stat"><div class="k">Best ${metricLabel(m)}</div><div class="v" style="font-size:20px">${m.best.m}${unit?`<small> ${unit}</small>`:''}</div></div>
+      <div class="stat"><div class="k">Change</div><div class="v" style="font-size:20px;color:${dir==='up'?'var(--good)':dir==='down'?'var(--athletic)':'inherit'}">${m.delta>0?'+':''}${m.delta}</div></div>
+    </div>
+    <span class="eyebrow">Top set per session · ${metricLabel(m)}</span>
+    <div class="card" style="padding:10px 8px 4px">${bigChart(m)}</div>
+    <span class="eyebrow">Every session</span>
+    <div class="card" style="padding:4px 14px"><div class="hist">
+      ${[...m.points].reverse().map(p=>`<div class="hitem">
+        <span class="hitem-main">
+          <span class="bd"><b>${topSet(m,p)}</b><i>${relDay(p.date)} · ${p.sets} set${p.sets>1?'s':''}${p.vol?` · ${fmtVol(p.vol)} ${S.units}`:''}</i></span>
+          <span class="rt">${p.m}${p.m===m.best.m?' ★':''}</span>
+        </span></div>`).join('')}
+    </div></div>
+    <p style="color:var(--muted);font-size:12.5px;margin-top:14px;line-height:1.5">
+      ${m.mode==='load'
+        ? 'e1RM is your estimated one-rep max for the heaviest set of that session (Epley). It lets a set of 5 and a set of 10 be compared on one line.'
+        : 'No weight was logged for this movement, so progress is tracked by the best set of reps.'}
+    </p>`);
 }
 
 /* ══════════════════════════════════════ progress ════════════════════════ */
@@ -835,19 +1028,10 @@ function viewProg(){
   const wv = weeks.map(k=>({k, v:S.sessions.filter(s=>weekKey(fromIso(s.date))===k).reduce((a,s)=>a+s.volume,0)}));
   const max = Math.max(1,...wv.map(w=>w.v));
 
-  // personal bests by exercise (best estimated 1RM)
-  const best={};
-  S.sessions.forEach(s=>{
-    Object.entries(s.entries||{}).forEach(([nm,sets])=>sets.forEach(st=>{
-      if(!st.done || !(+st.w>0) || !(+st.r>0)) return;
-      const e1 = (+st.w)*(1+(+st.r)/30);
-      if(!best[nm] || e1>best[nm].e1) best[nm] = {e1, w:+st.w, r:+st.r, date:s.date};
-    }));
-  });
-  const prs = Object.entries(best).sort((a,b)=>b[1].e1-a[1].e1).slice(0,12);
+  const moves = movementStats();
 
   const styleCount = {strength:0, athletic:0};
-  S.sessions.forEach(s=>{ const o=ALLOPTS[s.workoutId]; if(o) styleCount[o.style]++; });
+  S.sessions.forEach(s=>{ const o=getOpt(s.workoutId); if(o) styleCount[o.style]++; });
 
   return `<span class="eyebrow">All time</span>
   <div class="stats">
@@ -867,17 +1051,26 @@ function viewProg(){
     <div style="text-align:right;font-family:var(--mono);font-size:10.5px;color:var(--muted);padding-top:6px">peak ${fmtVol(max)} ${S.units}</div>
   </div>
 
-  ${prs.length?`<span class="eyebrow">Personal bests · top set</span>
-  <div class="card" style="padding:4px 14px"><div class="prlist">${prs.map(([nm,b])=>`
-    <div class="pr"><b>${esc(nm)}</b><span class="v">${b.w}×${b.r}</span><span class="e">e1RM ${Math.round(b.e1)}</span></div>`).join('')}</div></div>`:''}
+  ${moves.length?`<span class="eyebrow">Movements · PRs &amp; progress</span>
+  <div class="card" style="padding:4px 14px">${moves.map(m=>{
+    const d = m.delta>0?'up':m.delta<0?'dn':'';
+    return `<button class="mv" data-mv="${esc(m.nm)}">
+      <span class="bd"><b>${esc(m.nm)}</b><i>${m.sessions} session${m.sessions>1?'s':''} · best ${topSet(m,m.best)}${m.delta?` · <em class="${d}">${m.delta>0?'+':''}${m.delta}</em>`:''}</i></span>
+      ${spark(m.points.map(p=>p.m))}
+      <span class="rt">${m.best.m}<em>${metricLabel(m)}</em></span>
+    </button>`;}).join('')}</div>
+  <p style="color:var(--muted);font-size:12.5px;margin:10px 2px 0">Tap a movement for its full history.</p>`:''}
 
   <span class="eyebrow">History</span>
   <div class="card" style="padding:4px 14px"><div class="hist">${all.slice(0,30).map(s=>{
-    const o = ALLOPTS[s.workoutId];
-    return `<button class="hitem" data-hist="${s.id}">
-      <span class="rail ${o&&o.style==='athletic'?'ath':''}"></span>
-      <span class="bd"><b>${esc(o?o.name:'Session')}</b><i>${relDay(s.date)} · ${s.setCount} sets</i></span>
-      <span class="rt">${s.durationMin}m<br>${fmtVol(s.volume)} ${S.units}</span></button>`;
+    const o = getOpt(s.workoutId);
+    return `<div class="hitem">
+      <button class="hitem-main" data-hist="${s.id}">
+        <span class="rail ${o&&o.style==='athletic'?'ath':''}"></span>
+        <span class="bd"><b>${esc(sessName(s))}</b><i>${relDay(s.date)} · ${s.setCount} sets</i></span>
+        <span class="rt">${s.durationMin}m<br>${fmtVol(s.volume)} ${S.units}</span></button>
+      <button class="hitem-x" data-delsess="${s.id}" aria-label="Delete this session">${svgTrash()}</button>
+    </div>`;
   }).join('')}</div></div>`;
 }
 
@@ -919,6 +1112,14 @@ function openDay(date){
             <span class="check"></span>
           </button>`).join('')}
       </div>`).join('')}
+      ${(S.custom||[]).length ? `<div style="margin-bottom:12px">
+        <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--muted);margin-bottom:6px">YOUR WORKOUTS</div>
+        ${(S.custom||[]).map(c=>`
+          <button class="pick ${c.style==='athletic'?'ath':''}" data-pick="${c.id}" aria-pressed="${pickSel===c.id}">
+            <span class="t"><b>${esc(c.name)}</b><i>${styleName(c.style)} · ~${c.mins} min · ${c.ex.length} movements</i></span>
+            <span class="check"></span>
+          </button>`).join('')}
+      </div>` : ''}
     </div>
     <label class="fld"><span class="lb">Note (optional)</span>
       <textarea id="fNote" placeholder="Bump squat to 245 · shoulder felt tight last time">${esc(sch.note||'')}</textarea></label>
@@ -932,11 +1133,11 @@ function openDay(date){
 
 /* ── workout detail sheet ──────────────────────────────────────────────── */
 function openWorkout(id){
-  const o = ALLOPTS[id]; if(!o) return;
+  const o = getOpt(id); if(!o) return;
   sheet(`
     <div class="sheet-hd">
       <div style="flex:1">
-        <div class="sub">Day ${o.day.n} · ${esc(o.day.title)} · ${styleName(o.style)}</div>
+        <div class="sub">${esc(o.day.id==='custom' ? 'Your workout' : 'Day '+o.day.n+' · '+o.day.title)} · ${styleName(o.style)}</div>
         <h2>${esc(o.name)}</h2>
       </div>
       <button class="icon-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
@@ -957,13 +1158,14 @@ function openWorkout(id){
     <div class="row" style="margin-top:18px">
       <button class="btn ghost" data-schedpick="${o.id}" style="flex:0 0 44%">Schedule</button>
       <button class="btn" data-start="${o.id}" data-date="${todayIso()}">Start now</button>
-    </div>`);
+    </div>
+    ${o.custom?`<button class="btn ghost" style="margin-top:10px" data-build="${o.id}">Edit this workout</button>`:''}`);
 }
 
 /* ── history sheet ─────────────────────────────────────────────────────── */
 function openHistory(id){
   const s = S.sessions.find(x=>x.id===id); if(!s) return;
-  const o = ALLOPTS[s.workoutId];
+  const o = getOpt(s.workoutId);
   const dt = fromIso(s.date);
   const rows = Object.entries(s.entries||{}).map(([nm,sets])=>{
     const done = sets.filter(x=>x.done);
@@ -977,7 +1179,7 @@ function openHistory(id){
     <div class="sheet-hd">
       <div style="flex:1">
         <div class="sub">${DOW[dt.getDay()]} · ${MON[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}</div>
-        <h2>${esc(o?o.name:'Session')}</h2>
+        <h2>${esc(sessName(s))}</h2>
       </div>
       <button class="icon-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     </div>
@@ -1004,9 +1206,9 @@ function openSettings(){
       </div></label>
     <label class="fld"><span class="lb">Theme</span>
       <div class="chip-row">
-        <button class="chip" data-theme="auto" aria-pressed="${S.theme==='auto'}">Match device</button>
-        <button class="chip" data-theme="light" aria-pressed="${S.theme==='light'}">Light</button>
-        <button class="chip" data-theme="dark" aria-pressed="${S.theme==='dark'}">Dark</button>
+        <button class="chip" data-pick-theme="auto" aria-pressed="${S.theme==='auto'}">Match device</button>
+        <button class="chip" data-pick-theme="light" aria-pressed="${S.theme==='light'}">Light</button>
+        <button class="chip" data-pick-theme="dark" aria-pressed="${S.theme==='dark'}">Dark</button>
       </div></label>
     <span class="lb" style="font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px">Your data</span>
     <p style="font-size:13px;color:var(--muted);margin:0 0 12px;line-height:1.5">
@@ -1014,16 +1216,228 @@ function openSettings(){
       Clearing site data — or opening the dashboard in a different browser — starts a fresh ledger, so export a backup now and then.
       <br><b style="color:var(--ink-2)">${S.sessions.length} sessions · ${Object.keys(S.scheduled).length} planned days saved.</b>
     </p>
-    <div class="row"><button class="btn ghost" id="expBtn">Export backup</button><button class="btn ghost" id="impBtn">Import</button></div>
-    <input type="file" id="impFile" accept="application/json" hidden>
+    <div class="row">
+      <button class="btn ghost" id="expBtn">Export backup</button>
+      <label class="btn ghost" for="impFile">Import</label>
+    </div>
+    <input type="file" id="impFile" accept="application/json,.json"
+           style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none">
     <button class="btn danger" style="margin-top:22px" id="wipeBtn">Erase all data</button>`);
+}
+
+
+/* ── workout builder ───────────────────────────────────────────────────── */
+let EDIT = null, EK = 1;
+const REST_DEFAULT = '1:30';
+
+function blankMove(){ return {k:EK++, nm:'', sets:3, reps:'8-10', rest:REST_DEFAULT, cue:''}; }
+
+function openBuilder(id){
+  const src = id && id!=='new' ? (S.custom||[]).find(c=>c.id===id) : null;
+  EDIT = src
+    ? {id:src.id, name:src.name, style:src.style, focus:src.focus||'', gear:src.gear||'', mins:src.mins||'',
+       ex:src.ex.map(x=>({k:EK++, nm:x.nm, sets:x.sets, reps:x.reps, rest:x.rest, cue:x.cue||''}))}
+    : {id:null, name:'', style:'strength', focus:'', gear:'', mins:'', ex:[blankMove(),blankMove(),blankMove()]};
+  sheet(`
+    <div class="sheet-hd">
+      <div style="flex:1">
+        <div class="sub">${src?'Edit workout':'New workout'}</div>
+        <h2>${src?esc(src.name):'Build a workout'}</h2>
+      </div>
+      <button class="icon-btn" data-close aria-label="Close">${svgX()}</button>
+    </div>
+    <label class="fld"><span class="lb">Name</span>
+      <input type="text" data-b="name" value="${esc(EDIT.name)}" placeholder="Saturday Arms" autocomplete="off"></label>
+    <label class="fld"><span class="lb">Track</span>
+      <div class="chip-row">
+        <button class="chip" data-bstyle="strength" aria-pressed="${EDIT.style==='strength'}">Strength</button>
+        <button class="chip" data-bstyle="athletic" aria-pressed="${EDIT.style==='athletic'}">Athletic</button>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin:8px 0 0">Sets the colour it gets on the calendar.</p></label>
+    <div class="row">
+      <label class="fld" style="flex:1"><span class="lb">Targets</span>
+        <input type="text" data-b="focus" value="${esc(EDIT.focus)}" placeholder="Biceps · Forearms" autocomplete="off"></label>
+      <label class="fld" style="width:104px;flex:none"><span class="lb">Minutes</span>
+        <input type="number" inputmode="numeric" data-b="mins" value="${esc(EDIT.mins)}" placeholder="auto"></label>
+    </div>
+    <label class="fld"><span class="lb">Equipment</span>
+      <input type="text" data-b="gear" value="${esc(EDIT.gear)}" placeholder="Commercial gym" autocomplete="off"></label>
+    <span class="lb" style="font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px">Movements</span>
+    <div id="bEx">${EDIT.ex.map((x,i)=>moveRow(x,i)).join('')}</div>
+    <button class="addmv" data-badd>+ add movement</button>
+    <div class="row">
+      <button class="btn ghost" data-close style="flex:0 0 40%">Cancel</button>
+      <button class="btn" data-bsave>${src?'Save changes':'Save workout'}</button>
+    </div>
+    ${src?`<button class="btn danger" style="margin-top:10px" data-bdel="${src.id}">Delete this workout</button>`:''}
+  `);
+}
+function moveRow(x,i){
+  return `<div class="bex" data-k="${x.k}">
+    <div class="bex-hd">
+      <span class="idx">${pad(i+1)}</span>
+      <input type="text" data-e="nm" data-k="${x.k}" value="${esc(x.nm)}" placeholder="Movement name" autocomplete="off">
+      <button class="bex-x" data-brm="${x.k}" aria-label="Remove movement ${i+1}">${svgX()}</button>
+    </div>
+    <div class="bex-grid">
+      <label><span>Sets</span><input type="number" inputmode="numeric" data-e="sets" data-k="${x.k}" value="${esc(x.sets)}"></label>
+      <label><span>Reps</span><input type="text" data-e="reps" data-k="${x.k}" value="${esc(x.reps)}" autocomplete="off"></label>
+      <label><span>Rest</span><input type="text" data-e="rest" data-k="${x.k}" value="${esc(x.rest)}" placeholder="1:30" autocomplete="off"></label>
+    </div>
+    <input class="cuein" type="text" data-e="cue" data-k="${x.k}" value="${esc(x.cue)}" placeholder="Cue or note (optional)" autocomplete="off">
+  </div>`;
+}
+function paintMoves(){
+  const box = $('#bEx'); if(box) box.innerHTML = EDIT.ex.map((x,i)=>moveRow(x,i)).join('');
+}
+function estimateMins(ex){
+  let sec = 300;                                   // warm-up and transitions
+  ex.forEach(x=>{
+    const p = String(x.rest||'').split(':').map(Number);
+    const rest = p.length===2 ? p[0]*60+(p[1]||0) : (p[0]||60);
+    sec += (+x.sets||1) * (40 + rest);
+  });
+  return Math.max(10, Math.round(sec/60/5)*5);
+}
+function saveBuilder(){
+  const name = (EDIT.name||'').trim();
+  if(!name){ toast('Give the workout a name.'); return; }
+  const ex = EDIT.ex
+    .filter(x=>(x.nm||'').trim())
+    .map(x=>({nm:x.nm.trim(), sets:Math.max(1,Math.min(20,+x.sets||3)),
+              reps:String(x.reps||'').trim()||'8-10', rest:String(x.rest||'').trim()||REST_DEFAULT,
+              cue:(x.cue||'').trim()}));
+  if(!ex.length){ toast('Add at least one movement.'); return; }
+  const rec = {
+    id: EDIT.id || 'c'+Date.now().toString(36)+Math.floor(Math.random()*1e3).toString(36),
+    style: EDIT.style==='athletic' ? 'athletic' : 'strength',
+    name, focus:(EDIT.focus||'').trim(), gear:(EDIT.gear||'').trim(),
+    mins: +EDIT.mins > 0 ? Math.round(+EDIT.mins) : estimateMins(ex),
+    blurb:(EDIT.focus||'').trim(), ex
+  };
+  S.custom = S.custom || [];
+  const i = S.custom.findIndex(c=>c.id===rec.id);
+  if(i>=0) S.custom[i] = rec; else S.custom.push(rec);
+  EDIT = null; saveNow(); closeSheet(); render();
+  toast(`${rec.name} saved · ${ex.length} movements`);
+}
+function deleteBuilder(id){
+  const c = (S.custom||[]).find(x=>x.id===id); if(!c) return;
+  const planned = Object.keys(S.scheduled).filter(d=>S.scheduled[d].workoutId===id);
+  const msg = planned.length
+    ? `Delete ${c.name}? It is on your calendar ${planned.length} time${planned.length>1?'s':''} — those days will be cleared. Sessions you already logged are kept.`
+    : `Delete ${c.name}? Sessions you already logged are kept.`;
+  if(!confirm(msg)) return;
+  planned.forEach(d=>delete S.scheduled[d]);
+  S.custom = S.custom.filter(x=>x.id!==id);
+  if(S.draft && S.draft.workoutId===id) S.draft = null;
+  EDIT = null; saveNow(); closeSheet(); render();
+  toast(`${c.name} deleted`);
+}
+
+
+/* ── randomizer ────────────────────────────────────────────────────────── */
+let ROLLQ = {day:'d1', style:'strength'}, ROLL = null;
+
+function rollWorkout(dayId, style){
+  const key = dayId + (style==='athletic' ? 'a' : 's');
+  const slots = POOLS[key]; if(!slots) return null;
+  const day = PROGRAM.find(d=>d.id===dayId);
+  const ex = [];
+  slots.forEach(sl=>{
+    if(sl.opt && Math.random() < 0.45) return;              // optional slots come and go
+    const o = sl.opts[Math.floor(Math.random()*sl.opts.length)];
+    if(ex.some(x=>x.nm===o.nm)) return;                     // never list a movement twice
+    ex.push({...o});
+  });
+  const now = new Date();
+  return {
+    style, ex, dayId,
+    name: `${day.short} Roll · ${MON[now.getMonth()].slice(0,3)} ${now.getDate()}`,
+    focus: day.focus,
+    gear: style==='strength' ? 'Commercial gym' : 'Mixed equipment',
+    mins: estimateMins(ex)
+  };
+}
+
+function openRoller(){
+  const day = PROGRAM.find(d=>d.id===ROLLQ.day);
+  sheet(`
+    <div class="sheet-hd">
+      <div style="flex:1">
+        <div class="sub">Randomize</div>
+        <h2>Roll a workout</h2>
+      </div>
+      <button class="icon-btn" data-close aria-label="Close">${svgX()}</button>
+    </div>
+    <label class="fld"><span class="lb">Body section</span>
+      <div class="chip-row">${PROGRAM.map(d=>`
+        <button class="chip" data-rday="${d.id}" aria-pressed="${ROLLQ.day===d.id}">${esc(d.short)}</button>`).join('')}
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin:8px 0 0">${esc(day.title)} — ${esc(day.focus)}</p></label>
+    <label class="fld"><span class="lb">Track</span>
+      <div class="chip-row">
+        <button class="chip" data-rstyle="strength" aria-pressed="${ROLLQ.style==='strength'}">Strength</button>
+        <button class="chip" data-rstyle="athletic" aria-pressed="${ROLLQ.style==='athletic'}">Athletic</button>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin:8px 0 0">
+        ${ROLLQ.style==='strength'
+          ? 'Barbells and machines, drawn only from the strength pool.'
+          : 'Power, single-leg and reactive work, drawn only from the athletic pool.'}</p></label>
+    ${ROLL ? `
+      <div class="card ${ROLL.style==='athletic'?'ath':''}" style="padding:14px;margin-bottom:14px;position:relative;overflow:hidden">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--${ROLL.style==='athletic'?'athletic':'strength'})"></div>
+        <div class="opt-top" style="margin-bottom:9px">
+          <h4 style="margin:0;font-family:var(--disp);font-size:16px;font-weight:700;flex:1">${esc(ROLL.name)}</h4>
+          <span class="pill ${ROLL.style}">${styleName(ROLL.style)}</span>
+        </div>
+        <div class="opt-foot" style="margin-bottom:4px">
+          <span class="pill">~${ROLL.mins} min</span>
+          <span class="pill">${ROLL.ex.length} movements</span>
+        </div>
+        <div class="ex-list">${ROLL.ex.map((x,i)=>`
+          <div class="ex">
+            <span class="idx">${pad(i+1)}</span>
+            <span class="body"><span class="nm">${esc(x.nm)}</span>${x.cue?`<span class="cue">${esc(x.cue)}</span>`:''}</span>
+            <span class="rx">${x.sets} × ${esc(x.reps)}<span class="rest">rest ${esc(x.rest)}</span></span>
+          </div>`).join('')}</div>
+      </div>
+      <div class="row">
+        <button class="btn ghost" data-rgo style="flex:0 0 40%">Re-roll</button>
+        <button class="btn" data-rstart>Save &amp; start</button>
+      </div>
+      <button class="btn ghost" style="margin-top:10px" data-rsave>Save to my workouts</button>
+      <p style="color:var(--muted);font-size:12px;margin-top:12px;line-height:1.5">
+        Rolled sessions are saved alongside your own workouts, so they show up in your history and feed your movement PRs.</p>
+    ` : `
+      <button class="btn" data-rgo>
+        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.5 6.2L3 16M3 21v-5h5"/></svg>
+        Roll a ${ROLLQ.style} ${esc(day.short.toLowerCase())} workout</button>
+    `}
+  `);
+}
+
+function commitRoll(start){
+  if(!ROLL) return;
+  const rec = {
+    id:'c'+Date.now().toString(36)+Math.floor(Math.random()*1e3).toString(36),
+    style:ROLL.style, name:ROLL.name, focus:ROLL.focus, gear:ROLL.gear,
+    mins:ROLL.mins, blurb:ROLL.focus, rolled:true,
+    ex:ROLL.ex.map(x=>({nm:x.nm, sets:x.sets, reps:x.reps, rest:x.rest, cue:x.cue||''}))
+  };
+  S.custom = S.custom || [];
+  S.custom.push(rec);
+  const name = rec.name;
+  ROLL = null; saveNow();
+  if(start){ startWorkout(rec.id, todayIso()); return; }
+  closeSheet(); render(); toast(`${name} saved to your workouts`);
 }
 
 /* ══════════════════════════════════════ runner ══════════════════════════ */
 let restInt=null, clockInt=null;
 
 function startWorkout(optId, date){
-  const o = ALLOPTS[optId]; if(!o) return;
+  const o = getOpt(optId); if(!o) return;
   if(S.draft && S.draft.workoutId !== optId){
     if(!confirm('You have an unfinished session in progress. Starting a new one will discard it.')) return;
   }
@@ -1051,13 +1465,13 @@ function lastPerf(nm){
 
 function renderRunner(){
   const d = S.draft; if(!d) return;
-  const o = ALLOPTS[d.workoutId];
+  const o = getOpt(d.workoutId);
   const el = document.createElement('div');
   el.className='runner'; el.id='runner';
   el.innerHTML = `
     <div class="run-top"><div class="run-top-in">
       <button class="icon-btn" id="runMin" aria-label="Minimize"><svg viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg></button>
-      <div class="t"><b>${esc(o.name)}</b><i>DAY ${o.day.n} · ${styleName(o.style).toUpperCase()}</i></div>
+      <div class="t"><b>${esc(o.name)}</b><i>${o.day.id==='custom'?'CUSTOM':'DAY '+o.day.n} · ${styleName(o.style).toUpperCase()}</i></div>
       <span class="clock" id="clock">0:00</span>
       <button class="icon-btn" id="runDone" aria-label="Finish" style="border-color:var(--good);color:var(--good)">${svgCheck()}</button>
     </div></div>
@@ -1068,7 +1482,7 @@ function renderRunner(){
     </div>
     <div class="run-foot">
       <button class="btn" id="finishBtn">Finish &amp; log session</button>
-      <button class="btn ghost" id="discardBtn" style="margin-top:10px">Discard session</button>
+      <button class="btn danger" id="discardBtn" style="margin-top:10px">Discard — don't log this</button>
     </div>`;
   document.body.appendChild(el);
   document.body.style.overflow='hidden';
@@ -1125,12 +1539,12 @@ function startRest(str){
 }
 function finishWorkout(){
   const d = S.draft; if(!d) return;
-  const o = ALLOPTS[d.workoutId];
+  const o = getOpt(d.workoutId);
   const setCount = Object.values(d.entries).reduce((a,arr)=>a+arr.filter(s=>s.done).length,0);
   if(!setCount && !confirm('No sets are marked complete. Log this session anyway?')) return;
   const sess = {
     id:'s'+Date.now().toString(36)+Math.floor(Math.random()*1e4).toString(36),
-    date:d.date, workoutId:d.workoutId, notes:d.notes||'',
+    date:d.date, workoutId:d.workoutId, name:o.name, notes:d.notes||'',
     durationMin:Math.max(1, Math.round((d.elapsed||0)/60)),
     entries:d.entries, setCount, volume:0
   };
@@ -1152,6 +1566,14 @@ document.addEventListener('click', e=>{
   const day = t.closest('[data-day]'); if(day){ openDay(day.dataset.day); return; }
   const open = t.closest('[data-open]'); if(open){ openWorkout(open.dataset.open); return; }
   const hist = t.closest('[data-hist]'); if(hist){ openHistory(hist.dataset.hist); return; }
+  const mv = t.closest('[data-mv]'); if(mv){ openMovement(mv.dataset.mv); return; }
+  const bld = t.closest('[data-build]'); if(bld){ openBuilder(bld.dataset.build); return; }
+  if(t.closest('[data-roll]')){ ROLL = null; openRoller(); return; }
+  const rd = t.closest('[data-rday]');   if(rd){ ROLLQ.day = rd.dataset.rday; ROLL = null; openRoller(); return; }
+  const rs = t.closest('[data-rstyle]'); if(rs){ ROLLQ.style = rs.dataset.rstyle; ROLL = null; openRoller(); return; }
+  if(t.closest('[data-rgo]')){ ROLL = rollWorkout(ROLLQ.day, ROLLQ.style); openRoller(); return; }
+  if(t.closest('[data-rsave]')){ commitRoll(false); return; }
+  if(t.closest('[data-rstart]')){ commitRoll(true); return; }
 
   const go = t.closest('[data-goto]');
   if(go){ closeSheet(); $(`#nav button[data-tab="${go.dataset.goto}"]`).click(); return; }
@@ -1174,11 +1596,17 @@ document.addEventListener('click', e=>{
     if(!pickSel){ toast('Pick a session first.'); return; }
     S.scheduled[date] = { workoutId:pickSel, time:$('#fTime').value||'', note:$('#fNote').value.trim() };
     saveNow(); closeSheet(); render();
-    toast(`${ALLOPTS[pickSel].name} · ${relDay(date)}`);
+    toast(`${getOpt(pickSel).name} · ${relDay(date)}`);
     return;
   }
   const unsch = t.closest('[data-unschedule]');
-  if(unsch){ delete S.scheduled[unsch.dataset.unschedule]; saveNow(); closeSheet(); render(); toast('Removed from calendar'); return; }
+  if(unsch){
+    const d = unsch.dataset.unschedule;
+    const o = S.scheduled[d] && getOpt(S.scheduled[d].workoutId);
+    if(!$('#layer').innerHTML && !confirm(`Remove ${o?o.name:'this session'} from ${relDay(d)}?`)) return;
+    delete S.scheduled[d]; saveNow(); closeSheet(); render(); toast('Removed from calendar');
+    return;
+  }
 
   const sp = t.closest('[data-schedpick]');
   if(sp){ const id=sp.dataset.schedpick; closeSheet(); setTimeout(()=>{ openDay(todayIso()); pickSel=id;
@@ -1195,10 +1623,26 @@ document.addEventListener('click', e=>{
     return;
   }
 
+  const bs = t.closest('[data-bstyle]');
+  if(bs && EDIT){
+    EDIT.style = bs.dataset.bstyle;
+    [...document.querySelectorAll('[data-bstyle]')].forEach(c=>c.setAttribute('aria-pressed', String(c.dataset.bstyle===EDIT.style)));
+    return;
+  }
+  if(t.closest('[data-badd]') && EDIT){ EDIT.ex.push(blankMove()); paintMoves(); return; }
+  const brm = t.closest('[data-brm]');
+  if(brm && EDIT){
+    if(EDIT.ex.length<=1){ toast('A workout needs at least one movement.'); return; }
+    EDIT.ex = EDIT.ex.filter(x=>String(x.k)!==brm.dataset.brm);
+    paintMoves(); return;
+  }
+  if(t.closest('[data-bsave]') && EDIT){ saveBuilder(); return; }
+  const bdel = t.closest('[data-bdel]'); if(bdel){ deleteBuilder(bdel.dataset.bdel); return; }
+
   const u = t.closest('[data-units]');
   if(u){ S.units=u.dataset.units; saveNow(); openSettings(); render(); return; }
-  const th = t.closest('[data-theme]');
-  if(th){ S.theme=th.dataset.theme; applyTheme(); saveNow(); openSettings(); return; }
+  const th = t.closest('[data-pick-theme]');
+  if(th){ S.theme=th.dataset.pickTheme; applyTheme(); saveNow(); openSettings(); return; }
 
   /* runner interactions */
   const tick = t.closest('[data-tick]');
@@ -1250,7 +1694,6 @@ document.addEventListener('click', e=>{
     return;
   }
   if(t.closest('#expBtn')){ exportData(); return; }
-  if(t.closest('#impBtn')){ $('#impFile').click(); return; }
   if(t.closest('#wipeBtn')){
     if(!confirm('Erase every logged session and planned day on this device? This cannot be undone.')) return;
     S = structuredClone(blank); saveNow(); closeSheet(); applyTheme(); render(); toast('All data erased');
@@ -1265,7 +1708,14 @@ document.addEventListener('input', e=>{
     S.draft.entries[card.dataset.ex][+row.dataset.set][f.dataset.f] = f.value;
     save(); return;
   }
-  if(e.target.id==='runNotes' && S.draft){ S.draft.notes = e.target.value; save(); }
+  if(e.target.id==='runNotes' && S.draft){ S.draft.notes = e.target.value; save(); return; }
+  const b = e.target.closest('[data-b]');
+  if(b && EDIT){ EDIT[b.dataset.b] = b.value; return; }
+  const ef = e.target.closest('[data-e]');
+  if(ef && EDIT){
+    const row = EDIT.ex.find(x=>String(x.k)===ef.dataset.k);
+    if(row) row[ef.dataset.e] = ef.value;
+  }
 });
 document.addEventListener('change', e=>{
   if(e.target.id==='impFile' && e.target.files[0]) importData(e.target.files[0]);
@@ -1286,17 +1736,28 @@ async function exportData(){
     catch(err){ if(!err || err.code!=='declined') toast('Could not save the backup.'); }
     return;
   }
-  if(window.claude){                       // hosted, but saving files is not available here
-    try{ await navigator.clipboard.writeText(json); toast('Backup copied to the clipboard'); }
-    catch(e){ toast('Saving is unavailable in this view.'); }
+  const blob = new Blob([json],{type:'application/json'});
+  // iPhone: the share sheet is the only route to Files / AirDrop / Mail.
+  try{
+    const file = new File([blob], name, {type:'application/json'});
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      await navigator.share({files:[file], title:'Split Ledger backup'});
+      toast('Backup shared');
+      return;
+    }
+  }catch(err){ if(err && err.name==='AbortError') return; }
+
+  if(!window.claude && 'download' in document.createElement('a')){
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href=url; a.download=name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    toast('Backup downloaded');
     return;
   }
-  const url = URL.createObjectURL(new Blob([json],{type:'application/json'}));
-  const a = document.createElement('a');
-  a.href=url; a.download=name;
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-  toast('Backup downloaded');
+  try{ await navigator.clipboard.writeText(json); toast('Backup copied to the clipboard'); }
+  catch(e){ toast('Saving is unavailable here — try a different browser.'); }
 }
 function importData(file){
   const fr = new FileReader();
@@ -1328,7 +1789,7 @@ if('serviceWorker' in navigator && window.top===window.self &&
 
 /* resume banner for an unfinished session */
 if(S.draft){
-  const o = ALLOPTS[S.draft.workoutId];
+  const o = getOpt(S.draft.workoutId);
   if(o){
     const b = document.createElement('div');
     b.className='toast'; b.style.animation='none'; b.style.opacity='1'; b.style.pointerEvents='auto';
