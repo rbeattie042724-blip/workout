@@ -1,6 +1,6 @@
 # Split Ledger
 
-A phone-first workout dashboard: a 4-day full-body split with a strength and an
+A phone-first workout dashboard: a full-body split with a strength and an
 athletic option for every day, a calendar planner, and a set-by-set logger.
 Everything is stored in the browser on your device — no account, no server.
 

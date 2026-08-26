@@ -1,7 +1,7 @@
 {
   "name": "Split Ledger",
   "short_name": "Split Ledger",
-  "description": "A 4-day full-body split, planned on a calendar and logged set by set.",
+  "description": "A full-body training split, planned on a calendar and logged set by set.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

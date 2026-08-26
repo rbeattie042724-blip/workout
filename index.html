@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <title>Split Ledger</title>
-<meta name="description" content="A 4-day full-body split, planned on a calendar and logged set by set.">
+<meta name="description" content="A full-body training split, planned on a calendar and logged set by set.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Split Ledger">
@@ -460,7 +460,7 @@ label.btn{cursor:pointer}
 
 <script>
 /* ══════════════════════════════════════════════════════════════════════════
-   PROGRAM — 4-day split, full-body coverage.
+   PROGRAM — a full-body split: two lower days, two upper days.
    Each day offers a Strength option (barbell/machine, standard commercial-gym
    equipment) and an Athletic option (unilateral, explosive, reactive).
    ══════════════════════════════════════════════════════════════════════════ */
@@ -806,12 +806,12 @@ function suggestNext(){
   return getOpt(nd.options[0].id);
 }
 function weekStreak(){
-  // consecutive weeks (ending with the current or last week) containing 3+ sessions
+  // consecutive weeks (ending with the current or last week) you trained at all
   const counts = {};
   S.sessions.forEach(s=>{ const k = weekKey(fromIso(s.date)); counts[k]=(counts[k]||0)+1; });
   let streak=0; const cur = new Date();
-  if((counts[weekKey(cur)]||0) < 3) cur.setDate(cur.getDate()-7);
-  while((counts[weekKey(cur)]||0) >= 3){ streak++; cur.setDate(cur.getDate()-7); }
+  if(!counts[weekKey(cur)]) cur.setDate(cur.getDate()-7);
+  while(counts[weekKey(cur)]){ streak++; cur.setDate(cur.getDate()-7); }
   return streak;
 }
 function weekKey(d){ const x=new Date(d); x.setDate(x.getDate()-x.getDay()); return iso(x); }
@@ -879,12 +879,11 @@ function viewCal(){
 
 /* ══════════════════════════════════════ library ═════════════════════════ */
 function viewLib(){
-  return `<span class="eyebrow">The split · 4 days · full body</span>
+  return `<span class="eyebrow">The split · full body</span>
   <p style="color:var(--muted);font-size:13.5px;margin:0 2px 20px;line-height:1.55">
-    Four sessions cover every major muscle: two lower (squat pattern and hinge pattern), two upper (push and pull).
-    Each day has a <b style="color:var(--strength)">Strength</b> version built on barbells and machines any commercial gym has,
+    Every major muscle is covered: two lower days (squat pattern and hinge pattern) and two upper days (push and pull).
+    Each has a <b style="color:var(--strength)">Strength</b> version built on barbells and machines any commercial gym has,
     and an <b style="color:var(--athletic)">Athletic</b> version built on power, single-leg work, and change of direction.
-    Run one of each per week, or alternate blocks.
   </p>
   ${PROGRAM.map(d=>`
     <div class="day-block">
