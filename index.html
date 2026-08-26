@@ -355,6 +355,29 @@ textarea{resize:vertical;min-height:64px;font-family:var(--sans)}
 }
 @keyframes toast{0%{opacity:0;transform:translate(-50%,8px)}12%{opacity:1;transform:translate(-50%,0)}82%{opacity:1}100%{opacity:0}}
 
+/* ── account ───────────────────────────────────────────────────────────── */
+#acctBtn.synced{border-color:var(--good)}
+.acct-i{
+  width:22px;height:22px;border-radius:50%;background:var(--good);color:#fff;display:grid;place-items:center;
+  font-family:var(--disp);font-weight:700;font-size:12px;line-height:1;
+}
+.acct-big{
+  width:40px;height:40px;border-radius:50%;background:var(--strength);color:#fff;display:grid;place-items:center;
+  font-family:var(--disp);font-weight:700;font-size:17px;flex:none;
+}
+#acctBtn.busy{opacity:.55}
+.orbar{display:flex;align-items:center;gap:12px;margin:16px 0;color:var(--muted)}
+.orbar::before,.orbar::after{content:"";flex:1;height:1px;background:var(--line)}
+.orbar span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.linkish{font-size:13px;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;padding:4px 0}
+.autherr{
+  font-size:13px;color:var(--athletic);background:var(--athletic-soft);border-radius:10px;
+  padding:10px 12px;margin:0 0 14px;line-height:1.45;
+  border:1px solid color-mix(in srgb,var(--athletic) 30%,transparent);
+}
+.btn[disabled]{opacity:.5;pointer-events:none}
+label.btn{cursor:pointer}
+
 /* ── workout builder ───────────────────────────────────────────────────── */
 .bex{border:1px solid var(--line);background:var(--surface-2);border-radius:12px;padding:11px;margin-bottom:8px}
 .bex-hd{display:flex;align-items:center;gap:8px}
@@ -410,7 +433,10 @@ textarea{resize:vertical;min-height:64px;font-family:var(--sans)}
 
 <header class="top">
   <div class="top-in">
-    <div class="brand"><b>Split Ledger</b><span id="unitTag">4-day split</span></div>
+    <div class="brand"><b>Split Ledger</b></div>
+    <button class="icon-btn" id="acctBtn" aria-label="Sign in to sync">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>
+    </button>
     <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">
       <svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
     </button>
@@ -566,7 +592,7 @@ function dayTag(o){ return o.day.id==='custom' ? 'Your workout' : `Day ${o.day.n
 
 /* ══════════════════════════════════════ state ═══════════════════════════ */
 const KEY = 'splitledger.v1';
-const blank = { units:'lb', theme:'auto', scheduled:{}, sessions:[], custom:[], draft:null };
+const blank = { units:'lb', theme:'auto', scheduled:{}, sessions:[], custom:[], tomb:[], draft:null };
 let S = load();
 
 function load(){
@@ -582,11 +608,14 @@ function save(){
   saveTimer = setTimeout(()=>{
     try{ localStorage.setItem(KEY, JSON.stringify(S)); }
     catch(e){ toast('Could not save — device storage is full or blocked.'); }
+    if(window.SL && SL.api && SL.api.push) SL.api.push();
   }, 120);
 }
 function saveNow(){
   clearTimeout(saveTimer);
+  S.updatedAt = Date.now();
   try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
+  if(window.SL && SL.api && SL.api.push) SL.api.push();
 }
 addEventListener('pagehide', saveNow);
 addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='hidden') saveNow(); });
@@ -648,6 +677,7 @@ $('#nav').addEventListener('click', e => {
 });
 
 function render(){
+  paintAccountBtn();
   const v = $('#view');
   if(tab==='today') v.innerHTML = viewToday();
   else if(tab==='cal') v.innerHTML = viewCal();
@@ -1330,6 +1360,7 @@ function deleteBuilder(id){
   if(!confirm(msg)) return;
   planned.forEach(d=>delete S.scheduled[d]);
   S.custom = S.custom.filter(x=>x.id!==id);
+  remember_deleted(id);
   if(S.draft && S.draft.workoutId===id) S.draft = null;
   EDIT = null; saveNow(); closeSheet(); render();
   toast(`${c.name} deleted`);
@@ -1619,6 +1650,7 @@ document.addEventListener('click', e=>{
   if(del){
     if(!confirm('Delete this logged session? This cannot be undone.')) return;
     S.sessions = S.sessions.filter(s=>s.id!==del.dataset.delsess);
+    remember_deleted(del.dataset.delsess);
     saveNow(); closeSheet(); render(); toast('Session deleted');
     return;
   }
@@ -1685,6 +1717,21 @@ document.addEventListener('click', e=>{
     S.draft=null; saveNow(); closeRunner(); render(); return;
   }
   if(t.closest('#resumeBtn')){ resumeDraft(); return; }
+
+  if(t.closest('#acctBtn')){ openAccount(); return; }
+  const au = t.closest('[data-auth]');
+  if(au){
+    const api = (window.SL && SL.api) || null;
+    const k = au.dataset.auth;
+    if(k==='mode'){ AUTHMODE = AUTHMODE==='up' ? 'in' : 'up'; ACCOUNT.error=''; openAccount(); return; }
+    if(!api){ toast('Sync is not set up on this copy.'); return; }
+    if(k==='google') api.google();
+    if(k==='out')    api.signOut();
+    if(k==='sync')   api.syncNow();
+    if(k==='submit') api.email(AUTHMODE, ($('#authEmail').value||'').trim(), $('#authPass').value||'');
+    if(k==='reset')  api.reset(($('#authEmail').value||'').trim());
+    return;
+  }
 
   if(t.closest('#setBtn')){ openSettings(); return; }
   if(t.closest('#themeBtn')){
@@ -1773,6 +1820,153 @@ function importData(file){
   fr.readAsText(file);
 }
 
+/* ══════════════════════════════════════ sync bridge ═════════════════════ */
+/* The optional account layer lives in sync.js. It talks to the app only
+   through window.SL, so the dashboard works exactly the same without it. */
+
+let ACCOUNT = {status:'off', email:'', lastSync:0, error:''};
+let AUTHMODE = 'in';
+
+function remember_deleted(id){
+  S.tomb = S.tomb || [];
+  if(!S.tomb.includes(id)) S.tomb.push(id);
+  if(S.tomb.length > 800) S.tomb = S.tomb.slice(-800);
+}
+
+function localSnapshot(){
+  return {units:S.units, theme:S.theme, scheduled:S.scheduled||{},
+          sessions:S.sessions||[], custom:S.custom||[], tomb:S.tomb||[],
+          updatedAt:S.updatedAt||0};
+}
+
+/* Union the two ledgers. Newer side wins the single-value fields; lists are
+   merged by id, minus anything either device has deleted. */
+function mergeState(remote, local){
+  const tomb = new Set([...(local.tomb||[]), ...(remote.tomb||[])]);
+  const rNewer = (remote.updatedAt||0) > (local.updatedAt||0);
+
+  const byId = (a,b)=>{
+    const m = new Map();
+    [...(a||[]), ...(b||[])].forEach(x=>{ if(x && x.id && !tomb.has(x.id)) m.set(x.id, x); });
+    return [...m.values()];
+  };
+  // the same workout logged twice on the same day is one session, not two
+  const sessions = [];
+  const seen = new Map();
+  byId(local.sessions, remote.sessions)
+    .sort((a,b)=> a.date<b.date ? -1 : a.date>b.date ? 1 : 0)
+    .forEach(x=>{
+      const k = x.date + '|' + x.workoutId;
+      const prev = seen.get(k);
+      if(prev){ if((x.setCount||0) > (prev.setCount||0)) sessions[sessions.indexOf(prev)] = x, seen.set(k,x); return; }
+      seen.set(k,x); sessions.push(x);
+    });
+
+  return {
+    units:  rNewer ? (remote.units||local.units) : (local.units||remote.units),
+    theme:  rNewer ? (remote.theme||local.theme) : (local.theme||remote.theme),
+    scheduled: rNewer ? {...local.scheduled, ...remote.scheduled} : {...remote.scheduled, ...local.scheduled},
+    sessions, custom: byId(local.custom, remote.custom), tomb:[...tomb],
+    updatedAt: Math.max(remote.updatedAt||0, local.updatedAt||0)
+  };
+}
+
+window.SL = {
+  snapshot: localSnapshot,
+  /* sync.js hands us the merged ledger; we adopt it and repaint. */
+  adopt(next){
+    Object.assign(S, next);
+    saveNow(); applyTheme(); render();
+    if($('#layer').innerHTML && $('#layer').querySelector('[data-auth]')) openAccount();
+  },
+  merge: mergeState,
+  /* sync.js reports auth + sync status here. */
+  setAuth(info){
+    ACCOUNT = Object.assign({status:'off', email:'', lastSync:0, error:''}, info);
+    paintAccountBtn();
+    if($('#layer').innerHTML && $('#layer').querySelector('[data-auth]')) openAccount();
+  },
+  toast,
+  api: null   // filled in by sync.js: {google, email, reset, signOut, syncNow}
+};
+
+function paintAccountBtn(){
+  const b = $('#acctBtn'); if(!b) return;
+  const on = ACCOUNT.status==='in';
+  b.innerHTML = on
+    ? `<span class="acct-i">${esc((ACCOUNT.email||'?')[0].toUpperCase())}</span>`
+    : `<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>`;
+  b.classList.toggle('synced', on);
+  b.classList.toggle('busy', ACCOUNT.status==='busy');
+  b.setAttribute('aria-label', on ? `Account — ${ACCOUNT.email}` : 'Sign in to sync');
+}
+
+function syncAgo(){
+  if(!ACCOUNT.lastSync) return 'not yet';
+  const s = Math.round((Date.now()-ACCOUNT.lastSync)/1000);
+  if(s < 45) return 'just now';
+  if(s < 3600) return Math.round(s/60)+' min ago';
+  if(s < 86400) return Math.round(s/3600)+' h ago';
+  return Math.round(s/86400)+' d ago';
+}
+
+function openAccount(){
+  const A = ACCOUNT;
+  let body;
+
+  if(A.status==='off'){
+    body = `<p style="font-size:13.5px;color:var(--muted);line-height:1.6;margin:0 0 16px">
+        Accounts are not switched on for this copy of the dashboard. Your training is still saved
+        on this device, and Settings → Export backup moves it anywhere you like.</p>`;
+  } else if(A.status==='in'){
+    body = `
+      <div class="card" style="padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:16px">
+        <span class="acct-big">${esc((A.email||'?')[0].toUpperCase())}</span>
+        <span style="flex:1;min-width:0">
+          <b style="display:block;font-size:14.5px;overflow:hidden;text-overflow:ellipsis">${esc(A.email)}</b>
+          <i style="font-style:normal;font-family:var(--mono);font-size:11px;color:var(--muted)">Synced ${syncAgo()}</i>
+        </span>
+        <span class="pill done">${svgCheck()} On</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 16px">
+        Every session, plan and workout you build is saved to your account and pulled down on any
+        device you sign in on. It keeps working offline and catches up when you reconnect.</p>
+      <button class="btn ghost" data-auth="sync">Sync now</button>
+      <button class="btn ghost" style="margin-top:10px" data-auth="out">Sign out</button>
+      <p style="font-size:12px;color:var(--muted);margin-top:12px">Signing out leaves this device's copy untouched.</p>`;
+  } else {
+    const up = AUTHMODE==='up';
+    body = `
+      <p style="font-size:13.5px;color:var(--muted);line-height:1.6;margin:0 0 16px">
+        Your training is saved on this device already. An account backs it up and lets you pick up
+        on your phone, your laptop, anywhere. It is optional — everything works signed out.</p>
+      ${A.error?`<p class="autherr">${esc(A.error)}</p>`:''}
+      <button class="btn ghost" data-auth="google" ${A.status==='busy'?'disabled':''}>
+        <svg viewBox="0 0 24 24" style="stroke:none"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4z"/><path fill="#34A853" d="M12 22c2.7 0 4.9-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"/><path fill="#FBBC05" d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2L6.4 14z"/><path fill="#EA4335" d="M12 5.9c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.4L6.4 10c.8-2.4 3-4.1 5.6-4.1z"/></svg>
+        Continue with Google</button>
+      <div class="orbar"><span>or</span></div>
+      <label class="fld"><span class="lb">Email</span>
+        <input type="email" id="authEmail" autocomplete="email" inputmode="email" autocapitalize="none" placeholder="you@example.com"></label>
+      <label class="fld"><span class="lb">Password</span>
+        <input type="password" id="authPass" autocomplete="${up?'new-password':'current-password'}" placeholder="${up?'At least 6 characters':'Your password'}"></label>
+      <button class="btn" data-auth="submit" ${A.status==='busy'?'disabled':''}>${up?'Create account':'Sign in'}</button>
+      <div class="row" style="margin-top:12px;justify-content:space-between">
+        <button class="linkish" data-auth="mode">${up?'I already have an account':'Create an account'}</button>
+        ${up?'':'<button class="linkish" data-auth="reset">Forgot password?</button>'}
+      </div>`;
+  }
+
+  sheet(`
+    <div class="sheet-hd">
+      <div style="flex:1">
+        <div class="sub">${A.status==='in'?'Account':'Sync'}</div>
+        <h2>${A.status==='in'?'Your account':'Sync your training'}</h2>
+      </div>
+      <button class="icon-btn" data-close aria-label="Close">${svgX()}</button>
+    </div>
+    ${body}`);
+}
+
 /* ══════════════════════════════════════ theme / boot ════════════════════ */
 function applyTheme(){
   if(S.theme==='auto') document.documentElement.removeAttribute('data-theme');
@@ -1800,3 +1994,4 @@ if(S.draft){
   } else { S.draft=null; save(); }
 }
 </script>
+<script type="module" src="sync.js"></script>

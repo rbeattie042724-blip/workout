@@ -1,6 +1,6 @@
 /* Split Ledger service worker — keeps the dashboard usable with no signal. */
-const CACHE = 'split-ledger-v1';
-const CORE = ['./', './index.html', './manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png'];
+const CACHE = 'split-ledger-v2';
+const CORE = ['./', './index.html', './sync.js', './manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
