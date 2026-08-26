@@ -9,12 +9,12 @@
    ══════════════════════════════════════════════════════════════════════════ */
 
 const FIREBASE_CONFIG = {
-  apiKey:            "PASTE_API_KEY",
-  authDomain:        "PASTE_PROJECT_ID.firebaseapp.com",
-  projectId:         "PASTE_PROJECT_ID",
-  storageBucket:     "PASTE_PROJECT_ID.firebasestorage.app",
-  messagingSenderId: "PASTE_SENDER_ID",
-  appId:             "PASTE_APP_ID"
+  apiKey:            "AIzaSyDhOw2nNfZ-iBZ2aT_6vTFFdfF-BymBvO4",
+  authDomain:        "workout-1d4a8.firebaseapp.com",
+  projectId:         "workout-1d4a8",
+  storageBucket:     "workout-1d4a8.firebasestorage.app",
+  messagingSenderId: "117041479905",
+  appId:             "1:117041479905:web:fb78cf9724182adfa5f7a0"
 };
 
 const SDK = 'https://www.gstatic.com/firebasejs/10.14.1';
