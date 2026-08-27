@@ -4,7 +4,7 @@
  * lands on the next load. Cross-origin ones (Google Fonts, the Firebase SDK)
  * live at versioned, immutable URLs, so those are cache-first.
  */
-const CACHE = 'split-ledger-v10';
+const CACHE = 'split-ledger-v11';
 const CORE = ['./', './index.html', './sync.js', './manifest.webmanifest',
               './icon-180.png', './icon-192.png', './icon-512.png'];
 
