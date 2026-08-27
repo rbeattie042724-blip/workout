@@ -440,6 +440,11 @@ label.btn{cursor:pointer}
 .bex-grid input{padding:8px 6px;font-size:14px;text-align:center;font-family:var(--mono);background:var(--surface)}
 .bex .cuein{margin-top:7px;font-size:13.5px;background:var(--surface)}
 .swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sw-group{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin:12px 0 7px;
+}
+.sw-group:first-of-type{margin-top:0}
 .swatch{
   border:1px solid var(--line-2);border-radius:12px;padding:9px 8px;background:var(--surface-2);
   display:flex;flex-direction:column;align-items:center;gap:7px;
@@ -522,7 +527,7 @@ label.btn{cursor:pointer}
   --bg:#F4F4F4; --surface:#FFFFFF; --surface-2:#FAFAFA; --ink:#0A0A0A; --ink-2:#3A3A3A;
   --muted:#767676; --line:#E4E4E4; --line-2:#CFCFCF;
   --strength:#111111; --strength-soft:#EDEDED; --athletic:#5C5C5C; --athletic-soft:#F0F0F0;
-  --foundation:#8A8A8A; --foundation-soft:#F2F2F2; --mobility:#B0B0B0; --mobility-soft:#F5F5F5;
+  --foundation:#5A5A5A; --foundation-soft:#F2F2F2; --mobility:#7E7E7E; --mobility-soft:#F5F5F5;
   --good:#2E2E2E; --good-soft:#EAEAEA; --danger:#8A2B22; --warn:#6B5A20;
 }
 :root[data-palette="clay"]{
@@ -559,7 +564,7 @@ label.btn{cursor:pointer}
     --bg:#0A0A0A; --surface:#141414; --surface-2:#1B1B1B; --ink:#F5F5F5; --ink-2:#C8C8C8;
     --muted:#8A8A8A; --line:#242424; --line-2:#343434;
     --strength:#FFFFFF; --strength-soft:#202020; --athletic:#B4B4B4; --athletic-soft:#1C1C1C;
-    --foundation:#818181; --foundation-soft:#181818; --mobility:#5E5E5E; --mobility-soft:#161616;
+    --foundation:#818181; --foundation-soft:#181818; --mobility:#8E8E8E; --mobility-soft:#161616;
     --good:#DADADA; --good-soft:#1E1E1E; --danger:#E08878; --warn:#CBB176;
   }
   :root[data-palette="clay"]:not([data-theme="light"]){
@@ -595,7 +600,7 @@ label.btn{cursor:pointer}
   --bg:#0A0A0A; --surface:#141414; --surface-2:#1B1B1B; --ink:#F5F5F5; --ink-2:#C8C8C8;
   --muted:#8A8A8A; --line:#242424; --line-2:#343434;
   --strength:#FFFFFF; --strength-soft:#202020; --athletic:#B4B4B4; --athletic-soft:#1C1C1C;
-  --foundation:#818181; --foundation-soft:#181818; --mobility:#5E5E5E; --mobility-soft:#161616;
+  --foundation:#818181; --foundation-soft:#181818; --mobility:#8E8E8E; --mobility-soft:#161616;
   --good:#DADADA; --good-soft:#1E1E1E; --danger:#E08878; --warn:#CBB176;
 }
 :root[data-theme="dark"][data-palette="clay"]{
@@ -640,6 +645,465 @@ label.btn{cursor:pointer}
 :root[data-corners="sharp"] .chip,
 :root[data-corners="sharp"] .badge{border-radius:3px}
 :root[data-corners="sharp"] .sheet{border-radius:4px 4px 0 0}
+
+/* ── vibrant palettes ──────────────────────────────────────────────────── */
+:root[data-palette="neon"]{
+  --bg:#F3F5F1;
+  --surface:#FFFFFF;
+  --surface-2:#F8FAF6;
+  --ink:#080B07;
+  --ink-2:#2F352C;
+  --muted:#697062;
+  --line:#E2E8DE;
+  --line-2:#CAD3C5;
+  --strength:#0091AD;
+  --strength-soft:#E0F4F8;
+  --athletic:#D6006E;
+  --athletic-soft:#FFE4F0;
+  --foundation:#5E8C00;
+  --foundation-soft:#EEF7DC;
+  --mobility:#7A2BD1;
+  --mobility-soft:#F1E6FC;
+  --good:#167F45;
+  --good-soft:#E3F3E9;
+  --danger:#C4231F;
+  --warn:#9A6B00;
+}
+
+:root[data-palette="vapor"]{
+  --bg:#FBF0FF;
+  --surface:#FFFFFF;
+  --surface-2:#FAF3FE;
+  --ink:#2A0F45;
+  --ink-2:#543772;
+  --muted:#8B71A6;
+  --line:#EEDFF7;
+  --line-2:#DCC6EC;
+  --strength:#0089B8;
+  --strength-soft:#E0F4FB;
+  --athletic:#D1006B;
+  --athletic-soft:#FCE2EF;
+  --foundation:#0E9F7A;
+  --foundation-soft:#DFF5EE;
+  --mobility:#C77A00;
+  --mobility-soft:#FCEFD9;
+  --good:#0E9F7A;
+  --good-soft:#DFF5EE;
+  --danger:#C42B58;
+  --warn:#B07500;
+}
+
+:root[data-palette="sunset"]{
+  --bg:#FFF6F0;
+  --surface:#FFFFFF;
+  --surface-2:#FFF9F5;
+  --ink:#2B1410;
+  --ink-2:#5C332B;
+  --muted:#906A60;
+  --line:#F6E3D8;
+  --line-2:#E9CDBD;
+  --strength:#D2452A;
+  --strength-soft:#FBE7E1;
+  --athletic:#B57800;
+  --athletic-soft:#FBF0D9;
+  --foundation:#C41E4A;
+  --foundation-soft:#FBE3EA;
+  --mobility:#6B21A8;
+  --mobility-soft:#EEE4FA;
+  --good:#067A5E;
+  --good-soft:#DFF3ED;
+  --danger:#C1123E;
+  --warn:#A06A00;
+}
+
+:root[data-palette="citrus"]{
+  --bg:#FFFDF2;
+  --surface:#FFFFFF;
+  --surface-2:#FFFDF7;
+  --ink:#1B1A0C;
+  --ink-2:#45431F;
+  --muted:#7C7A55;
+  --line:#F2EFD9;
+  --line-2:#E1DDBC;
+  --strength:#E85D04;
+  --strength-soft:#FDEAD9;
+  --athletic:#5E8C0E;
+  --athletic-soft:#EAF3DC;
+  --foundation:#A97600;
+  --foundation-soft:#FBF1D5;
+  --mobility:#0091AD;
+  --mobility-soft:#DEF1F6;
+  --good:#2E933C;
+  --good-soft:#E3F2E5;
+  --danger:#D00000;
+  --warn:#BC6C25;
+}
+
+:root[data-palette="candy"]{
+  --bg:#FDF4FF;
+  --surface:#FFFFFF;
+  --surface-2:#FEF8FF;
+  --ink:#2A1030;
+  --ink-2:#5A3363;
+  --muted:#957C9C;
+  --line:#F5E4F9;
+  --line-2:#E7CCEE;
+  --strength:#E0479E;
+  --strength-soft:#FBE4F1;
+  --athletic:#00A6A6;
+  --athletic-soft:#DCF3F3;
+  --foundation:#7B4DFF;
+  --foundation-soft:#EAE2FF;
+  --mobility:#C85A0E;
+  --mobility-soft:#FDEADD;
+  --good:#0FA958;
+  --good-soft:#DEF3E7;
+  --danger:#E5383B;
+  --warn:#C77800;
+}
+
+:root[data-palette="racer"]{
+  --bg:#F4F5F7;
+  --surface:#FFFFFF;
+  --surface-2:#FAFAFB;
+  --ink:#0A0A0A;
+  --ink-2:#333333;
+  --muted:#6E7278;
+  --line:#E3E5E9;
+  --line-2:#CDD0D6;
+  --strength:#0057B8;
+  --strength-soft:#E1EBF7;
+  --athletic:#D40500;
+  --athletic-soft:#FBE3E2;
+  --foundation:#B58900;
+  --foundation-soft:#F8F0D7;
+  --mobility:#00874A;
+  --mobility-soft:#DDF0E6;
+  --good:#00874A;
+  --good-soft:#DDF0E6;
+  --danger:#B00020;
+  --warn:#B58900;
+}
+
+@media (prefers-color-scheme:dark){
+  :root[data-palette="neon"]:not([data-theme="light"]){
+  --bg:#04060A;
+  --surface:#0C1016;
+  --surface-2:#12181F;
+  --ink:#EAFFFB;
+  --ink-2:#B4C7C4;
+  --muted:#7B8C89;
+  --line:#1A222C;
+  --line-2:#26313E;
+  --strength:#22E0FF;
+  --strength-soft:#04262E;
+  --athletic:#FF3D9A;
+  --athletic-soft:#2A0A1B;
+  --foundation:#B8FF3C;
+  --foundation-soft:#1A2405;
+  --mobility:#B47BFF;
+  --mobility-soft:#1B0E2A;
+  --good:#38E07B;
+  --good-soft:#062418;
+  --danger:#FF5A5A;
+  --warn:#FFD166;
+}
+
+  :root[data-palette="vapor"]:not([data-theme="light"]){
+  --bg:#140A29;
+  --surface:#1E1039;
+  --surface-2:#271547;
+  --ink:#F6EAFF;
+  --ink-2:#CDB6EA;
+  --muted:#9883BE;
+  --line:#2E1A52;
+  --line-2:#3D256E;
+  --strength:#4CC9F0;
+  --strength-soft:#0A2733;
+  --athletic:#F72585;
+  --athletic-soft:#2C0A1D;
+  --foundation:#80FFDB;
+  --foundation-soft:#08291F;
+  --mobility:#FFB703;
+  --mobility-soft:#2A1C05;
+  --good:#4ADE80;
+  --good-soft:#0A2416;
+  --danger:#FF5D8F;
+  --warn:#FFB703;
+}
+
+  :root[data-palette="sunset"]:not([data-theme="light"]){
+  --bg:#170C13;
+  --surface:#22131F;
+  --surface-2:#2C1928;
+  --ink:#FFF0E8;
+  --ink-2:#E0BFB2;
+  --muted:#A88A80;
+  --line:#341F30;
+  --line-2:#472C41;
+  --strength:#FF7B54;
+  --strength-soft:#2E1610;
+  --athletic:#FFD166;
+  --athletic-soft:#2E2510;
+  --foundation:#FF4D6D;
+  --foundation-soft:#2E1018;
+  --mobility:#9D4EDD;
+  --mobility-soft:#1F1030;
+  --good:#06D6A0;
+  --good-soft:#052620;
+  --danger:#EF476F;
+  --warn:#FFD166;
+}
+
+  :root[data-palette="citrus"]:not([data-theme="light"]){
+  --bg:#0F1009;
+  --surface:#181A0F;
+  --surface-2:#1F2216;
+  --ink:#F8FBE9;
+  --ink-2:#CDD4B4;
+  --muted:#949B7C;
+  --line:#252A19;
+  --line-2:#353B26;
+  --strength:#FF9E2C;
+  --strength-soft:#2B1C06;
+  --athletic:#A7E32B;
+  --athletic-soft:#1F2606;
+  --foundation:#FFD23F;
+  --foundation-soft:#2B2306;
+  --mobility:#35D0EE;
+  --mobility-soft:#06232B;
+  --good:#6FE07B;
+  --good-soft:#08240F;
+  --danger:#FF6B6B;
+  --warn:#FFD23F;
+}
+
+  :root[data-palette="candy"]:not([data-theme="light"]){
+  --bg:#150F1A;
+  --surface:#1F1727;
+  --surface-2:#271D32;
+  --ink:#FBEEFF;
+  --ink-2:#D6C1E0;
+  --muted:#A08FAA;
+  --line:#2D2237;
+  --line-2:#3D2E4A;
+  --strength:#FF74C0;
+  --strength-soft:#2C1020;
+  --athletic:#3DDCDC;
+  --athletic-soft:#062626;
+  --foundation:#A98BFF;
+  --foundation-soft:#1B1233;
+  --mobility:#FFA45C;
+  --mobility-soft:#2C1B0D;
+  --good:#4ADE80;
+  --good-soft:#0A2416;
+  --danger:#FF6B6E;
+  --warn:#FFC857;
+}
+
+  :root[data-palette="racer"]:not([data-theme="light"]){
+  --bg:#08090C;
+  --surface:#121419;
+  --surface-2:#191C22;
+  --ink:#F4F6F8;
+  --ink-2:#C4C9D0;
+  --muted:#868C95;
+  --line:#20242A;
+  --line-2:#2E333B;
+  --strength:#3B82F6;
+  --strength-soft:#0A1830;
+  --athletic:#FF2D20;
+  --athletic-soft:#2C0C0A;
+  --foundation:#FFCC00;
+  --foundation-soft:#2B2405;
+  --mobility:#22C55E;
+  --mobility-soft:#062416;
+  --good:#22C55E;
+  --good-soft:#062416;
+  --danger:#FF6B6B;
+  --warn:#FFCC00;
+}
+
+}
+:root[data-theme="dark"][data-palette="neon"]{
+  --bg:#04060A;
+  --surface:#0C1016;
+  --surface-2:#12181F;
+  --ink:#EAFFFB;
+  --ink-2:#B4C7C4;
+  --muted:#7B8C89;
+  --line:#1A222C;
+  --line-2:#26313E;
+  --strength:#22E0FF;
+  --strength-soft:#04262E;
+  --athletic:#FF3D9A;
+  --athletic-soft:#2A0A1B;
+  --foundation:#B8FF3C;
+  --foundation-soft:#1A2405;
+  --mobility:#B47BFF;
+  --mobility-soft:#1B0E2A;
+  --good:#38E07B;
+  --good-soft:#062418;
+  --danger:#FF5A5A;
+  --warn:#FFD166;
+}
+
+:root[data-theme="dark"][data-palette="vapor"]{
+  --bg:#140A29;
+  --surface:#1E1039;
+  --surface-2:#271547;
+  --ink:#F6EAFF;
+  --ink-2:#CDB6EA;
+  --muted:#9883BE;
+  --line:#2E1A52;
+  --line-2:#3D256E;
+  --strength:#4CC9F0;
+  --strength-soft:#0A2733;
+  --athletic:#F72585;
+  --athletic-soft:#2C0A1D;
+  --foundation:#80FFDB;
+  --foundation-soft:#08291F;
+  --mobility:#FFB703;
+  --mobility-soft:#2A1C05;
+  --good:#4ADE80;
+  --good-soft:#0A2416;
+  --danger:#FF5D8F;
+  --warn:#FFB703;
+}
+
+:root[data-theme="dark"][data-palette="sunset"]{
+  --bg:#170C13;
+  --surface:#22131F;
+  --surface-2:#2C1928;
+  --ink:#FFF0E8;
+  --ink-2:#E0BFB2;
+  --muted:#A88A80;
+  --line:#341F30;
+  --line-2:#472C41;
+  --strength:#FF7B54;
+  --strength-soft:#2E1610;
+  --athletic:#FFD166;
+  --athletic-soft:#2E2510;
+  --foundation:#FF4D6D;
+  --foundation-soft:#2E1018;
+  --mobility:#9D4EDD;
+  --mobility-soft:#1F1030;
+  --good:#06D6A0;
+  --good-soft:#052620;
+  --danger:#EF476F;
+  --warn:#FFD166;
+}
+
+:root[data-theme="dark"][data-palette="citrus"]{
+  --bg:#0F1009;
+  --surface:#181A0F;
+  --surface-2:#1F2216;
+  --ink:#F8FBE9;
+  --ink-2:#CDD4B4;
+  --muted:#949B7C;
+  --line:#252A19;
+  --line-2:#353B26;
+  --strength:#FF9E2C;
+  --strength-soft:#2B1C06;
+  --athletic:#A7E32B;
+  --athletic-soft:#1F2606;
+  --foundation:#FFD23F;
+  --foundation-soft:#2B2306;
+  --mobility:#35D0EE;
+  --mobility-soft:#06232B;
+  --good:#6FE07B;
+  --good-soft:#08240F;
+  --danger:#FF6B6B;
+  --warn:#FFD23F;
+}
+
+:root[data-theme="dark"][data-palette="candy"]{
+  --bg:#150F1A;
+  --surface:#1F1727;
+  --surface-2:#271D32;
+  --ink:#FBEEFF;
+  --ink-2:#D6C1E0;
+  --muted:#A08FAA;
+  --line:#2D2237;
+  --line-2:#3D2E4A;
+  --strength:#FF74C0;
+  --strength-soft:#2C1020;
+  --athletic:#3DDCDC;
+  --athletic-soft:#062626;
+  --foundation:#A98BFF;
+  --foundation-soft:#1B1233;
+  --mobility:#FFA45C;
+  --mobility-soft:#2C1B0D;
+  --good:#4ADE80;
+  --good-soft:#0A2416;
+  --danger:#FF6B6E;
+  --warn:#FFC857;
+}
+
+:root[data-theme="dark"][data-palette="racer"]{
+  --bg:#08090C;
+  --surface:#121419;
+  --surface-2:#191C22;
+  --ink:#F4F6F8;
+  --ink-2:#C4C9D0;
+  --muted:#868C95;
+  --line:#20242A;
+  --line-2:#2E333B;
+  --strength:#3B82F6;
+  --strength-soft:#0A1830;
+  --athletic:#FF2D20;
+  --athletic-soft:#2C0C0A;
+  --foundation:#FFCC00;
+  --foundation-soft:#2B2405;
+  --mobility:#22C55E;
+  --mobility-soft:#062416;
+  --good:#22C55E;
+  --good-soft:#062416;
+  --danger:#FF6B6B;
+  --warn:#FFCC00;
+}
+
+.sw-chips[data-pv="neon"] i:nth-child(1){background:#0091AD}
+.sw-chips[data-pv="neon"] i:nth-child(2){background:#D6006E}
+.sw-chips[data-pv="neon"] i:nth-child(3){background:#5E8C00}
+.sw-chips[data-pv="neon"] i:nth-child(4){background:#7A2BD1}
+.sw-chips[data-pv="vapor"] i:nth-child(1){background:#0089B8}
+.sw-chips[data-pv="vapor"] i:nth-child(2){background:#D1006B}
+.sw-chips[data-pv="vapor"] i:nth-child(3){background:#0E9F7A}
+.sw-chips[data-pv="vapor"] i:nth-child(4){background:#C77A00}
+.sw-chips[data-pv="sunset"] i:nth-child(1){background:#D2452A}
+.sw-chips[data-pv="sunset"] i:nth-child(2){background:#B57800}
+.sw-chips[data-pv="sunset"] i:nth-child(3){background:#C41E4A}
+.sw-chips[data-pv="sunset"] i:nth-child(4){background:#6B21A8}
+.sw-chips[data-pv="citrus"] i:nth-child(1){background:#E85D04}
+.sw-chips[data-pv="citrus"] i:nth-child(2){background:#5E8C0E}
+.sw-chips[data-pv="citrus"] i:nth-child(3){background:#C99000}
+.sw-chips[data-pv="citrus"] i:nth-child(4){background:#0091AD}
+.sw-chips[data-pv="candy"] i:nth-child(1){background:#E0479E}
+.sw-chips[data-pv="candy"] i:nth-child(2){background:#00A6A6}
+.sw-chips[data-pv="candy"] i:nth-child(3){background:#7B4DFF}
+.sw-chips[data-pv="candy"] i:nth-child(4){background:#FF8A3D}
+.sw-chips[data-pv="racer"] i:nth-child(1){background:#0057B8}
+.sw-chips[data-pv="racer"] i:nth-child(2){background:#D40500}
+.sw-chips[data-pv="racer"] i:nth-child(3){background:#B58900}
+.sw-chips[data-pv="racer"] i:nth-child(4){background:#00874A}
+/* ── optional glow ─────────────────────────────────────────────────────── */
+:root[data-fx="glow"] .pill.track{box-shadow:0 0 12px -3px var(--track)}
+:root[data-fx="glow"] .opt::before,
+:root[data-fx="glow"] .session-card::before,
+:root[data-fx="glow"] .pick::before{box-shadow:0 0 14px 0 var(--track)}
+:root[data-fx="glow"] .rail{box-shadow:0 0 10px 0 var(--track)}
+:root[data-fx="glow"] .cell.done{
+  box-shadow:0 0 22px -4px var(--track,var(--good)), inset 0 0 0 1px color-mix(in srgb,var(--track,var(--good)) 40%,transparent);
+}
+:root[data-fx="glow"] .ws.done{box-shadow:0 0 18px -5px var(--track,var(--good))}
+:root[data-fx="glow"] .brand b{text-shadow:0 0 18px color-mix(in srgb,var(--strength) 55%,transparent)}
+:root[data-fx="glow"] .btn:not(.ghost):not(.danger){box-shadow:0 0 20px -6px var(--ink)}
+:root[data-fx="glow"] .nav button[aria-selected="true"]{text-shadow:0 0 12px color-mix(in srgb,var(--ink) 60%,transparent)}
+:root[data-fx="glow"] .tick[aria-pressed="true"]{box-shadow:0 0 14px -2px var(--good)}
+:root[data-fx="glow"] .bigstat .v,
+:root[data-fx="glow"] .stat .v{text-shadow:0 0 16px color-mix(in srgb,var(--ink) 35%,transparent)}
+@media (prefers-reduced-motion:reduce){:root[data-fx="glow"] *{text-shadow:none}}
 
 @media (min-width:720px){
   .wrap{padding-bottom:48px}
@@ -903,7 +1367,7 @@ function dayTag(o){ return o.day.id==='custom' ? 'Your workout' : o.day.short; }
 
 /* ══════════════════════════════════════ state ═══════════════════════════ */
 const KEY = 'splitledger.v1';
-const blank = { units:'lb', theme:'auto', palette:'neutral', corners:'soft', scheduled:{}, sessions:[], custom:[], favs:[], weights:[], profile:null, tomb:[], draft:null };
+const blank = { units:'lb', theme:'auto', palette:'neutral', corners:'soft', fx:'', scheduled:{}, sessions:[], custom:[], favs:[], weights:[], profile:null, tomb:[], draft:null };
 let S = load();
 
 function load(){
@@ -1616,18 +2080,26 @@ function openSettings(){
         <button class="chip" data-pick-theme="dark" aria-pressed="${S.theme==='dark'}">Dark</button>
       </div></label>
     <label class="fld"><span class="lb">Colour</span>
-      <div class="swatches">${PALETTES.map(pl=>`
-        <button class="swatch" data-palette="${pl.id}" aria-pressed="${(S.palette||'neutral')===pl.id}"
-          aria-label="${pl.name} — ${pl.note}">
-          <span class="sw-chips" data-pv="${pl.id}"><i></i><i></i><i></i><i></i></span>
-          <span class="sw-name">${pl.name}</span>
-        </button>`).join('')}
+      ${['Quiet','Loud'].map(g=>`
+        <div class="sw-group">${g}</div>
+        <div class="swatches">${PALETTES.filter(pl=>pl.group===g).map(pl=>`
+          <button class="swatch" data-pick-palette="${pl.id}" aria-pressed="${(S.palette||'neutral')===pl.id}"
+            aria-label="${pl.name} — ${pl.note}">
+            <span class="sw-chips" data-pv="${pl.id}"><i></i><i></i><i></i><i></i></span>
+            <span class="sw-name">${pl.name}</span>
+          </button>`).join('')}
+        </div>`).join('')}
+      <p style="font-size:12px;color:var(--muted);margin:10px 0 0">${esc((PALETTES.find(x=>x.id===(S.palette||'neutral'))||PALETTES[0]).note)}</p></label>
+    <label class="fld"><span class="lb">Glow</span>
+      <div class="chip-row">
+        <button class="chip" data-pick-fx="off" aria-pressed="${S.fx!=='glow'}">Off</button>
+        <button class="chip" data-pick-fx="glow" aria-pressed="${S.fx==='glow'}">On</button>
       </div>
-      <p style="font-size:12px;color:var(--muted);margin:8px 0 0">${esc((PALETTES.find(x=>x.id===(S.palette||'neutral'))||PALETTES[0]).note)}</p></label>
+      <p style="font-size:12px;color:var(--muted);margin:8px 0 0">Lights up the accents, the tab bar and the calendar. Best with a loud palette.</p></label>
     <label class="fld"><span class="lb">Corners</span>
       <div class="chip-row">
-        <button class="chip" data-corners="soft" aria-pressed="${(S.corners||'soft')==='soft'}">Rounded</button>
-        <button class="chip" data-corners="sharp" aria-pressed="${S.corners==='sharp'}">Sharp</button>
+        <button class="chip" data-pick-corners="soft" aria-pressed="${(S.corners||'soft')==='soft'}">Rounded</button>
+        <button class="chip" data-pick-corners="sharp" aria-pressed="${S.corners==='sharp'}">Sharp</button>
       </div></label>
     <span class="lb" style="font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px">Your data</span>
     <p style="font-size:13px;color:var(--muted);margin:0 0 12px;line-height:1.5">
@@ -2073,10 +2545,18 @@ document.addEventListener('click', e=>{
 
   const u = t.closest('[data-units]');
   if(u){ S.units=u.dataset.units; saveNow(); openSettings(); render(); return; }
-  const pal = t.closest('[data-palette]');
-  if(pal){ S.palette = pal.dataset.palette; applyTheme(); saveNow(); openSettings(); return; }
-  const cor = t.closest('[data-corners]');
-  if(cor){ S.corners = cor.dataset.corners; applyTheme(); saveNow(); openSettings(); return; }
+  const pal = t.closest('[data-pick-palette]');
+  if(pal){
+    S.palette = pal.dataset.pickPalette;
+    const meta = PALETTES.find(x=>x.id===S.palette);
+    if(meta && meta.fx && S.fx!=='glow' && !S.fxAsked){ S.fxAsked = 1; S.fx = 'glow'; }
+    applyTheme(); saveNow(); openSettings();
+    return;
+  }
+  const fx = t.closest('[data-pick-fx]');
+  if(fx){ S.fx = fx.dataset.pickFx==='glow' ? 'glow' : ''; applyTheme(); saveNow(); openSettings(); return; }
+  const cor = t.closest('[data-pick-corners]');
+  if(cor){ S.corners = cor.dataset.pickCorners; applyTheme(); saveNow(); openSettings(); return; }
   const th = t.closest('[data-pick-theme]');
   if(th){ S.theme=th.dataset.pickTheme; applyTheme(); saveNow(); openSettings(); return; }
 
@@ -2569,12 +3049,18 @@ function openAccount(){
 
 /* ══════════════════════════════════════ theme / boot ════════════════════ */
 const PALETTES = [
-  {id:'neutral', name:'Neutral', note:'Warm paper and graphite. The default.'},
-  {id:'slate',   name:'Slate',   note:'Cool blues and teal.'},
-  {id:'carbon',  name:'Carbon',  note:'Pure greyscale, maximum contrast.'},
-  {id:'clay',    name:'Clay',    note:'Terracotta, ochre and olive.'},
-  {id:'forest',  name:'Forest',  note:'Deep greens with a brass accent.'},
-  {id:'ember',   name:'Ember',   note:'Plum and burnt orange.'}
+  {id:'neutral', name:'Neutral', group:'Quiet',   note:'Warm paper and graphite. The default.'},
+  {id:'slate',   name:'Slate',   group:'Quiet',   note:'Cool blues and teal.'},
+  {id:'carbon',  name:'Carbon',  group:'Quiet',   note:'Pure greyscale, maximum contrast.'},
+  {id:'clay',    name:'Clay',    group:'Quiet',   note:'Terracotta, ochre and olive.'},
+  {id:'forest',  name:'Forest',  group:'Quiet',   note:'Deep greens with a brass accent.'},
+  {id:'ember',   name:'Ember',   group:'Quiet',   note:'Plum and burnt orange.'},
+  {id:'neon',    name:'Neon',    group:'Loud', fx:1, note:'Arcade cyan, magenta and lime on black. Turn the glow on.'},
+  {id:'vapor',   name:'Vapor',   group:'Loud', fx:1, note:'Vaporwave: hot pink and cyan over deep violet.'},
+  {id:'sunset',  name:'Sunset',  group:'Loud', fx:1, note:'Coral, gold and orchid. Warm all the way down.'},
+  {id:'citrus',  name:'Citrus',  group:'Loud',       note:'Blood orange, lime and turmeric.'},
+  {id:'candy',   name:'Candy',   group:'Loud',       note:'Bubblegum, teal and grape.'},
+  {id:'racer',   name:'Racer',   group:'Loud', fx:1, note:'Primary red, blue and yellow. Motorsport livery.'}
 ];
 function applyTheme(){
   const r = document.documentElement;
@@ -2584,6 +3070,8 @@ function applyTheme(){
   else r.setAttribute('data-palette', S.palette);
   if(S.corners==='sharp') r.setAttribute('data-corners','sharp');
   else r.removeAttribute('data-corners');
+  if(S.fx==='glow') r.setAttribute('data-fx','glow');
+  else r.removeAttribute('data-fx');
 }
 applyTheme();
 render();
