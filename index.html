@@ -29,8 +29,13 @@
   --strength-soft:#EDECEA;
   --athletic:#8A7250;
   --athletic-soft:#F3EEE5;
-  --good:#5C6A58;
-  --good-soft:#EAEEE7;
+  --foundation:#55634F;
+  --foundation-soft:#EAEFE7;
+  --mobility:#5F5766;
+  --mobility-soft:#EFEBF1;
+  --good:#46685E;
+  --good-soft:#E6EEEA;
+  --danger:#93463A;
   --warn:#7C6A45;
   --shadow:0 1px 2px rgba(17,20,27,.06), 0 8px 24px -12px rgba(17,20,27,.18);
   --shadow-lift:0 2px 6px rgba(17,20,27,.08), 0 24px 48px -20px rgba(17,20,27,.35);
@@ -53,8 +58,13 @@
     --strength-soft:#22242A;
     --athletic:#C9A87E;
     --athletic-soft:#2A231A;
-    --good:#93A88C;
-    --good-soft:#1A211A;
+    --foundation:#A3B79B;
+    --foundation-soft:#1C231A;
+    --mobility:#B3A6BC;
+    --mobility-soft:#232029;
+    --good:#86B3A6;
+    --good-soft:#16231F;
+    --danger:#E0907E;
     --warn:#C2A46E;
     --shadow:0 1px 2px rgba(0,0,0,.5), 0 8px 24px -12px rgba(0,0,0,.7);
     --shadow-lift:0 2px 6px rgba(0,0,0,.5), 0 24px 48px -20px rgba(0,0,0,.9);
@@ -64,7 +74,7 @@
   --bg:#0E0E10; --surface:#17171A; --surface-2:#1E1E22; --ink:#F0EFEC; --ink-2:#C6C4BF;
   --muted:#8A8985; --line:#26262A; --line-2:#35353B;
   --strength:#AEB4BF; --strength-soft:#22242A; --athletic:#C9A87E; --athletic-soft:#2A231A;
-  --good:#93A88C; --good-soft:#1A211A; --warn:#C2A46E;
+  --good:#86B3A6; --good-soft:#16231F; --danger:#E0907E; --warn:#C2A46E;
   --shadow:0 1px 2px rgba(0,0,0,.5), 0 8px 24px -12px rgba(0,0,0,.7);
   --shadow-lift:0 2px 6px rgba(0,0,0,.5), 0 24px 48px -20px rgba(0,0,0,.9);
 }
@@ -130,8 +140,11 @@ h1,h2,h3{font-family:var(--disp);margin:0;text-wrap:balance;letter-spacing:-.01e
   letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;
   border:1px solid var(--line-2);color:var(--muted);white-space:nowrap;
 }
-.pill.strength{color:var(--strength);border-color:color-mix(in srgb,var(--strength) 38%,transparent);background:var(--strength-soft)}
-.pill.athletic{color:var(--athletic);border-color:color-mix(in srgb,var(--athletic) 38%,transparent);background:var(--athletic-soft)}
+.t-strength{--track:var(--strength);--track-soft:var(--strength-soft)}
+.t-athletic{--track:var(--athletic);--track-soft:var(--athletic-soft)}
+.t-foundation{--track:var(--foundation);--track-soft:var(--foundation-soft)}
+.t-mobility{--track:var(--mobility);--track-soft:var(--mobility-soft)}
+.pill.track{color:var(--track);border-color:color-mix(in srgb,var(--track) 38%,transparent);background:var(--track-soft)}
 .pill.done{color:var(--good);border-color:color-mix(in srgb,var(--good) 38%,transparent);background:var(--good-soft)}
 .pill svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .btn{
@@ -141,7 +154,7 @@ h1,h2,h3{font-family:var(--disp);margin:0;text-wrap:balance;letter-spacing:-.01e
 }
 .btn:active{transform:scale(.985)}
 .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line-2)}
-.btn.danger{background:transparent;color:var(--athletic);border:1px solid color-mix(in srgb,var(--athletic) 40%,transparent)}
+.btn.danger{background:transparent;color:var(--danger);border:1px solid color-mix(in srgb,var(--danger) 40%,transparent)}
 .btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .row{display:flex;gap:10px}
 .empty{color:var(--muted);font-size:14px;padding:22px 4px;text-align:center}
@@ -161,14 +174,12 @@ h1,h2,h3{font-family:var(--disp);margin:0;text-wrap:balance;letter-spacing:-.01e
 .ws .d{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
 .ws .n{font-family:var(--disp);font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
 .ws .dot{width:5px;height:5px;border-radius:50%;background:var(--line-2)}
-.ws.has .dot{background:var(--strength)}
-.ws.has.ath .dot{background:var(--athletic)}
-.ws.done .dot{background:var(--good)}
+.ws.has .dot{background:var(--track,var(--strength))}
+.ws.done .dot{background:var(--ink);width:6px;height:6px}
 .ws.today{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
 
 .session-card{padding:16px;display:flex;flex-direction:column;gap:14px;margin-top:14px;position:relative;overflow:hidden}
-.session-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--strength)}
-.session-card.ath::before{background:var(--athletic)}
+.session-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--track,var(--strength))}
 .session-card.done::before{background:var(--good)}
 .sc-head{display:flex;align-items:flex-start;gap:10px}
 .sc-head h2{font-size:20px;font-weight:700;font-stretch:108%;flex:1;line-height:1.15}
@@ -203,8 +214,22 @@ h1,h2,h3{font-family:var(--disp);margin:0;text-wrap:balance;letter-spacing:-.01e
 .cell.today .n{color:var(--ink);font-weight:800}
 .cell .dots{display:flex;gap:3px;height:5px;align-items:center}
 .cell .dots i{width:5px;height:5px;border-radius:50%;display:block}
-.dot-str{background:var(--strength)}.dot-ath{background:var(--athletic)}.dot-done{background:var(--good)}
+.tdot{background:var(--track)}
+.dot-done{background:var(--ink);width:6px!important;height:6px!important}
 .cell.sel{border-color:var(--ink);background:var(--surface-2)}
+.cell.done{
+  background:color-mix(in srgb,var(--track,var(--good)) 18%,var(--surface));
+  border-color:color-mix(in srgb,var(--track,var(--good)) 55%,transparent);
+  box-shadow:0 0 12px -2px color-mix(in srgb,var(--track,var(--good)) 70%,transparent),
+             inset 0 0 0 1px color-mix(in srgb,var(--track,var(--good)) 22%,transparent);
+}
+.cell.done .n{color:var(--ink);font-weight:800}
+.cell.done.today{box-shadow:0 0 12px -2px color-mix(in srgb,var(--track,var(--good)) 70%,transparent), inset 0 0 0 1.5px var(--ink)}
+.ws.done{
+  background:color-mix(in srgb,var(--track,var(--good)) 16%,var(--surface));
+  border-color:color-mix(in srgb,var(--track,var(--good)) 45%,transparent);
+  box-shadow:0 0 10px -3px color-mix(in srgb,var(--track,var(--good)) 70%,transparent);
+}
 .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--muted)}
 .legend b{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
 
@@ -219,8 +244,28 @@ h1,h2,h3{font-family:var(--disp);margin:0;text-wrap:balance;letter-spacing:-.01e
   position:relative;overflow:hidden;box-shadow:var(--shadow);transition:transform .1s;
 }
 .opt:active{transform:scale(.99)}
-.opt::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--strength)}
-.opt.ath::before{background:var(--athletic)}
+.opt-wrap{position:relative}
+.opt-fav{
+  position:absolute;right:10px;bottom:10px;width:34px;height:34px;border-radius:9px;
+  display:grid;place-items:center;color:var(--line-2);
+}
+.opt-fav svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round}
+.opt-fav[aria-pressed="true"]{color:var(--warn)}
+.opt .opt-foot{padding-right:40px}
+.badge{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:2px 7px;
+}
+.bigstat{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);
+  padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:2px;
+}
+.bigstat .k{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.bigstat .v{font-family:var(--disp);font-weight:800;font-stretch:112%;font-size:clamp(30px,9vw,40px);
+  line-height:1.05;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.bigstat .v small{font-size:15px;font-weight:600;color:var(--muted);font-stretch:100%;letter-spacing:0}
+.bigstat p{margin:6px 0 0;font-size:12.5px;color:var(--muted);line-height:1.5}
+.opt::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--track,var(--strength))}
 .opt-top{display:flex;align-items:center;gap:10px}
 .opt-top h4{margin:0;font-family:var(--disp);font-size:16px;font-weight:700;font-stretch:106%;flex:1}
 .opt p{margin:0;font-size:13px;color:var(--muted);line-height:1.45}
@@ -239,6 +284,14 @@ h1,h2,h3{font-family:var(--disp);margin:0;text-wrap:balance;letter-spacing:-.01e
   flex:none;padding-top:1px;font-variant-numeric:tabular-nums;
 }
 .ex .rest{display:block;font-size:10.5px;color:var(--muted);font-weight:400;margin-top:2px}
+.demo{
+  display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;flex:none;
+  border-radius:8px;border:1px solid var(--line-2);color:var(--muted);margin-left:2px;text-decoration:none;
+}
+.demo svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linejoin:round}
+.demo:active{color:var(--ink);border-color:var(--ink)}
+.ex-actions{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none}
+.run-ex h4 .demo{vertical-align:middle;margin-left:6px}
 
 /* ── sheet ─────────────────────────────────────────────────────────────── */
 .scrim{
@@ -277,8 +330,7 @@ textarea{resize:vertical;min-height:64px;font-family:var(--sans)}
   width:100%;text-align:left;border:1px solid var(--line);background:var(--surface-2);border-radius:12px;
   padding:12px;display:flex;align-items:center;gap:11px;margin-bottom:7px;position:relative;overflow:hidden;
 }
-.pick::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--strength)}
-.pick.ath::before{background:var(--athletic)}
+.pick::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--track,var(--strength))}
 .pick .t{flex:1;min-width:0}
 .pick .t b{display:block;font-weight:600;font-size:14.5px}
 .pick .t i{display:block;font-style:normal;font-size:12px;color:var(--muted);margin-top:1px}
@@ -337,8 +389,7 @@ textarea{resize:vertical;min-height:64px;font-family:var(--sans)}
 .hitem .bd b{display:block;font-size:14.5px;font-weight:600;line-height:1.25}
 .hitem .bd i{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.05em}
 .hitem .rt{text-align:right;font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
-.rail{width:3px;height:34px;border-radius:2px;background:var(--strength);flex:none}
-.rail.ath{background:var(--athletic)}
+.rail{width:3px;height:34px;border-radius:2px;background:var(--track,var(--strength));flex:none}
 .prlist{display:flex;flex-direction:column}
 .pr{display:flex;align-items:baseline;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
 .pr:last-child{border-bottom:0}
@@ -370,9 +421,9 @@ textarea{resize:vertical;min-height:64px;font-family:var(--sans)}
 .orbar span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
 .linkish{font-size:13px;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;padding:4px 0}
 .autherr{
-  font-size:13px;color:var(--athletic);background:var(--athletic-soft);border-radius:10px;
+  font-size:13px;color:var(--danger);background:color-mix(in srgb,var(--danger) 12%,transparent);border-radius:10px;
   padding:10px 12px;margin:0 0 14px;line-height:1.45;
-  border:1px solid color-mix(in srgb,var(--athletic) 30%,transparent);
+  border:1px solid color-mix(in srgb,var(--danger) 30%,transparent);
 }
 .btn[disabled]{opacity:.5;pointer-events:none}
 label.btn{cursor:pointer}
@@ -388,6 +439,44 @@ label.btn{cursor:pointer}
 .bex-grid span{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
 .bex-grid input{padding:8px 6px;font-size:14px;text-align:center;font-family:var(--mono);background:var(--surface)}
 .bex .cuein{margin-top:7px;font-size:13.5px;background:var(--surface)}
+.swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.swatch{
+  border:1px solid var(--line-2);border-radius:12px;padding:9px 8px;background:var(--surface-2);
+  display:flex;flex-direction:column;align-items:center;gap:7px;
+}
+.swatch[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.sw-chips{display:flex;gap:3px}
+.sw-chips i{width:13px;height:13px;border-radius:4px;display:block;border:1px solid rgba(128,128,128,.25)}
+.sw-name{font-size:11.5px;font-weight:500}
+.sw-chips[data-pv="neutral"] i:nth-child(1){background:#3C4149}
+.sw-chips[data-pv="neutral"] i:nth-child(2){background:#8A7250}
+.sw-chips[data-pv="neutral"] i:nth-child(3){background:#55634F}
+.sw-chips[data-pv="neutral"] i:nth-child(4){background:#5F5766}
+.sw-chips[data-pv="slate"] i:nth-child(1){background:#2F5D8A}
+.sw-chips[data-pv="slate"] i:nth-child(2){background:#3F7D74}
+.sw-chips[data-pv="slate"] i:nth-child(3){background:#5A6B86}
+.sw-chips[data-pv="slate"] i:nth-child(4){background:#6B5F8A}
+.sw-chips[data-pv="carbon"] i:nth-child(1){background:#111111}
+.sw-chips[data-pv="carbon"] i:nth-child(2){background:#5C5C5C}
+.sw-chips[data-pv="carbon"] i:nth-child(3){background:#8A8A8A}
+.sw-chips[data-pv="carbon"] i:nth-child(4){background:#B0B0B0}
+.sw-chips[data-pv="clay"] i:nth-child(1){background:#7A4A2E}
+.sw-chips[data-pv="clay"] i:nth-child(2){background:#A8752B}
+.sw-chips[data-pv="clay"] i:nth-child(3){background:#6B7355}
+.sw-chips[data-pv="clay"] i:nth-child(4){background:#7C5B6B}
+.sw-chips[data-pv="forest"] i:nth-child(1){background:#2C4A38}
+.sw-chips[data-pv="forest"] i:nth-child(2){background:#8A6B26}
+.sw-chips[data-pv="forest"] i:nth-child(3){background:#55705C}
+.sw-chips[data-pv="forest"] i:nth-child(4){background:#4F6473}
+.sw-chips[data-pv="ember"] i:nth-child(1){background:#4A3F55}
+.sw-chips[data-pv="ember"] i:nth-child(2){background:#A34A28}
+.sw-chips[data-pv="ember"] i:nth-child(3){background:#6E6156}
+.sw-chips[data-pv="ember"] i:nth-child(4){background:#38636B}
+.loadhint{
+  display:block;font-family:var(--mono);font-size:10.5px;font-weight:500;margin-top:2px;
+  color:var(--muted);letter-spacing:.02em;
+}
+.loadhint.log{color:var(--good)}
 .addmv{width:100%;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;
   padding:11px 0;border:1px dashed var(--line-2);border-radius:11px;margin-bottom:16px}
 
@@ -398,7 +487,7 @@ label.btn{cursor:pointer}
 .mv .bd b{display:block;font-size:14px;font-weight:600;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mv .bd i{font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.03em}
 .mv .bd i em{font-style:normal;color:var(--good)}
-.mv .bd i em.dn{color:var(--athletic)}
+.mv .bd i em.dn{color:var(--danger)}
 .spark{width:56px;height:22px;flex:none;overflow:visible}
 .spark path{fill:none;stroke:var(--strength);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .spark circle{fill:var(--strength)}
@@ -416,7 +505,141 @@ label.btn{cursor:pointer}
 .hitem-main{flex:1;display:flex;align-items:center;gap:12px;text-align:left;min-width:0}
 .hitem-x{width:34px;height:34px;border-radius:9px;border:1px solid var(--line-2);display:grid;place-items:center;color:var(--muted);flex:none}
 .hitem-x svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.hitem-x:active{color:var(--athletic);border-color:var(--athletic)}
+.hitem-x:active{color:var(--danger);border-color:var(--danger)}
+
+
+/* ── alternate palettes ────────────────────────────────────────────────── */
+/* Each redefines only the tokens; every component keeps reading the same
+   variables, so a palette never needs a component rule of its own. */
+:root[data-palette="slate"]{
+  --bg:#EEF1F4; --surface:#FFFFFF; --surface-2:#F5F7F9; --ink:#14181D; --ink-2:#3E4650;
+  --muted:#727B86; --line:#E0E5EA; --line-2:#CBD2DA;
+  --strength:#2F5D8A; --strength-soft:#E7EEF5; --athletic:#3F7D74; --athletic-soft:#E5F0EE;
+  --foundation:#5A6B86; --foundation-soft:#EAEEF4; --mobility:#6B5F8A; --mobility-soft:#EDEAF4;
+  --good:#2F6B57; --good-soft:#E4EFEA; --danger:#8E4438; --warn:#7A6230;
+}
+:root[data-palette="carbon"]{
+  --bg:#F4F4F4; --surface:#FFFFFF; --surface-2:#FAFAFA; --ink:#0A0A0A; --ink-2:#3A3A3A;
+  --muted:#767676; --line:#E4E4E4; --line-2:#CFCFCF;
+  --strength:#111111; --strength-soft:#EDEDED; --athletic:#5C5C5C; --athletic-soft:#F0F0F0;
+  --foundation:#8A8A8A; --foundation-soft:#F2F2F2; --mobility:#B0B0B0; --mobility-soft:#F5F5F5;
+  --good:#2E2E2E; --good-soft:#EAEAEA; --danger:#8A2B22; --warn:#6B5A20;
+}
+:root[data-palette="clay"]{
+  --bg:#F6F1EA; --surface:#FFFDFA; --surface-2:#F9F5EF; --ink:#1E1813; --ink-2:#4B4139;
+  --muted:#84776B; --line:#E8DFD3; --line-2:#D7CBBA;
+  --strength:#7A4A2E; --strength-soft:#F6EAE0; --athletic:#A8752B; --athletic-soft:#F8EEDC;
+  --foundation:#6B7355; --foundation-soft:#EEF0E6; --mobility:#7C5B6B; --mobility-soft:#F4EAEE;
+  --good:#4F6B47; --good-soft:#EAF0E7; --danger:#9A3D2C; --warn:#87692A;
+}
+:root[data-palette="forest"]{
+  --bg:#F0F3EF; --surface:#FFFFFF; --surface-2:#F6F8F5; --ink:#131A15; --ink-2:#3B463D;
+  --muted:#6F7A71; --line:#E0E6DF; --line-2:#CAD3C9;
+  --strength:#2C4A38; --strength-soft:#E6EDE8; --athletic:#8A6B26; --athletic-soft:#F4EEDD;
+  --foundation:#55705C; --foundation-soft:#E9EFEA; --mobility:#4F6473; --mobility-soft:#E8EEF2;
+  --good:#356B4E; --good-soft:#E5EFE9; --danger:#8B4033; --warn:#7A6428;
+}
+:root[data-palette="ember"]{
+  --bg:#F5F2F0; --surface:#FFFFFF; --surface-2:#FAF7F5; --ink:#191413; --ink-2:#463C39;
+  --muted:#7E7370; --line:#E7E1DE; --line-2:#D4CCC8;
+  --strength:#4A3F55; --strength-soft:#EDEAF0; --athletic:#A34A28; --athletic-soft:#F8E9E1;
+  --foundation:#6E6156; --foundation-soft:#F0ECE8; --mobility:#38636B; --mobility-soft:#E6EFF0;
+  --good:#3E6B5A; --good-soft:#E7F0EC; --danger:#9C3B2C; --warn:#836423;
+}
+
+@media (prefers-color-scheme:dark){
+  :root[data-palette="slate"]:not([data-theme="light"]){
+    --bg:#0C1014; --surface:#151B21; --surface-2:#1B222A; --ink:#EDF2F6; --ink-2:#C0CAD4;
+    --muted:#8794A1; --line:#232C35; --line-2:#333F4A;
+    --strength:#7FB0E0; --strength-soft:#152430; --athletic:#74C4B6; --athletic-soft:#122622;
+    --foundation:#9AAFC9; --foundation-soft:#182029; --mobility:#AC9CD1; --mobility-soft:#1F1B2A;
+    --good:#6FC2A0; --good-soft:#12241D; --danger:#E08A78; --warn:#D3AE6A;
+  }
+  :root[data-palette="carbon"]:not([data-theme="light"]){
+    --bg:#0A0A0A; --surface:#141414; --surface-2:#1B1B1B; --ink:#F5F5F5; --ink-2:#C8C8C8;
+    --muted:#8A8A8A; --line:#242424; --line-2:#343434;
+    --strength:#FFFFFF; --strength-soft:#202020; --athletic:#B4B4B4; --athletic-soft:#1C1C1C;
+    --foundation:#818181; --foundation-soft:#181818; --mobility:#5E5E5E; --mobility-soft:#161616;
+    --good:#DADADA; --good-soft:#1E1E1E; --danger:#E08878; --warn:#CBB176;
+  }
+  :root[data-palette="clay"]:not([data-theme="light"]){
+    --bg:#120E0B; --surface:#1B1613; --surface-2:#221C18; --ink:#F4EDE5; --ink-2:#CDBFB1;
+    --muted:#93857A; --line:#2A231E; --line-2:#3A3029;
+    --strength:#D79B72; --strength-soft:#2A1C13; --athletic:#E0B366; --athletic-soft:#2C2413;
+    --foundation:#A9B487; --foundation-soft:#1E2317; --mobility:#C79BAE; --mobility-soft:#271C21;
+    --good:#8FBE86; --good-soft:#1A2318; --danger:#E28C74; --warn:#D2AC66;
+  }
+  :root[data-palette="forest"]:not([data-theme="light"]){
+    --bg:#0B0F0C; --surface:#141A16; --surface-2:#1A211C; --ink:#EDF3EE; --ink-2:#BFCCC2;
+    --muted:#7E8C82; --line:#222B25; --line-2:#313D34;
+    --strength:#86C3A0; --strength-soft:#152219; --athletic:#D6B36A; --athletic-soft:#241E10;
+    --foundation:#9FB8A5; --foundation-soft:#18211B; --mobility:#8CB0C4; --mobility-soft:#151F25;
+    --good:#78C79D; --good-soft:#13231A; --danger:#DE8B76; --warn:#CFAC6A;
+  }
+  :root[data-palette="ember"]:not([data-theme="light"]){
+    --bg:#100D0C; --surface:#191413; --surface-2:#201A18; --ink:#F4EEEC; --ink-2:#CCC0BC;
+    --muted:#8C7F7B; --line:#272020; --line-2:#372E2C;
+    --strength:#B4A0C8; --strength-soft:#221D28; --athletic:#E68B5E; --athletic-soft:#2C1B12;
+    --foundation:#BAA995; --foundation-soft:#221D18; --mobility:#7FBAC2; --mobility-soft:#152224;
+    --good:#7CC2A6; --good-soft:#13231D; --danger:#E28A73; --warn:#D2AB68;
+  }
+}
+:root[data-theme="dark"][data-palette="slate"]{
+  --bg:#0C1014; --surface:#151B21; --surface-2:#1B222A; --ink:#EDF2F6; --ink-2:#C0CAD4;
+  --muted:#8794A1; --line:#232C35; --line-2:#333F4A;
+  --strength:#7FB0E0; --strength-soft:#152430; --athletic:#74C4B6; --athletic-soft:#122622;
+  --foundation:#9AAFC9; --foundation-soft:#182029; --mobility:#AC9CD1; --mobility-soft:#1F1B2A;
+  --good:#6FC2A0; --good-soft:#12241D; --danger:#E08A78; --warn:#D3AE6A;
+}
+:root[data-theme="dark"][data-palette="carbon"]{
+  --bg:#0A0A0A; --surface:#141414; --surface-2:#1B1B1B; --ink:#F5F5F5; --ink-2:#C8C8C8;
+  --muted:#8A8A8A; --line:#242424; --line-2:#343434;
+  --strength:#FFFFFF; --strength-soft:#202020; --athletic:#B4B4B4; --athletic-soft:#1C1C1C;
+  --foundation:#818181; --foundation-soft:#181818; --mobility:#5E5E5E; --mobility-soft:#161616;
+  --good:#DADADA; --good-soft:#1E1E1E; --danger:#E08878; --warn:#CBB176;
+}
+:root[data-theme="dark"][data-palette="clay"]{
+  --bg:#120E0B; --surface:#1B1613; --surface-2:#221C18; --ink:#F4EDE5; --ink-2:#CDBFB1;
+  --muted:#93857A; --line:#2A231E; --line-2:#3A3029;
+  --strength:#D79B72; --strength-soft:#2A1C13; --athletic:#E0B366; --athletic-soft:#2C2413;
+  --foundation:#A9B487; --foundation-soft:#1E2317; --mobility:#C79BAE; --mobility-soft:#271C21;
+  --good:#8FBE86; --good-soft:#1A2318; --danger:#E28C74; --warn:#D2AC66;
+}
+:root[data-theme="dark"][data-palette="forest"]{
+  --bg:#0B0F0C; --surface:#141A16; --surface-2:#1A211C; --ink:#EDF3EE; --ink-2:#BFCCC2;
+  --muted:#7E8C82; --line:#222B25; --line-2:#313D34;
+  --strength:#86C3A0; --strength-soft:#152219; --athletic:#D6B36A; --athletic-soft:#241E10;
+  --foundation:#9FB8A5; --foundation-soft:#18211B; --mobility:#8CB0C4; --mobility-soft:#151F25;
+  --good:#78C79D; --good-soft:#13231A; --danger:#DE8B76; --warn:#CFAC6A;
+}
+:root[data-theme="dark"][data-palette="ember"]{
+  --bg:#100D0C; --surface:#191413; --surface-2:#201A18; --ink:#F4EEEC; --ink-2:#CCC0BC;
+  --muted:#8C7F7B; --line:#272020; --line-2:#372E2C;
+  --strength:#B4A0C8; --strength-soft:#221D28; --athletic:#E68B5E; --athletic-soft:#2C1B12;
+  --foundation:#BAA995; --foundation-soft:#221D18; --mobility:#7FBAC2; --mobility-soft:#152224;
+  --good:#7CC2A6; --good-soft:#13231D; --danger:#E28A73; --warn:#D2AB68;
+}
+
+/* ── shape ─────────────────────────────────────────────────────────────── */
+:root[data-corners="sharp"]{--r-s:2px; --r-m:3px; --r-l:4px}
+:root[data-corners="sharp"] .btn,
+:root[data-corners="sharp"] .icon-btn,
+:root[data-corners="sharp"] .cell,
+:root[data-corners="sharp"] .ws,
+:root[data-corners="sharp"] .stat,
+:root[data-corners="sharp"] .opt,
+:root[data-corners="sharp"] .pick,
+:root[data-corners="sharp"] .run-ex,
+:root[data-corners="sharp"] .bex,
+:root[data-corners="sharp"] .bigstat,
+:root[data-corners="sharp"] input,
+:root[data-corners="sharp"] textarea,
+:root[data-corners="sharp"] .setrow input,
+:root[data-corners="sharp"] .tick{border-radius:3px}
+:root[data-corners="sharp"] .pill,
+:root[data-corners="sharp"] .chip,
+:root[data-corners="sharp"] .badge{border-radius:3px}
+:root[data-corners="sharp"] .sheet{border-radius:4px 4px 0 0}
 
 @media (min-width:720px){
   .wrap{padding-bottom:48px}
@@ -488,6 +711,28 @@ const PROGRAM = [
       {nm:'Copenhagen Plank', sets:3, reps:'20–30s / side', rest:':45', cue:'Adductor insurance — the single best groin-strain reducer. Start bent-knee.'},
       {nm:'Single-Leg Calf Raise', sets:3, reps:'12 / leg', rest:':45', cue:'Off a step, full range. Ankle stiffness is free sprint speed.'},
       {nm:'Pallof Press', sets:3, reps:'10 / side', rest:':45', cue:'Resist rotation. Ribs down, glutes on, press slow.'}
+    ]},
+  { id:'d1f', style:'foundation', name:'Legs: First Steps', mins:42, gear:'Machines · dumbbells',
+    blurb:'Every pattern of the squat day, on equipment that holds you in position while you learn it. Nothing here asks for balance or technique you do not have yet.',
+    ex:[
+      {nm:'Goblet Squat', sets:3, reps:'10', rest:'1:30', cue:'A dumbbell at your chest counterbalances you — it makes a deep squat easier, not harder.'},
+      {nm:'Leg Press', sets:3, reps:'12', rest:'1:30', cue:'The machine takes balance out of it. Go only as deep as you can keep your back flat.'},
+      {nm:'Dumbbell Step-Up (low box)', sets:2, reps:'10 / leg', rest:'1:15', cue:'Knee height is not the goal yet. Start at a step and drive through the whole foot.'},
+      {nm:'Seated Leg Curl', sets:3, reps:'12', rest:'1:15', cue:'Hamstrings do half the work of a healthy knee. Do not skip this one.'},
+      {nm:'Leg Extension', sets:2, reps:'15', rest:'1:00', cue:'Light. This is about feeling the quad work, not loading it.'},
+      {nm:'Standing Calf Raise', sets:3, reps:'15', rest:'1:00', cue:'Hold the top for a full second every rep.'},
+      {nm:'Dead Bug', sets:3, reps:'8 / side', rest:'0:45', cue:'Low back pressed into the floor throughout. Move slowly.'}
+    ]},
+  { id:'d1m', style:'mobility', name:'Ankles, Hips & Squat Depth', mins:24, gear:'Mat · wall · band',
+    blurb:'The three things that stop a squat going deep: stiff ankles, tight hips, and adductors that will not let the knees travel out.',
+    ex:[
+      {nm:'Knee-to-Wall Ankle Rock', sets:2, reps:'10 / side', rest:'0:20', cue:'Heel stays down. Drive the knee past the toes toward the wall.'},
+      {nm:'90/90 Hip Switch', sets:2, reps:'8 / side', rest:'0:30', cue:'Sit tall. Rotate both knees to the floor without using your hands.'},
+      {nm:'Deep Squat Hold', sets:3, reps:'30s', rest:'0:30', cue:'Heels down, elbows inside the knees pushing them out. Breathe.'},
+      {nm:'Cossack Squat (bodyweight)', sets:2, reps:'8 / side', rest:'0:30', cue:'Sit into one hip, the other leg straight with the toes up.'},
+      {nm:'Couch Stretch', sets:2, reps:'45s / side', rest:'0:20', cue:'Rear foot on a bench. Squeeze that glute to feel it properly.'},
+      {nm:'Adductor Rock-Back', sets:2, reps:'10 / side', rest:'0:20', cue:'On all fours, one leg out to the side. Rock the hips back slowly.'},
+      {nm:'Tibialis Raise', sets:2, reps:'15', rest:'0:20', cue:'Back to a wall, pull the toes up. Balances everything the calves do.'}
     ]}
 ]},
 { id:'d2', title:'Upper — Push', focus:'Chest · Front & Side Delts · Triceps', short:'Push',
@@ -514,6 +759,28 @@ const PROGRAM = [
       {nm:'Bottoms-Up Kettlebell Press', sets:3, reps:'8 / arm', rest:'1:00', cue:'Light bell. Crushing grip lights up the rotator cuff and scapular control.'},
       {nm:'Face Pull / Band Pull-Apart', sets:3, reps:'15', rest:':45', cue:'Non-negotiable balance work on a push day. Pull to the eyes, thumbs back.'},
       {nm:'Ab Wheel Rollout', sets:3, reps:'8–10', rest:'1:00', cue:'Posterior pelvic tilt the whole way. Only roll as far as you can hold the brace.'}
+    ]},
+  { id:'d2f', style:'foundation', name:'Push: First Steps', mins:40, gear:'Machines · dumbbells',
+    blurb:'Pressing strength built on machines and dumbbells first. The barbell bench can wait until these feel easy.',
+    ex:[
+      {nm:'Machine Chest Press', sets:3, reps:'10', rest:'1:30', cue:'Fixed path, no spotter needed. Handles level with the middle of your chest.'},
+      {nm:'Seated Dumbbell Shoulder Press', sets:3, reps:'10', rest:'1:30', cue:'Back against the pad. Stop just short of locking the elbows.'},
+      {nm:'Incline Dumbbell Press', sets:2, reps:'12', rest:'1:30', cue:'Low incline. Lower until you feel a stretch, not until the weights touch you.'},
+      {nm:'Hands-Elevated Push-Up', sets:3, reps:'8', rest:'1:15', cue:'Hands on a bench or bar. The higher the hands, the easier — lower it as you get stronger.'},
+      {nm:'Dumbbell Lateral Raise', sets:2, reps:'12', rest:'1:00', cue:'Lighter than you think. Stop at shoulder height.'},
+      {nm:'Rope Pushdown', sets:3, reps:'12', rest:'1:00', cue:'Elbows pinned at your sides. Only the forearms move.'},
+      {nm:'Plank', sets:3, reps:'20–30s', rest:'0:45', cue:'From the knees is fine. A short solid plank beats a long sagging one.'}
+    ]},
+  { id:'d2m', style:'mobility', name:'Shoulders & Upper Back', mins:22, gear:'Mat · band · foam roller',
+    blurb:'Overhead range comes from the upper back as much as the shoulder. This opens both, then teaches the shoulder to control the new range.',
+    ex:[
+      {nm:'Thoracic Extension over Foam Roller', sets:2, reps:'10', rest:'0:20', cue:'Roller across the mid-back, hands behind the head, extend over it slowly.'},
+      {nm:'Open Book', sets:2, reps:'8 / side', rest:'0:20', cue:'On your side, knees stacked. Follow the top hand with your eyes.'},
+      {nm:'Wall Slide', sets:3, reps:'10', rest:'0:30', cue:'Forearms on the wall, slide up without the ribs flaring or elbows leaving.'},
+      {nm:'Band Pass-Through', sets:2, reps:'10', rest:'0:30', cue:'Wide grip, straight arms, over and behind. Narrow the grip as you loosen up.'},
+      {nm:'Prone Y-T-W', sets:2, reps:'8 each', rest:'0:30', cue:'Face down, no weight. Lift from between the shoulder blades.'},
+      {nm:'Doorway Pec Stretch', sets:2, reps:'45s / side', rest:'0:20', cue:'Forearm on the frame at shoulder height, turn away slowly.'},
+      {nm:'Child Pose with Lat Reach', sets:2, reps:'45s / side', rest:'0:20', cue:'Walk both hands to one side and sink the ribs toward the floor.'}
     ]}
 ]},
 { id:'d3', title:'Lower — Hinge',  focus:'Hamstrings · Glutes · Low Back · Core', short:'Hinge',
@@ -541,6 +808,29 @@ const PROGRAM = [
       {nm:'Sled Push (or steep incline walk)', sets:4, reps:'25 yd', rest:'1:30', cue:'Low body angle, short choppy steps, full hip extension.'},
       {nm:'Side Plank with Hip Lift', sets:3, reps:'10 / side', rest:':45', cue:'Lateral chain stability — directly protects the low back when sprinting.'},
       {nm:'Dead Bug (slow, 5s per rep)', sets:3, reps:'8 / side', rest:':45', cue:'Low back glued to the floor. Exhale fully at end range.'}
+    ]},
+  { id:'d3f', style:'foundation', name:'Hinge: First Steps', mins:42, gear:'Dumbbells · machines',
+    blurb:'Learn to hinge at the hips before you load it. This day is worth running for weeks before you touch a heavy deadlift.',
+    ex:[
+      {nm:'Dowel Hip Hinge', sets:2, reps:'10', rest:'1:00', cue:'A broomstick along the spine touching head, back and hips. Push the hips back keeping all three in contact.'},
+      {nm:'Kettlebell Deadlift', sets:3, reps:'8', rest:'2:00', cue:'Weight between the feet and higher off the floor than a barbell — a far friendlier starting position.'},
+      {nm:'Glute Bridge', sets:3, reps:'12', rest:'1:00', cue:'Heels close, ribs down, squeeze for a second at the top.'},
+      {nm:'Seated Leg Curl', sets:3, reps:'12', rest:'1:15', cue:'Controlled on the way back — that half of the rep does the most.'},
+      {nm:'Back Extension (bodyweight)', sets:2, reps:'12', rest:'1:15', cue:'Stop level with your legs. Nothing is gained by arching past it.'},
+      {nm:'Seated Calf Raise', sets:3, reps:'15', rest:'1:00', cue:'Full stretch at the bottom.'},
+      {nm:'Suitcase Carry', sets:3, reps:'30 yd / side', rest:'1:00', cue:'One weight, walk tall, do not lean. The easiest core work there is.'}
+    ]},
+  { id:'d3m', style:'mobility', name:'Hips & Hamstrings', mins:24, gear:'Mat · bench',
+    blurb:'Hamstrings and hip flexors both pull on the pelvis. Loosening one without the other is why stretching often does nothing.',
+    ex:[
+      {nm:'Cat-Cow', sets:2, reps:'10', rest:'0:20', cue:'Move one vertebra at a time. A warm-up, not a stretch.'},
+      {nm:'Half-Kneeling Hip Flexor Stretch', sets:2, reps:'45s / side', rest:'0:20', cue:'Tuck the pelvis under first, then lean. Most people skip the tuck and feel nothing.'},
+      {nm:'90/90 Hip Switch', sets:2, reps:'8 / side', rest:'0:30', cue:'Slow and controlled, no hands.'},
+      {nm:'Seated Good Morning (dowel)', sets:2, reps:'10', rest:'0:30', cue:'Sat on a bench, hinge forward with a flat back. Teaches the hinge without balance.'},
+      {nm:'Standing Hamstring Sweep', sets:2, reps:'10 / side', rest:'0:20', cue:'Heel out, toes up, hinge and sweep the hands past the shin.'},
+      {nm:'Glute Bridge Hold', sets:3, reps:'30s', rest:'0:30', cue:'Hold at the top. Glutes on, low back quiet.'},
+      {nm:'Figure-4 Stretch', sets:2, reps:'45s / side', rest:'0:20', cue:'Ankle over the opposite knee, pull the far thigh toward you.'},
+      {nm:'Bird Dog', sets:2, reps:'8 / side', rest:'0:30', cue:'Opposite arm and leg, hips level. Slow beats far.'}
     ]}
 ]},
 { id:'d4', title:'Upper — Pull', focus:'Lats · Mid-Back · Rear Delts · Biceps · Grip', short:'Pull',
@@ -567,6 +857,28 @@ const PROGRAM = [
       {nm:"Farmer's Carry", sets:4, reps:'40 yd', rest:'1:30', cue:'As heavy as you can hold. Tall posture, shoulders packed down.'},
       {nm:'Face Pull + External Rotation', sets:3, reps:'15', rest:':45', cue:'Shoulder health work — earns you every heavy press you will do.'},
       {nm:'Hammer Curl', sets:3, reps:'10', rest:':45', cue:'Brachialis and forearm — thickness and grip in one movement.'}
+    ]},
+  { id:'d4f', style:'foundation', name:'Pull: First Steps', mins:40, gear:'Cables · machines',
+    blurb:'A pull-up is a long way off for most people and that is fine. Cables and machines build the same back, starting today.',
+    ex:[
+      {nm:'Lat Pulldown', sets:3, reps:'10', rest:'1:30', cue:'Lean back slightly, bar to the collarbone, elbows down rather than back.'},
+      {nm:'Seated Cable Row', sets:3, reps:'10', rest:'1:30', cue:'Let the shoulder blades travel forward at the front, squeeze them at the back.'},
+      {nm:'Chest-Supported Row', sets:2, reps:'12', rest:'1:15', cue:'The pad takes your lower back out of the equation entirely.'},
+      {nm:'Inverted Row (bar set high)', sets:3, reps:'8', rest:'1:15', cue:'The higher the bar, the easier. Lower it a notch when 8 gets comfortable.'},
+      {nm:'Face Pull', sets:3, reps:'15', rest:'1:00', cue:'Rope to the eyes. The single best thing you can do for desk-worn shoulders.'},
+      {nm:'Dumbbell Curl', sets:2, reps:'12', rest:'1:00', cue:'Elbows still, no swinging.'},
+      {nm:'Farmer Carry', sets:3, reps:'30 yd', rest:'1:00', cue:'Heavy enough that the last steps are hard. Grip catches up fast.'}
+    ]},
+  { id:'d4m', style:'mobility', name:'Lats, Wrists & Neck', mins:22, gear:'Bar · bench · band',
+    blurb:'Everything that stiffens up from pulling, phones and desks — the lats, the wrists that hold the bar, and the neck above both.',
+    ex:[
+      {nm:'Dead Hang', sets:3, reps:'20–30s', rest:'0:45', cue:'Just hang. Decompresses the shoulders and builds grip at the same time.'},
+      {nm:'Bench Lat Stretch', sets:2, reps:'45s / side', rest:'0:20', cue:'Elbows on a bench, sink the chest toward the floor and breathe into it.'},
+      {nm:'Thread the Needle', sets:2, reps:'8 / side', rest:'0:20', cue:'On all fours, reach one arm under the other and rotate the mid-back.'},
+      {nm:'Band Face Pull + External Rotation', sets:2, reps:'15', rest:'0:30', cue:'Pull to the eyes, then rotate the hands back and up.'},
+      {nm:'Wrist Rocks', sets:2, reps:'10 each way', rest:'0:20', cue:'Palms down then palms up on the floor, rock gently forward and back.'},
+      {nm:'Chin Tuck', sets:2, reps:'10', rest:'0:20', cue:'Make a double chin, hold three seconds. Undoes hours of looking down.'},
+      {nm:'Quadruped Thoracic Rotation', sets:2, reps:'8 / side', rest:'0:20', cue:'Hand behind the head, rotate the elbow toward the ceiling.'}
     ]}
 ]}];
 
@@ -577,7 +889,7 @@ PROGRAM.forEach(d => d.options.forEach(o => ALLOPTS[o.id] = {...o, day:d}));
    slot from that pool only, so a strength roll never pulls an athletic
    movement and vice versa.
    ══════════════════════════════════════════════════════════════════════════ */
-const POOLS = {"d1s":[{"label":"Main squat","opt":false,"opts":[{"nm":"Barbell Back Squat","sets":4,"reps":"4–6","rest":"3:00","cue":"Brace hard. Hips and chest rise together."},{"nm":"Front Squat","sets":4,"reps":"5","rest":"3:00","cue":"Elbows high, upright torso, control the descent."},{"nm":"Safety-Bar Squat","sets":4,"reps":"5","rest":"3:00","cue":"Easier on the shoulders — fight the forward pull."},{"nm":"Paused Back Squat","sets":4,"reps":"4","rest":"3:00","cue":"Two seconds in the hole, no bounce out."},{"nm":"Hack Squat (machine)","sets":4,"reps":"6–8","rest":"2:30","cue":"Deep range with the back supported. Push through mid-foot."}]},{"label":"Second push","opt":false,"opts":[{"nm":"Leg Press","sets":3,"reps":"8–10","rest":"2:00","cue":"Feet mid-platform, knees track over toes."},{"nm":"Hack Squat (machine)","sets":3,"reps":"8–10","rest":"2:00","cue":"Stop one or two reps shy of failure."},{"nm":"Smith Machine Squat","sets":3,"reps":"8–10","rest":"2:00","cue":"Feet slightly forward lets you sit straight down."},{"nm":"Goblet Squat","sets":3,"reps":"12","rest":"1:30","cue":"Elbows inside the knees at the bottom."}]},{"label":"Single leg","opt":false,"opts":[{"nm":"Dumbbell Bulgarian Split Squat","sets":3,"reps":"8 / leg","rest":"1:30","cue":"Rear foot at knee height. Lean in for more glute."},{"nm":"Walking Dumbbell Lunge","sets":3,"reps":"10 / leg","rest":"1:30","cue":"Step long, front shin near vertical."},{"nm":"Dumbbell Step-Up","sets":3,"reps":"8 / leg","rest":"1:30","cue":"Box at knee height. Do not push off the back foot."},{"nm":"Front-Foot-Elevated Split Squat","sets":3,"reps":"10 / leg","rest":"1:30","cue":"The elevation buys you extra quad stretch."}]},{"label":"Hamstring balance","opt":false,"opts":[{"nm":"Romanian Deadlift","sets":3,"reps":"8–10","rest":"2:00","cue":"Moderate load — balance for a squat day, not a max."},{"nm":"Seated Leg Curl","sets":3,"reps":"10–12","rest":"1:30","cue":"Hip flexion pre-stretches the hamstring."},{"nm":"Lying Leg Curl","sets":3,"reps":"10–12","rest":"1:30","cue":"Point the toes to shift work off the calves."},{"nm":"Cable Pull-Through","sets":3,"reps":"12","rest":"1:30","cue":"Hips back, then snap them through. Spine locked."}]},{"label":"Quad isolation","opt":false,"opts":[{"nm":"Leg Extension","sets":3,"reps":"12–15","rest":"1:00","cue":"Pause a second at lockout."},{"nm":"Cyclist Squat (heels elevated)","sets":3,"reps":"10","rest":"1:30","cue":"Heels on plates puts everything on the quad."},{"nm":"Sissy Squat","sets":3,"reps":"10–12","rest":"1:00","cue":"Knees travel forward, hips stay extended."}]},{"label":"Calves","opt":false,"opts":[{"nm":"Standing Calf Raise","sets":4,"reps":"10–12","rest":"1:00","cue":"Full stretch at the bottom, two-second squeeze up top."},{"nm":"Seated Calf Raise","sets":4,"reps":"12–15","rest":"1:00","cue":"Bent knee targets the soleus."},{"nm":"Leg Press Calf Raise","sets":4,"reps":"12","rest":"1:00","cue":"Let the heels drop below the platform."}]},{"label":"Core","opt":false,"opts":[{"nm":"Cable Crunch","sets":3,"reps":"12–15","rest":"1:00","cue":"Round the spine toward the knees. Hips stay fixed."},{"nm":"Weighted Decline Sit-Up","sets":3,"reps":"12","rest":"1:00","cue":"Hold the plate at the chest, control the way down."},{"nm":"Hanging Leg Raise","sets":3,"reps":"10–12","rest":"1:00","cue":"Curl the pelvis at the top. No swinging."},{"nm":"Ab Wheel Rollout","sets":3,"reps":"8–10","rest":"1:00","cue":"Posterior tilt throughout. Only go as far as the brace holds."}]}],"d1a":[{"label":"Jump","opt":false,"opts":[{"nm":"Box Jump (step down)","sets":5,"reps":"3","rest":"1:30","cue":"Land quiet. Step down every rep."},{"nm":"Trap-Bar Jump","sets":5,"reps":"3","rest":"1:30","cue":"Light bar, maximum height. Absorb softly."},{"nm":"Squat Jump","sets":5,"reps":"5","rest":"1:30","cue":"Continuous, minimal ground time."},{"nm":"Depth Jump to Box","sets":4,"reps":"3","rest":"2:00","cue":"Drop from a low box, rebound instantly. Advanced."},{"nm":"Hurdle Hop (stick the landing)","sets":4,"reps":"4","rest":"1:30","cue":"Hold each landing for a full second."}]},{"label":"Squat pattern","opt":false,"opts":[{"nm":"Front Squat","sets":4,"reps":"5","rest":"2:30","cue":"Elbows high, athletic squat pattern."},{"nm":"Safety-Bar Squat","sets":4,"reps":"5","rest":"2:30","cue":"Fight the bar pulling you forward."},{"nm":"Paused Back Squat","sets":4,"reps":"4","rest":"2:30","cue":"Own the bottom position."},{"nm":"Tempo Goblet Squat","sets":4,"reps":"8","rest":"2:00","cue":"Three seconds down, one-second pause, drive up."}]},{"label":"Single leg","opt":false,"opts":[{"nm":"Dumbbell Reverse Lunge","sets":3,"reps":"8 / leg","rest":"1:30","cue":"Step back and down. Loads the glute and hamstring."},{"nm":"Rear-Foot-Elevated Split Squat","sets":3,"reps":"8 / leg","rest":"1:30","cue":"Slow down, drive up. Knee tracks the toes."},{"nm":"Walking Dumbbell Lunge","sets":3,"reps":"10 / leg","rest":"1:30","cue":"Long stride, tall chest."},{"nm":"High Box Step-Up","sets":3,"reps":"8 / leg","rest":"1:30","cue":"Drive through the heel. No push-off below."}]},{"label":"Frontal plane","opt":false,"opts":[{"nm":"Lateral Lunge (goblet)","sets":3,"reps":"8 / side","rest":"1:15","cue":"Hips back over the working leg, trail leg straight."},{"nm":"Cossack Squat","sets":3,"reps":"8 / side","rest":"1:15","cue":"Sink deep, keep the heel down."},{"nm":"Lateral Sled Drag","sets":3,"reps":"20 yd / side","rest":"1:15","cue":"Stay low, push through the outside edge."},{"nm":"Banded Lateral Walk","sets":3,"reps":"15 / side","rest":"1:00","cue":"Band at the ankles, feet never come together."}]},{"label":"Reactive","opt":false,"opts":[{"nm":"Skater Bound (stick)","sets":3,"reps":"5 / side","rest":"1:00","cue":"Hold the landing a full second before the next rep."},{"nm":"Lateral Bound to Box","sets":3,"reps":"5 / side","rest":"1:00","cue":"Cover distance sideways, land absorbed."},{"nm":"Single-Leg Pogo","sets":3,"reps":"10 / side","rest":"1:00","cue":"Stiff ankle, minimal knee bend, fast off the floor."},{"nm":"5-10-5 Shuttle","sets":4,"reps":"1","rest":"1:30","cue":"Full recovery between runs. Sharp changes of direction."}]},{"label":"Knee & groin insurance","opt":false,"opts":[{"nm":"Copenhagen Plank","sets":3,"reps":"20–30s / side","rest":"0:45","cue":"The best groin-strain reducer there is. Start bent-knee."},{"nm":"Nordic Hamstring Curl","sets":3,"reps":"5","rest":"2:00","cue":"Slow lower, push back up with the hands."},{"nm":"Reverse Nordic","sets":3,"reps":"8","rest":"1:00","cue":"Lean back from the knees. Brutal quad stretch under load."},{"nm":"Slider Adductor Slide","sets":3,"reps":"10 / side","rest":"0:45","cue":"Control the slide out, pull back with the inner thigh."}]},{"label":"Ankle","opt":false,"opts":[{"nm":"Single-Leg Calf Raise","sets":3,"reps":"12 / leg","rest":"0:45","cue":"Full range off a step. Ankle stiffness is free speed."},{"nm":"Pogo Hops","sets":3,"reps":"20","rest":"0:45","cue":"Bounce off the balls of the feet, knees nearly locked."},{"nm":"Tibialis Raise","sets":3,"reps":"15","rest":"0:45","cue":"Back to a wall, pull the toes up. Protects the shins."}]},{"label":"Core","opt":false,"opts":[{"nm":"Pallof Press","sets":3,"reps":"10 / side","rest":"0:45","cue":"Resist rotation. Ribs down, glutes on."},{"nm":"Suitcase Carry","sets":3,"reps":"40 yd / side","rest":"1:00","cue":"Heavy, and do not lean."},{"nm":"Side Plank with Hip Lift","sets":3,"reps":"10 / side","rest":"0:45","cue":"Lateral chain — protects the low back when sprinting."},{"nm":"Dead Bug","sets":3,"reps":"8 / side","rest":"0:45","cue":"Low back glued down, exhale fully at end range."}]}],"d2s":[{"label":"Main press","opt":false,"opts":[{"nm":"Barbell Bench Press","sets":4,"reps":"4–6","rest":"3:00","cue":"Shoulder blades pinned, bar to the lower chest."},{"nm":"Close-Grip Bench Press","sets":4,"reps":"5–6","rest":"3:00","cue":"Hands shoulder width, elbows tucked. Triceps-biased."},{"nm":"Incline Barbell Press","sets":4,"reps":"5–6","rest":"3:00","cue":"Thirty degrees. Upper chest and front delt."},{"nm":"Paused Bench Press","sets":4,"reps":"4","rest":"3:00","cue":"One second on the chest, no bounce."}]},{"label":"Overhead","opt":false,"opts":[{"nm":"Standing Overhead Press","sets":3,"reps":"5–6","rest":"2:30","cue":"Glutes squeezed, ribs down, head through at lockout."},{"nm":"Seated Dumbbell Shoulder Press","sets":3,"reps":"8–10","rest":"2:00","cue":"Back supported. Full range, no bouncing off the bottom."},{"nm":"Push Press","sets":3,"reps":"5","rest":"2:30","cue":"Dip and drive from the legs, lower under control."},{"nm":"Machine Shoulder Press","sets":3,"reps":"10","rest":"2:00","cue":"Good when the bench day already cooked you."}]},{"label":"Chest volume","opt":false,"opts":[{"nm":"Incline Dumbbell Press","sets":3,"reps":"8–10","rest":"2:00","cue":"Stretch at the bottom, stop short of touching up top."},{"nm":"Flat Dumbbell Press","sets":3,"reps":"10","rest":"2:00","cue":"Wider range than the bar. Control the eccentric."},{"nm":"Machine Chest Press","sets":3,"reps":"10–12","rest":"1:30","cue":"Safe to push close to failure."},{"nm":"Cable Fly","sets":3,"reps":"12–15","rest":"1:15","cue":"Slight elbow bend, squeeze at the midline."}]},{"label":"Compound finisher","opt":false,"opts":[{"nm":"Weighted Dip","sets":3,"reps":"6–8","rest":"2:00","cue":"Lean forward for chest, upright for triceps."},{"nm":"Decline Dumbbell Press","sets":3,"reps":"8–10","rest":"2:00","cue":"Lower chest with the shoulders out of the way."},{"nm":"Weighted Push-Up","sets":3,"reps":"12","rest":"1:30","cue":"Plate on the back. Body rigid start to finish."},{"nm":"Machine Chest Press","sets":3,"reps":"10","rest":"1:30","cue":"Straight sets to near failure."}]},{"label":"Side delts","opt":false,"opts":[{"nm":"Cable Lateral Raise","sets":3,"reps":"12–15","rest":"1:00","cue":"One arm, cable behind the body. Lead with the elbow."},{"nm":"Dumbbell Lateral Raise","sets":3,"reps":"12–15","rest":"1:00","cue":"Stop at shoulder height, no shrugging."},{"nm":"Machine Lateral Raise","sets":3,"reps":"12–15","rest":"1:00","cue":"Constant tension throughout."},{"nm":"Wide-Grip Upright Row","sets":3,"reps":"12","rest":"1:00","cue":"Wide grip keeps the shoulder happy."}]},{"label":"Triceps","opt":false,"opts":[{"nm":"Overhead Cable Triceps Extension","sets":3,"reps":"10–12","rest":"1:00","cue":"Full overhead stretch — that is where the long head grows."},{"nm":"Skull Crusher","sets":3,"reps":"10","rest":"1:00","cue":"Lower to the forehead, elbows still."},{"nm":"Overhead Dumbbell Extension","sets":3,"reps":"12","rest":"1:00","cue":"One heavy dumbbell, both hands."}]},{"label":"Triceps finisher","opt":true,"opts":[{"nm":"Triceps Pushdown","sets":2,"reps":"12–15","rest":"0:45","cue":"Superset it with the lateral raises if time is short."},{"nm":"Rope Pushdown","sets":2,"reps":"15","rest":"0:45","cue":"Spread the rope at the bottom."},{"nm":"Bench Dip","sets":2,"reps":"15","rest":"0:45","cue":"Feet out for more load."}]},{"label":"Balance","opt":false,"opts":[{"nm":"Face Pull","sets":3,"reps":"15","rest":"0:45","cue":"Non-negotiable on a push day. Pull to the eyes."},{"nm":"Band Pull-Apart","sets":3,"reps":"20","rest":"0:45","cue":"Straight arms, squeeze the shoulder blades."},{"nm":"Reverse Pec Deck","sets":3,"reps":"15","rest":"0:45","cue":"Rear delts — the muscle that keeps you pressing pain-free."}]}],"d2a":[{"label":"Ballistic","opt":false,"opts":[{"nm":"Med-Ball Chest Pass","sets":5,"reps":"3","rest":"1:00","cue":"Maximum intent. Stop the set when speed drops."},{"nm":"Plyo Push-Up","sets":5,"reps":"3","rest":"1:00","cue":"Leave the floor every rep, land soft."},{"nm":"Med-Ball Overhead Slam","sets":5,"reps":"5","rest":"1:00","cue":"Full body. Drive the ball through the floor."},{"nm":"Med-Ball Rotational Throw","sets":4,"reps":"4 / side","rest":"1:00","cue":"Turn the back hip through. Power comes from the ground."}]},{"label":"Press pattern","opt":false,"opts":[{"nm":"Half-Kneeling Landmine Press","sets":4,"reps":"6 / arm","rest":"1:30","cue":"Shoulder-friendly arc. Down-knee glute squeezed."},{"nm":"Single-Arm Dumbbell Push Press","sets":4,"reps":"5 / arm","rest":"1:30","cue":"Dip, drive, punch overhead, lower slowly."},{"nm":"Z-Press","sets":4,"reps":"6","rest":"1:30","cue":"Seated on the floor, legs straight. Nowhere to cheat."},{"nm":"Tall-Kneeling Overhead Press","sets":4,"reps":"8","rest":"1:30","cue":"No leg drive available — pure shoulder and core."}]},{"label":"Chest anchor","opt":false,"opts":[{"nm":"Incline Dumbbell Press","sets":3,"reps":"8","rest":"2:00","cue":"Your strength anchor for the day."},{"nm":"Weighted Push-Up","sets":3,"reps":"10","rest":"1:30","cue":"Rigid plank, full lockout."},{"nm":"Flat Dumbbell Press","sets":3,"reps":"8–10","rest":"2:00","cue":"Controlled, heavy-ish."},{"nm":"Ring or TRX Push-Up","sets":3,"reps":"12","rest":"1:30","cue":"Instability recruits the whole shoulder girdle."}]},{"label":"Triceps","opt":false,"opts":[{"nm":"Dip (bodyweight, controlled)","sets":3,"reps":"8–10","rest":"1:30","cue":"Three-second lowering. Add weight past 12 clean reps."},{"nm":"Close-Grip Push-Up","sets":3,"reps":"15","rest":"1:00","cue":"Elbows brushing the ribs."},{"nm":"Triceps Pushdown","sets":3,"reps":"12","rest":"1:00","cue":"Simple volume to finish the arms."}]},{"label":"Shoulder stability","opt":false,"opts":[{"nm":"Bottoms-Up Kettlebell Press","sets":3,"reps":"8 / arm","rest":"1:00","cue":"Light bell. Crushing grip switches on the cuff."},{"nm":"Turkish Get-Up","sets":3,"reps":"3 / side","rest":"1:30","cue":"Slow and deliberate. Every joint has to cooperate."},{"nm":"Kettlebell Arm Bar","sets":3,"reps":"30s / side","rest":"1:00","cue":"Opens the chest and packs the shoulder."},{"nm":"Prone Y-T-W Raise","sets":3,"reps":"10","rest":"0:45","cue":"Light or no weight. Quality only."}]},{"label":"Balance pull","opt":false,"opts":[{"nm":"Face Pull","sets":3,"reps":"15","rest":"0:45","cue":"Thumbs back at the finish."},{"nm":"Band Pull-Apart","sets":3,"reps":"20","rest":"0:45","cue":"Straight arms, slow return."},{"nm":"Prone Trap Raise","sets":3,"reps":"12","rest":"0:45","cue":"Thumbs up, lift to a Y. Lower traps."}]},{"label":"Core","opt":false,"opts":[{"nm":"Ab Wheel Rollout","sets":3,"reps":"8–10","rest":"1:00","cue":"Only roll as far as the brace holds."},{"nm":"Hollow Body Hold","sets":3,"reps":"30s","rest":"0:45","cue":"Low back pressed flat. Shorten the levers if it lifts."},{"nm":"Plank Shoulder Tap","sets":3,"reps":"20","rest":"0:45","cue":"Hips dead still — that is the whole exercise."},{"nm":"Bear Crawl","sets":3,"reps":"20 yd","rest":"1:00","cue":"Knees an inch off the floor, back flat."}]}],"d3s":[{"label":"Main hinge","opt":false,"opts":[{"nm":"Deadlift (conventional)","sets":4,"reps":"3–5","rest":"3:00","cue":"Take the slack out first. Reset every rep."},{"nm":"Trap-Bar Deadlift","sets":4,"reps":"4–6","rest":"3:00","cue":"Easier on the back, still brutally effective."},{"nm":"Sumo Deadlift","sets":4,"reps":"3–5","rest":"3:00","cue":"Knees out, push the floor apart."},{"nm":"Deficit Deadlift","sets":4,"reps":"4","rest":"3:00","cue":"Stand on a plate. Longer range off the floor."},{"nm":"Rack Pull","sets":4,"reps":"5","rest":"2:30","cue":"Just below the knee. Overload the lockout."}]},{"label":"Glutes","opt":false,"opts":[{"nm":"Barbell Hip Thrust","sets":3,"reps":"8–10","rest":"2:00","cue":"Chin tucked, ribs down, one-second squeeze."},{"nm":"Barbell Glute Bridge","sets":3,"reps":"12","rest":"1:30","cue":"Shorter range, same job. Easier to set up."},{"nm":"Cable Pull-Through","sets":3,"reps":"12–15","rest":"1:15","cue":"Hips back, then snap through."},{"nm":"Machine Hip Thrust","sets":3,"reps":"10","rest":"2:00","cue":"Load it heavy without the setup fight."}]},{"label":"Hamstring — knee flexion","opt":false,"opts":[{"nm":"Seated Leg Curl","sets":3,"reps":"10–12","rest":"1:30","cue":"Seated beats lying for the stretch position."},{"nm":"Lying Leg Curl","sets":3,"reps":"10–12","rest":"1:30","cue":"Hips pressed down the whole set."},{"nm":"Nordic Hamstring Curl","sets":3,"reps":"6","rest":"2:00","cue":"The strain-prevention gold standard."},{"nm":"Slider Leg Curl","sets":3,"reps":"10","rest":"1:30","cue":"Hips high, heels drag out and back."}]},{"label":"Hamstring — hip extension","opt":false,"opts":[{"nm":"Weighted Back Extension (45°)","sets":3,"reps":"10–12","rest":"1:30","cue":"Round slightly for glutes, stay flat for erectors."},{"nm":"Good Morning","sets":3,"reps":"10","rest":"1:30","cue":"Light bar. Pure hinge groove."},{"nm":"Single-Leg Romanian Deadlift","sets":3,"reps":"8 / leg","rest":"1:15","cue":"Hips square, back leg locked."},{"nm":"Stiff-Leg Deadlift","sets":3,"reps":"8","rest":"2:00","cue":"Bar close, hamstrings loaded from the first inch."}]},{"label":"Calves","opt":false,"opts":[{"nm":"Seated Calf Raise","sets":3,"reps":"12–15","rest":"1:00","cue":"Bent knee targets the soleus."},{"nm":"Standing Calf Raise","sets":3,"reps":"10–12","rest":"1:00","cue":"Pause at the top and the bottom."}]},{"label":"Core","opt":false,"opts":[{"nm":"Hanging Leg Raise","sets":3,"reps":"10–12","rest":"1:00","cue":"Curl the pelvis at the top."},{"nm":"Weighted Plank","sets":3,"reps":"45s","rest":"1:00","cue":"Plate on the back, glutes and quads switched on."},{"nm":"Cable Woodchop","sets":3,"reps":"12 / side","rest":"1:00","cue":"Rotate from the hips, arms just hold on."},{"nm":"Ab Wheel Rollout","sets":3,"reps":"10","rest":"1:00","cue":"Slow out, slower back."}]},{"label":"Carry","opt":true,"opts":[{"nm":"Suitcase Carry","sets":3,"reps":"40 yd / side","rest":"1:00","cue":"Heavy. The obliques earn their keep here."},{"nm":"Farmer's Carry","sets":3,"reps":"40 yd","rest":"1:00","cue":"Tall posture, shoulders packed down."},{"nm":"Zercher Carry","sets":3,"reps":"30 yd","rest":"1:30","cue":"Bar in the elbow crease. Everything works."}]}],"d3a":[{"label":"Horizontal power","opt":false,"opts":[{"nm":"Standing Broad Jump","sets":5,"reps":"3","rest":"1:30","cue":"Full reset between reps. Chase distance, land soft."},{"nm":"Bounding","sets":4,"reps":"20 yd","rest":"1:30","cue":"Long, floating strides. Cover ground, not steps."},{"nm":"Single-Leg Broad Jump","sets":4,"reps":"3 / side","rest":"1:30","cue":"Stick every landing before the next rep."},{"nm":"Sprint Start (10 yd)","sets":6,"reps":"1","rest":"1:30","cue":"Aggressive first three steps, then relax."}]},{"label":"Speed pull","opt":false,"opts":[{"nm":"Trap-Bar Deadlift (speed work)","sets":5,"reps":"3","rest":"1:30","cue":"Sixty to seventy percent. Every rep as fast as possible."},{"nm":"Speed Deadlift","sets":5,"reps":"2","rest":"1:30","cue":"Bar speed is the whole point. Stop when it slows."},{"nm":"Hang High Pull","sets":5,"reps":"3","rest":"1:30","cue":"Explode from the hips, elbows lead."},{"nm":"Kettlebell Snatch","sets":5,"reps":"5 / arm","rest":"1:15","cue":"One smooth arc. Punch through at the top."}]},{"label":"Ballistic hinge","opt":false,"opts":[{"nm":"Kettlebell Swing (chest height)","sets":5,"reps":"10","rest":"1:00","cue":"Snap the hips, do not squat it."},{"nm":"Single-Arm Kettlebell Swing","sets":4,"reps":"8 / arm","rest":"1:00","cue":"Resist the rotation on every rep."},{"nm":"Band-Resisted Hip Thrust","sets":4,"reps":"12","rest":"1:00","cue":"Hardest at lockout, where the glute is shortest."}]},{"label":"Hamstring durability","opt":false,"opts":[{"nm":"Nordic Hamstring Curl","sets":3,"reps":"5–6","rest":"2:00","cue":"Slow lower, push back up. Non-negotiable."},{"nm":"Slider Leg Curl","sets":3,"reps":"10","rest":"1:30","cue":"Hips stay high the entire set."},{"nm":"Single-Leg Romanian Deadlift","sets":3,"reps":"8 / leg","rest":"1:15","cue":"Balance is part of the exercise."},{"nm":"Razor Curl","sets":3,"reps":"8","rest":"1:30","cue":"Hip flexion into knee flexion. Ferocious."}]},{"label":"Glute / single leg","opt":false,"opts":[{"nm":"Single-Leg Hip Thrust","sets":3,"reps":"10 / side","rest":"1:15","cue":"Ribs down, drive through the heel."},{"nm":"High Box Step-Up","sets":3,"reps":"8 / leg","rest":"1:15","cue":"No push-off from the trailing foot."},{"nm":"Reverse Hyper","sets":3,"reps":"15","rest":"1:15","cue":"Control the swing. Great for the low back."}]},{"label":"Drive","opt":false,"opts":[{"nm":"Sled Push","sets":4,"reps":"25 yd","rest":"1:30","cue":"Low body angle, short choppy steps."},{"nm":"Backward Sled Drag","sets":4,"reps":"25 yd","rest":"1:30","cue":"Knees-over-toes loading. Kind to sore knees."},{"nm":"Hill Sprint","sets":6,"reps":"20 yd","rest":"2:00","cue":"Walk back down. Quality over quantity."},{"nm":"Weighted Incline Walk","sets":3,"reps":"3 min","rest":"1:00","cue":"Steep and steady. Builds the engine without the pounding."}]},{"label":"Core","opt":false,"opts":[{"nm":"Side Plank with Hip Lift","sets":3,"reps":"10 / side","rest":"0:45","cue":"Directly protects the low back when sprinting."},{"nm":"Pallof Press","sets":3,"reps":"10 / side","rest":"0:45","cue":"Press slow, resist the pull."},{"nm":"Dead Bug","sets":3,"reps":"8 / side","rest":"0:45","cue":"Exhale fully at end range."},{"nm":"Copenhagen Plank","sets":3,"reps":"25s / side","rest":"0:45","cue":"Adductor insurance."}]}],"d4s":[{"label":"Vertical pull","opt":false,"opts":[{"nm":"Weighted Pull-Up","sets":4,"reps":"5–6","rest":"2:30","cue":"Full hang to chin over the bar."},{"nm":"Weighted Chin-Up","sets":4,"reps":"5–6","rest":"2:30","cue":"Supinated grip brings the biceps in."},{"nm":"Heavy Lat Pulldown","sets":4,"reps":"8","rest":"2:00","cue":"Use it when bodyweight is still the ceiling."},{"nm":"Assisted Pull-Up","sets":4,"reps":"8","rest":"2:00","cue":"Least assistance that lets you finish clean."}]},{"label":"Horizontal pull","opt":false,"opts":[{"nm":"Barbell Row (bent-over)","sets":4,"reps":"6–8","rest":"2:30","cue":"Torso at forty-five degrees, bar to the navel."},{"nm":"Pendlay Row","sets":4,"reps":"5","rest":"2:30","cue":"Dead stop on the floor every rep."},{"nm":"T-Bar Row","sets":4,"reps":"8","rest":"2:00","cue":"Chest up, drive the elbows past the ribs."},{"nm":"Chest-Supported Row","sets":4,"reps":"10","rest":"2:00","cue":"Pad removes the low back from the equation."}]},{"label":"Row volume","opt":false,"opts":[{"nm":"Chest-Supported Row","sets":3,"reps":"10–12","rest":"1:30","cue":"Pure mid-back, no cheating."},{"nm":"Seated Cable Row","sets":3,"reps":"10–12","rest":"1:30","cue":"Let the shoulder blades travel forward, then squeeze."},{"nm":"Seal Row","sets":3,"reps":"10","rest":"1:30","cue":"Face down on a bench. Zero body english."},{"nm":"Single-Arm Dumbbell Row","sets":3,"reps":"10 / arm","rest":"1:30","cue":"Full stretch to full retraction."}]},{"label":"Lat volume","opt":false,"opts":[{"nm":"Neutral-Grip Lat Pulldown","sets":3,"reps":"10–12","rest":"1:30","cue":"Elbows down and back, hold the squeeze."},{"nm":"Straight-Arm Pulldown","sets":3,"reps":"12–15","rest":"1:00","cue":"Isolates the lat without the arms."},{"nm":"Wide-Grip Lat Pulldown","sets":3,"reps":"12","rest":"1:30","cue":"Thumbs over the bar, pull with the elbows."}]},{"label":"Rear delts","opt":false,"opts":[{"nm":"Face Pull","sets":3,"reps":"15","rest":"1:00","cue":"High cable, rope to eye level."},{"nm":"Reverse Pec Deck","sets":3,"reps":"15","rest":"1:00","cue":"Constant tension, no momentum."},{"nm":"Rear-Delt Dumbbell Fly","sets":3,"reps":"15","rest":"1:00","cue":"Chest on an incline bench, light weight."}]},{"label":"Biceps","opt":false,"opts":[{"nm":"Barbell Curl","sets":3,"reps":"8–10","rest":"1:15","cue":"Elbows pinned to the ribs."},{"nm":"EZ-Bar Curl","sets":3,"reps":"10","rest":"1:15","cue":"Kinder on the wrists than a straight bar."},{"nm":"Cable Curl","sets":3,"reps":"12","rest":"1:00","cue":"Tension all the way through the top."}]},{"label":"Biceps stretch","opt":false,"opts":[{"nm":"Incline Dumbbell Curl","sets":3,"reps":"10–12","rest":"1:00","cue":"Arms behind the body — the growth position."},{"nm":"Hammer Curl","sets":3,"reps":"10–12","rest":"1:00","cue":"Brachialis and forearm. Thickness."},{"nm":"Preacher Curl","sets":3,"reps":"10","rest":"1:00","cue":"No swing available. Control the bottom."},{"nm":"Spider Curl","sets":3,"reps":"12","rest":"1:00","cue":"Chest on an incline, arms hanging straight down."}]},{"label":"Traps & grip","opt":true,"opts":[{"nm":"Barbell Shrug","sets":3,"reps":"12","rest":"1:00","cue":"Straight up and down, pause at the top."},{"nm":"Farmer's Carry","sets":3,"reps":"40 yd","rest":"1:00","cue":"As heavy as you can hold."},{"nm":"Plate Pinch Hold","sets":3,"reps":"30s","rest":"0:45","cue":"Two smooth plates, fingers only."}]}],"d4a":[{"label":"Explosive pull","opt":false,"opts":[{"nm":"Explosive Pull-Up (chest to bar)","sets":5,"reps":"3","rest":"1:30","cue":"Accelerate all the way up. Stop when speed drops."},{"nm":"Kettlebell High Pull","sets":5,"reps":"5","rest":"1:15","cue":"Hips first, elbows finish it."},{"nm":"Hang Power Clean","sets":5,"reps":"3","rest":"2:00","cue":"Violent hip extension, fast elbows. Technique first."},{"nm":"Band-Resisted Pull-Up","sets":4,"reps":"5","rest":"1:30","cue":"Band adds tension at the top where you are strongest."}]},{"label":"Single-arm row","opt":false,"opts":[{"nm":"Single-Arm Dumbbell Row","sets":4,"reps":"8 / arm","rest":"1:30","cue":"Let the shoulder blade travel."},{"nm":"Meadows Row","sets":3,"reps":"8 / arm","rest":"1:15","cue":"Landmine, staggered stance. Big stretch on the lat."},{"nm":"Landmine Row","sets":3,"reps":"8 / arm","rest":"1:15","cue":"Angled path hits lat and rear delt together."},{"nm":"Single-Arm Cable Row","sets":3,"reps":"10 / arm","rest":"1:15","cue":"Rotate slightly into the stretch."}]},{"label":"Bodyweight pull","opt":false,"opts":[{"nm":"Chin-Up","sets":3,"reps":"6–8","rest":"1:30","cue":"Two-second lower on every rep."},{"nm":"Pull-Up","sets":3,"reps":"6–8","rest":"1:30","cue":"Full hang each rep. No kipping."},{"nm":"Feet-Elevated Inverted Row","sets":3,"reps":"10–12","rest":"1:15","cue":"Body rigid, chest to the bar, pause."},{"nm":"Ring Row","sets":3,"reps":"12","rest":"1:15","cue":"Rotate the rings out as you pull."}]},{"label":"Horizontal volume","opt":false,"opts":[{"nm":"Feet-Elevated Inverted Row","sets":3,"reps":"10–12","rest":"1:15","cue":"Pause at the top of every rep."},{"nm":"Seated Cable Row","sets":3,"reps":"12","rest":"1:15","cue":"Squeeze and hold for a beat."},{"nm":"Chest-Supported Row","sets":3,"reps":"12","rest":"1:15","cue":"Strict, no momentum."}]},{"label":"Carry & grip","opt":false,"opts":[{"nm":"Farmer's Carry","sets":4,"reps":"40 yd","rest":"1:30","cue":"Tall posture, shoulders packed down."},{"nm":"Suitcase Carry","sets":3,"reps":"40 yd / side","rest":"1:00","cue":"Do not lean toward the weight."},{"nm":"Plate Pinch Hold","sets":3,"reps":"30s","rest":"0:45","cue":"Grip is the last link in every pull."},{"nm":"Dead Hang","sets":3,"reps":"30s","rest":"1:00","cue":"Decompresses the shoulders and builds grip."}]},{"label":"Shoulder health","opt":false,"opts":[{"nm":"Face Pull + External Rotation","sets":3,"reps":"15","rest":"0:45","cue":"Earns you every heavy press you will do."},{"nm":"Prone Y-T-W Raise","sets":3,"reps":"10","rest":"0:45","cue":"Light. Quality only."},{"nm":"Band Pull-Apart","sets":3,"reps":"20","rest":"0:45","cue":"Straight arms, slow return."}]},{"label":"Arms","opt":false,"opts":[{"nm":"Hammer Curl","sets":3,"reps":"10","rest":"0:45","cue":"Brachialis and forearm in one movement."},{"nm":"Chin-Up Iso Hold","sets":3,"reps":"20s","rest":"1:00","cue":"Chin over the bar, hold. Grip and biceps together."},{"nm":"Zottman Curl","sets":3,"reps":"10","rest":"0:45","cue":"Curl up supinated, lower pronated."}]},{"label":"Rotational core","opt":true,"opts":[{"nm":"Cable Woodchop","sets":3,"reps":"12 / side","rest":"1:00","cue":"Rotate from the hips."},{"nm":"Med-Ball Rotational Throw","sets":4,"reps":"4 / side","rest":"1:00","cue":"Turn the back hip through."},{"nm":"Pallof Press","sets":3,"reps":"10 / side","rest":"0:45","cue":"Anti-rotation. Ribs down."}]}]};
+const POOLS = {"d1s":[{"label":"Main squat","opt":false,"opts":[{"nm":"Barbell Back Squat","sets":4,"reps":"4–6","rest":"3:00","cue":"Brace hard. Hips and chest rise together."},{"nm":"Front Squat","sets":4,"reps":"5","rest":"3:00","cue":"Elbows high, upright torso, control the descent."},{"nm":"Safety-Bar Squat","sets":4,"reps":"5","rest":"3:00","cue":"Easier on the shoulders — fight the forward pull."},{"nm":"Paused Back Squat","sets":4,"reps":"4","rest":"3:00","cue":"Two seconds in the hole, no bounce out."},{"nm":"Hack Squat (machine)","sets":4,"reps":"6–8","rest":"2:30","cue":"Deep range with the back supported. Push through mid-foot."}]},{"label":"Second push","opt":false,"opts":[{"nm":"Leg Press","sets":3,"reps":"8–10","rest":"2:00","cue":"Feet mid-platform, knees track over toes."},{"nm":"Hack Squat (machine)","sets":3,"reps":"8–10","rest":"2:00","cue":"Stop one or two reps shy of failure."},{"nm":"Smith Machine Squat","sets":3,"reps":"8–10","rest":"2:00","cue":"Feet slightly forward lets you sit straight down."},{"nm":"Goblet Squat","sets":3,"reps":"12","rest":"1:30","cue":"Elbows inside the knees at the bottom."}]},{"label":"Single leg","opt":false,"opts":[{"nm":"Dumbbell Bulgarian Split Squat","sets":3,"reps":"8 / leg","rest":"1:30","cue":"Rear foot at knee height. Lean in for more glute."},{"nm":"Walking Dumbbell Lunge","sets":3,"reps":"10 / leg","rest":"1:30","cue":"Step long, front shin near vertical."},{"nm":"Dumbbell Step-Up","sets":3,"reps":"8 / leg","rest":"1:30","cue":"Box at knee height. Do not push off the back foot."},{"nm":"Front-Foot-Elevated Split Squat","sets":3,"reps":"10 / leg","rest":"1:30","cue":"The elevation buys you extra quad stretch."}]},{"label":"Hamstring balance","opt":false,"opts":[{"nm":"Romanian Deadlift","sets":3,"reps":"8–10","rest":"2:00","cue":"Moderate load — balance for a squat day, not a max."},{"nm":"Seated Leg Curl","sets":3,"reps":"10–12","rest":"1:30","cue":"Hip flexion pre-stretches the hamstring."},{"nm":"Lying Leg Curl","sets":3,"reps":"10–12","rest":"1:30","cue":"Point the toes to shift work off the calves."},{"nm":"Cable Pull-Through","sets":3,"reps":"12","rest":"1:30","cue":"Hips back, then snap them through. Spine locked."}]},{"label":"Quad isolation","opt":false,"opts":[{"nm":"Leg Extension","sets":3,"reps":"12–15","rest":"1:00","cue":"Pause a second at lockout."},{"nm":"Cyclist Squat (heels elevated)","sets":3,"reps":"10","rest":"1:30","cue":"Heels on plates puts everything on the quad."},{"nm":"Sissy Squat","sets":3,"reps":"10–12","rest":"1:00","cue":"Knees travel forward, hips stay extended."}]},{"label":"Calves","opt":false,"opts":[{"nm":"Standing Calf Raise","sets":4,"reps":"10–12","rest":"1:00","cue":"Full stretch at the bottom, two-second squeeze up top."},{"nm":"Seated Calf Raise","sets":4,"reps":"12–15","rest":"1:00","cue":"Bent knee targets the soleus."},{"nm":"Leg Press Calf Raise","sets":4,"reps":"12","rest":"1:00","cue":"Let the heels drop below the platform."}]},{"label":"Core","opt":false,"opts":[{"nm":"Cable Crunch","sets":3,"reps":"12–15","rest":"1:00","cue":"Round the spine toward the knees. Hips stay fixed."},{"nm":"Weighted Decline Sit-Up","sets":3,"reps":"12","rest":"1:00","cue":"Hold the plate at the chest, control the way down."},{"nm":"Hanging Leg Raise","sets":3,"reps":"10–12","rest":"1:00","cue":"Curl the pelvis at the top. No swinging."},{"nm":"Ab Wheel Rollout","sets":3,"reps":"8–10","rest":"1:00","cue":"Posterior tilt throughout. Only go as far as the brace holds."}]}],"d1a":[{"label":"Jump","opt":false,"opts":[{"nm":"Box Jump (step down)","sets":5,"reps":"3","rest":"1:30","cue":"Land quiet. Step down every rep."},{"nm":"Trap-Bar Jump","sets":5,"reps":"3","rest":"1:30","cue":"Light bar, maximum height. Absorb softly."},{"nm":"Squat Jump","sets":5,"reps":"5","rest":"1:30","cue":"Continuous, minimal ground time."},{"nm":"Depth Jump to Box","sets":4,"reps":"3","rest":"2:00","cue":"Drop from a low box, rebound instantly. Advanced."},{"nm":"Hurdle Hop (stick the landing)","sets":4,"reps":"4","rest":"1:30","cue":"Hold each landing for a full second."}]},{"label":"Squat pattern","opt":false,"opts":[{"nm":"Front Squat","sets":4,"reps":"5","rest":"2:30","cue":"Elbows high, athletic squat pattern."},{"nm":"Safety-Bar Squat","sets":4,"reps":"5","rest":"2:30","cue":"Fight the bar pulling you forward."},{"nm":"Paused Back Squat","sets":4,"reps":"4","rest":"2:30","cue":"Own the bottom position."},{"nm":"Tempo Goblet Squat","sets":4,"reps":"8","rest":"2:00","cue":"Three seconds down, one-second pause, drive up."}]},{"label":"Single leg","opt":false,"opts":[{"nm":"Dumbbell Reverse Lunge","sets":3,"reps":"8 / leg","rest":"1:30","cue":"Step back and down. Loads the glute and hamstring."},{"nm":"Rear-Foot-Elevated Split Squat","sets":3,"reps":"8 / leg","rest":"1:30","cue":"Slow down, drive up. Knee tracks the toes."},{"nm":"Walking Dumbbell Lunge","sets":3,"reps":"10 / leg","rest":"1:30","cue":"Long stride, tall chest."},{"nm":"High Box Step-Up","sets":3,"reps":"8 / leg","rest":"1:30","cue":"Drive through the heel. No push-off below."}]},{"label":"Frontal plane","opt":false,"opts":[{"nm":"Lateral Lunge (goblet)","sets":3,"reps":"8 / side","rest":"1:15","cue":"Hips back over the working leg, trail leg straight."},{"nm":"Cossack Squat","sets":3,"reps":"8 / side","rest":"1:15","cue":"Sink deep, keep the heel down."},{"nm":"Lateral Sled Drag","sets":3,"reps":"20 yd / side","rest":"1:15","cue":"Stay low, push through the outside edge."},{"nm":"Banded Lateral Walk","sets":3,"reps":"15 / side","rest":"1:00","cue":"Band at the ankles, feet never come together."}]},{"label":"Reactive","opt":false,"opts":[{"nm":"Skater Bound (stick)","sets":3,"reps":"5 / side","rest":"1:00","cue":"Hold the landing a full second before the next rep."},{"nm":"Lateral Bound to Box","sets":3,"reps":"5 / side","rest":"1:00","cue":"Cover distance sideways, land absorbed."},{"nm":"Single-Leg Pogo","sets":3,"reps":"10 / side","rest":"1:00","cue":"Stiff ankle, minimal knee bend, fast off the floor."},{"nm":"5-10-5 Shuttle","sets":4,"reps":"1","rest":"1:30","cue":"Full recovery between runs. Sharp changes of direction."}]},{"label":"Knee & groin insurance","opt":false,"opts":[{"nm":"Copenhagen Plank","sets":3,"reps":"20–30s / side","rest":"0:45","cue":"The best groin-strain reducer there is. Start bent-knee."},{"nm":"Nordic Hamstring Curl","sets":3,"reps":"5","rest":"2:00","cue":"Slow lower, push back up with the hands."},{"nm":"Reverse Nordic","sets":3,"reps":"8","rest":"1:00","cue":"Lean back from the knees. Brutal quad stretch under load."},{"nm":"Slider Adductor Slide","sets":3,"reps":"10 / side","rest":"0:45","cue":"Control the slide out, pull back with the inner thigh."}]},{"label":"Ankle","opt":false,"opts":[{"nm":"Single-Leg Calf Raise","sets":3,"reps":"12 / leg","rest":"0:45","cue":"Full range off a step. Ankle stiffness is free speed."},{"nm":"Pogo Hops","sets":3,"reps":"20","rest":"0:45","cue":"Bounce off the balls of the feet, knees nearly locked."},{"nm":"Tibialis Raise","sets":3,"reps":"15","rest":"0:45","cue":"Back to a wall, pull the toes up. Protects the shins."}]},{"label":"Core","opt":false,"opts":[{"nm":"Pallof Press","sets":3,"reps":"10 / side","rest":"0:45","cue":"Resist rotation. Ribs down, glutes on."},{"nm":"Suitcase Carry","sets":3,"reps":"40 yd / side","rest":"1:00","cue":"Heavy, and do not lean."},{"nm":"Side Plank with Hip Lift","sets":3,"reps":"10 / side","rest":"0:45","cue":"Lateral chain — protects the low back when sprinting."},{"nm":"Dead Bug","sets":3,"reps":"8 / side","rest":"0:45","cue":"Low back glued down, exhale fully at end range."}]}],"d1f":[{"label":"Squat pattern","opt":false,"opts":[{"nm":"Goblet Squat","sets":3,"reps":"10","rest":"1:30","cue":"Dumbbell at the chest counterbalances you into a deeper squat."},{"nm":"Box Squat","sets":3,"reps":"10","rest":"1:30","cue":"Sit to a box, stand up. The box removes the guesswork about depth."},{"nm":"Smith Machine Squat","sets":3,"reps":"10","rest":"1:30","cue":"Fixed bar path. Feet slightly forward lets you sit straight down."},{"nm":"Bodyweight Squat (tempo)","sets":3,"reps":"12","rest":"1:00","cue":"Three seconds down. Load can wait; control cannot."}]},{"label":"Machine push","opt":false,"opts":[{"nm":"Leg Press","sets":3,"reps":"12","rest":"1:30","cue":"Only as deep as you can keep the low back flat."},{"nm":"Hack Squat (machine)","sets":3,"reps":"10","rest":"1:30","cue":"Back supported the whole way. Push through the mid-foot."},{"nm":"Belt Squat","sets":3,"reps":"12","rest":"1:30","cue":"All the leg work, none of the spinal load."}]},{"label":"Single leg","opt":false,"opts":[{"nm":"Dumbbell Step-Up (low box)","sets":2,"reps":"10 / leg","rest":"1:15","cue":"Start at a step. Drive through the whole foot."},{"nm":"Split Squat (rear foot down)","sets":2,"reps":"8 / leg","rest":"1:15","cue":"Both feet on the floor — far easier to balance than a Bulgarian."},{"nm":"Assisted Reverse Lunge","sets":2,"reps":"8 / leg","rest":"1:15","cue":"Hold a rack upright with one hand. Balance stops being the limit."}]},{"label":"Hamstrings","opt":false,"opts":[{"nm":"Seated Leg Curl","sets":3,"reps":"12","rest":"1:15","cue":"Hamstrings do half the work of a healthy knee."},{"nm":"Lying Leg Curl","sets":3,"reps":"12","rest":"1:15","cue":"Hips pressed down the whole set."},{"nm":"Glute Bridge","sets":3,"reps":"12","rest":"1:00","cue":"Heels close, squeeze for a second at the top."}]},{"label":"Quads","opt":false,"opts":[{"nm":"Leg Extension","sets":2,"reps":"15","rest":"1:00","cue":"Light. Feel the quad rather than load it."},{"nm":"Wall Sit","sets":3,"reps":"30s","rest":"1:00","cue":"Thighs parallel, back flat on the wall. Simple and brutal."},{"nm":"Step-Down (low box)","sets":2,"reps":"10 / leg","rest":"1:00","cue":"Lower slowly under control, tap the heel, stand up."}]},{"label":"Calves","opt":false,"opts":[{"nm":"Standing Calf Raise","sets":3,"reps":"15","rest":"1:00","cue":"Hold the top for a full second."},{"nm":"Seated Calf Raise","sets":3,"reps":"15","rest":"1:00","cue":"Bent knee targets the deeper calf muscle."},{"nm":"Leg Press Calf Raise","sets":3,"reps":"15","rest":"1:00","cue":"Let the heels drop below the platform."}]},{"label":"Core","opt":false,"opts":[{"nm":"Dead Bug","sets":3,"reps":"8 / side","rest":"0:45","cue":"Low back pressed into the floor throughout."},{"nm":"Plank","sets":3,"reps":"20–30s","rest":"0:45","cue":"From the knees is fine. Short and solid beats long and sagging."},{"nm":"Bird Dog","sets":3,"reps":"8 / side","rest":"0:45","cue":"Opposite arm and leg, hips level."},{"nm":"Side Plank (knees down)","sets":3,"reps":"20s / side","rest":"0:45","cue":"Stack the shoulders, lift the hips."}]}],"d1m":[{"label":"Ankles","opt":false,"opts":[{"nm":"Knee-to-Wall Ankle Rock","sets":2,"reps":"10 / side","rest":"0:20","cue":"Heel down, knee past the toes."},{"nm":"Calf Stretch on a Step","sets":2,"reps":"45s / side","rest":"0:20","cue":"Heel hangs off, knee straight, then repeat bent."},{"nm":"Tibialis Raise","sets":2,"reps":"15","rest":"0:20","cue":"Back to a wall, pull the toes up."}]},{"label":"Hips","opt":false,"opts":[{"nm":"90/90 Hip Switch","sets":2,"reps":"8 / side","rest":"0:30","cue":"Sit tall, no hands."},{"nm":"Half-Kneeling Hip Flexor Stretch","sets":2,"reps":"45s / side","rest":"0:20","cue":"Tuck the pelvis first, then lean."},{"nm":"Frog Stretch","sets":2,"reps":"45s","rest":"0:20","cue":"Knees wide, rock back gently."},{"nm":"Hip CARs","sets":2,"reps":"5 / side","rest":"0:30","cue":"Slow full circles at the hip. Control the whole range."}]},{"label":"Squat position","opt":false,"opts":[{"nm":"Deep Squat Hold","sets":3,"reps":"30s","rest":"0:30","cue":"Heels down, elbows inside the knees pushing out."},{"nm":"Goblet Squat Hold","sets":3,"reps":"30s","rest":"0:30","cue":"Light dumbbell at the chest to help you sit deeper."},{"nm":"Squat to Stand","sets":2,"reps":"8","rest":"0:30","cue":"Grab the toes, sink into a squat, lift the chest."}]},{"label":"Adductors","opt":false,"opts":[{"nm":"Cossack Squat (bodyweight)","sets":2,"reps":"8 / side","rest":"0:30","cue":"Sit into one hip, other leg straight, toes up."},{"nm":"Adductor Rock-Back","sets":2,"reps":"10 / side","rest":"0:20","cue":"All fours, one leg out to the side."},{"nm":"Butterfly Stretch","sets":2,"reps":"45s","rest":"0:20","cue":"Soles together, hinge forward from the hips."}]},{"label":"Quads & glutes","opt":false,"opts":[{"nm":"Couch Stretch","sets":2,"reps":"45s / side","rest":"0:20","cue":"Squeeze the glute of the stretching side."},{"nm":"Figure-4 Stretch","sets":2,"reps":"45s / side","rest":"0:20","cue":"Ankle over the opposite knee."},{"nm":"Pigeon Stretch","sets":2,"reps":"45s / side","rest":"0:20","cue":"Front shin across, hips square."}]},{"label":"Control","opt":true,"opts":[{"nm":"Reverse Nordic","sets":2,"reps":"8","rest":"0:30","cue":"Lean back from the knees. Loaded quad stretch."},{"nm":"Single-Leg Balance","sets":2,"reps":"30s / side","rest":"0:20","cue":"Eyes closed makes it a different exercise."},{"nm":"Step-Down (slow)","sets":2,"reps":"8 / side","rest":"0:30","cue":"Lower under control, tap, stand up."}]}],"d2s":[{"label":"Main press","opt":false,"opts":[{"nm":"Barbell Bench Press","sets":4,"reps":"4–6","rest":"3:00","cue":"Shoulder blades pinned, bar to the lower chest."},{"nm":"Close-Grip Bench Press","sets":4,"reps":"5–6","rest":"3:00","cue":"Hands shoulder width, elbows tucked. Triceps-biased."},{"nm":"Incline Barbell Press","sets":4,"reps":"5–6","rest":"3:00","cue":"Thirty degrees. Upper chest and front delt."},{"nm":"Paused Bench Press","sets":4,"reps":"4","rest":"3:00","cue":"One second on the chest, no bounce."}]},{"label":"Overhead","opt":false,"opts":[{"nm":"Standing Overhead Press","sets":3,"reps":"5–6","rest":"2:30","cue":"Glutes squeezed, ribs down, head through at lockout."},{"nm":"Seated Dumbbell Shoulder Press","sets":3,"reps":"8–10","rest":"2:00","cue":"Back supported. Full range, no bouncing off the bottom."},{"nm":"Push Press","sets":3,"reps":"5","rest":"2:30","cue":"Dip and drive from the legs, lower under control."},{"nm":"Machine Shoulder Press","sets":3,"reps":"10","rest":"2:00","cue":"Good when the bench day already cooked you."}]},{"label":"Chest volume","opt":false,"opts":[{"nm":"Incline Dumbbell Press","sets":3,"reps":"8–10","rest":"2:00","cue":"Stretch at the bottom, stop short of touching up top."},{"nm":"Flat Dumbbell Press","sets":3,"reps":"10","rest":"2:00","cue":"Wider range than the bar. Control the eccentric."},{"nm":"Machine Chest Press","sets":3,"reps":"10–12","rest":"1:30","cue":"Safe to push close to failure."},{"nm":"Cable Fly","sets":3,"reps":"12–15","rest":"1:15","cue":"Slight elbow bend, squeeze at the midline."}]},{"label":"Compound finisher","opt":false,"opts":[{"nm":"Weighted Dip","sets":3,"reps":"6–8","rest":"2:00","cue":"Lean forward for chest, upright for triceps."},{"nm":"Decline Dumbbell Press","sets":3,"reps":"8–10","rest":"2:00","cue":"Lower chest with the shoulders out of the way."},{"nm":"Weighted Push-Up","sets":3,"reps":"12","rest":"1:30","cue":"Plate on the back. Body rigid start to finish."},{"nm":"Machine Chest Press","sets":3,"reps":"10","rest":"1:30","cue":"Straight sets to near failure."}]},{"label":"Side delts","opt":false,"opts":[{"nm":"Cable Lateral Raise","sets":3,"reps":"12–15","rest":"1:00","cue":"One arm, cable behind the body. Lead with the elbow."},{"nm":"Dumbbell Lateral Raise","sets":3,"reps":"12–15","rest":"1:00","cue":"Stop at shoulder height, no shrugging."},{"nm":"Machine Lateral Raise","sets":3,"reps":"12–15","rest":"1:00","cue":"Constant tension throughout."},{"nm":"Wide-Grip Upright Row","sets":3,"reps":"12","rest":"1:00","cue":"Wide grip keeps the shoulder happy."}]},{"label":"Triceps","opt":false,"opts":[{"nm":"Overhead Cable Triceps Extension","sets":3,"reps":"10–12","rest":"1:00","cue":"Full overhead stretch — that is where the long head grows."},{"nm":"Skull Crusher","sets":3,"reps":"10","rest":"1:00","cue":"Lower to the forehead, elbows still."},{"nm":"Overhead Dumbbell Extension","sets":3,"reps":"12","rest":"1:00","cue":"One heavy dumbbell, both hands."}]},{"label":"Triceps finisher","opt":true,"opts":[{"nm":"Triceps Pushdown","sets":2,"reps":"12–15","rest":"0:45","cue":"Superset it with the lateral raises if time is short."},{"nm":"Rope Pushdown","sets":2,"reps":"15","rest":"0:45","cue":"Spread the rope at the bottom."},{"nm":"Bench Dip","sets":2,"reps":"15","rest":"0:45","cue":"Feet out for more load."}]},{"label":"Balance","opt":false,"opts":[{"nm":"Face Pull","sets":3,"reps":"15","rest":"0:45","cue":"Non-negotiable on a push day. Pull to the eyes."},{"nm":"Band Pull-Apart","sets":3,"reps":"20","rest":"0:45","cue":"Straight arms, squeeze the shoulder blades."},{"nm":"Reverse Pec Deck","sets":3,"reps":"15","rest":"0:45","cue":"Rear delts — the muscle that keeps you pressing pain-free."}]}],"d2a":[{"label":"Ballistic","opt":false,"opts":[{"nm":"Med-Ball Chest Pass","sets":5,"reps":"3","rest":"1:00","cue":"Maximum intent. Stop the set when speed drops."},{"nm":"Plyo Push-Up","sets":5,"reps":"3","rest":"1:00","cue":"Leave the floor every rep, land soft."},{"nm":"Med-Ball Overhead Slam","sets":5,"reps":"5","rest":"1:00","cue":"Full body. Drive the ball through the floor."},{"nm":"Med-Ball Rotational Throw","sets":4,"reps":"4 / side","rest":"1:00","cue":"Turn the back hip through. Power comes from the ground."}]},{"label":"Press pattern","opt":false,"opts":[{"nm":"Half-Kneeling Landmine Press","sets":4,"reps":"6 / arm","rest":"1:30","cue":"Shoulder-friendly arc. Down-knee glute squeezed."},{"nm":"Single-Arm Dumbbell Push Press","sets":4,"reps":"5 / arm","rest":"1:30","cue":"Dip, drive, punch overhead, lower slowly."},{"nm":"Z-Press","sets":4,"reps":"6","rest":"1:30","cue":"Seated on the floor, legs straight. Nowhere to cheat."},{"nm":"Tall-Kneeling Overhead Press","sets":4,"reps":"8","rest":"1:30","cue":"No leg drive available — pure shoulder and core."}]},{"label":"Chest anchor","opt":false,"opts":[{"nm":"Incline Dumbbell Press","sets":3,"reps":"8","rest":"2:00","cue":"Your strength anchor for the day."},{"nm":"Weighted Push-Up","sets":3,"reps":"10","rest":"1:30","cue":"Rigid plank, full lockout."},{"nm":"Flat Dumbbell Press","sets":3,"reps":"8–10","rest":"2:00","cue":"Controlled, heavy-ish."},{"nm":"Ring or TRX Push-Up","sets":3,"reps":"12","rest":"1:30","cue":"Instability recruits the whole shoulder girdle."}]},{"label":"Triceps","opt":false,"opts":[{"nm":"Dip (bodyweight, controlled)","sets":3,"reps":"8–10","rest":"1:30","cue":"Three-second lowering. Add weight past 12 clean reps."},{"nm":"Close-Grip Push-Up","sets":3,"reps":"15","rest":"1:00","cue":"Elbows brushing the ribs."},{"nm":"Triceps Pushdown","sets":3,"reps":"12","rest":"1:00","cue":"Simple volume to finish the arms."}]},{"label":"Shoulder stability","opt":false,"opts":[{"nm":"Bottoms-Up Kettlebell Press","sets":3,"reps":"8 / arm","rest":"1:00","cue":"Light bell. Crushing grip switches on the cuff."},{"nm":"Turkish Get-Up","sets":3,"reps":"3 / side","rest":"1:30","cue":"Slow and deliberate. Every joint has to cooperate."},{"nm":"Kettlebell Arm Bar","sets":3,"reps":"30s / side","rest":"1:00","cue":"Opens the chest and packs the shoulder."},{"nm":"Prone Y-T-W Raise","sets":3,"reps":"10","rest":"0:45","cue":"Light or no weight. Quality only."}]},{"label":"Balance pull","opt":false,"opts":[{"nm":"Face Pull","sets":3,"reps":"15","rest":"0:45","cue":"Thumbs back at the finish."},{"nm":"Band Pull-Apart","sets":3,"reps":"20","rest":"0:45","cue":"Straight arms, slow return."},{"nm":"Prone Trap Raise","sets":3,"reps":"12","rest":"0:45","cue":"Thumbs up, lift to a Y. Lower traps."}]},{"label":"Core","opt":false,"opts":[{"nm":"Ab Wheel Rollout","sets":3,"reps":"8–10","rest":"1:00","cue":"Only roll as far as the brace holds."},{"nm":"Hollow Body Hold","sets":3,"reps":"30s","rest":"0:45","cue":"Low back pressed flat. Shorten the levers if it lifts."},{"nm":"Plank Shoulder Tap","sets":3,"reps":"20","rest":"0:45","cue":"Hips dead still — that is the whole exercise."},{"nm":"Bear Crawl","sets":3,"reps":"20 yd","rest":"1:00","cue":"Knees an inch off the floor, back flat."}]}],"d2f":[{"label":"Chest press","opt":false,"opts":[{"nm":"Machine Chest Press","sets":3,"reps":"10","rest":"1:30","cue":"Fixed path, no spotter needed."},{"nm":"Flat Dumbbell Press","sets":3,"reps":"10","rest":"1:30","cue":"Lower to a stretch, not to a bounce."},{"nm":"Hands-Elevated Push-Up","sets":3,"reps":"8","rest":"1:15","cue":"The higher the hands, the easier. Lower it as you get stronger."},{"nm":"Cable Chest Press","sets":3,"reps":"12","rest":"1:30","cue":"Standing, one handle each side. Kind to the shoulders."}]},{"label":"Overhead","opt":false,"opts":[{"nm":"Seated Dumbbell Shoulder Press","sets":3,"reps":"10","rest":"1:30","cue":"Back against the pad, stop short of locking out."},{"nm":"Machine Shoulder Press","sets":3,"reps":"12","rest":"1:30","cue":"The safest way to learn to press overhead."},{"nm":"Landmine Press","sets":3,"reps":"8 / arm","rest":"1:30","cue":"The angled path suits shoulders that are not ready for straight overhead."}]},{"label":"Second chest","opt":false,"opts":[{"nm":"Incline Dumbbell Press","sets":2,"reps":"12","rest":"1:30","cue":"Low incline, light dumbbells."},{"nm":"Pec Deck","sets":2,"reps":"12","rest":"1:15","cue":"Squeeze at the middle, control the way back."},{"nm":"Cable Fly","sets":2,"reps":"15","rest":"1:15","cue":"Slight elbow bend held throughout."}]},{"label":"Side delts","opt":false,"opts":[{"nm":"Dumbbell Lateral Raise","sets":2,"reps":"12","rest":"1:00","cue":"Lighter than you think. Stop at shoulder height."},{"nm":"Machine Lateral Raise","sets":2,"reps":"12","rest":"1:00","cue":"Constant tension, nothing to balance."},{"nm":"Cable Lateral Raise","sets":2,"reps":"12","rest":"1:00","cue":"One arm at a time, cable behind you."}]},{"label":"Triceps","opt":false,"opts":[{"nm":"Rope Pushdown","sets":3,"reps":"12","rest":"1:00","cue":"Elbows pinned. Only the forearms move."},{"nm":"Straight-Bar Pushdown","sets":3,"reps":"12","rest":"1:00","cue":"Keep the shoulders down and back."},{"nm":"Overhead Dumbbell Extension","sets":3,"reps":"12","rest":"1:00","cue":"One dumbbell, both hands, full stretch overhead."},{"nm":"Bench Dip (feet close)","sets":3,"reps":"10","rest":"1:00","cue":"Feet in close to start. Walk them out as it gets easier."}]},{"label":"Balance","opt":false,"opts":[{"nm":"Face Pull","sets":3,"reps":"15","rest":"0:45","cue":"Rope to the eyes. Best thing you can do for desk shoulders."},{"nm":"Band Pull-Apart","sets":3,"reps":"20","rest":"0:45","cue":"Straight arms, slow return."},{"nm":"Reverse Pec Deck","sets":3,"reps":"15","rest":"0:45","cue":"Light. Rear delts respond to reps, not load."}]},{"label":"Core","opt":false,"opts":[{"nm":"Plank","sets":3,"reps":"20–30s","rest":"0:45","cue":"Squeeze the glutes and it gets easier and harder at once."},{"nm":"Dead Bug","sets":3,"reps":"8 / side","rest":"0:45","cue":"Exhale fully at the end of each rep."},{"nm":"Standing Pallof Press","sets":3,"reps":"10 / side","rest":"0:45","cue":"Resist the pull. Ribs down."}]}],"d2m":[{"label":"Upper back","opt":false,"opts":[{"nm":"Thoracic Extension over Foam Roller","sets":2,"reps":"10","rest":"0:20","cue":"Roller across the mid-back, extend over it slowly."},{"nm":"Open Book","sets":2,"reps":"8 / side","rest":"0:20","cue":"On your side, knees stacked, follow the hand with your eyes."},{"nm":"Quadruped Thoracic Rotation","sets":2,"reps":"8 / side","rest":"0:20","cue":"Hand behind the head, elbow to the ceiling."},{"nm":"Cat-Cow","sets":2,"reps":"10","rest":"0:20","cue":"One vertebra at a time."}]},{"label":"Overhead range","opt":false,"opts":[{"nm":"Wall Slide","sets":3,"reps":"10","rest":"0:30","cue":"Forearms on the wall, slide up without the ribs flaring."},{"nm":"Band Pass-Through","sets":2,"reps":"10","rest":"0:30","cue":"Wide grip, straight arms, over and behind."},{"nm":"Bench Lat Stretch","sets":2,"reps":"45s","rest":"0:20","cue":"Elbows on a bench, sink the chest down."},{"nm":"Wall Angel","sets":3,"reps":"10","rest":"0:30","cue":"Back flat to the wall, arms slide up and down touching throughout."}]},{"label":"Chest","opt":false,"opts":[{"nm":"Doorway Pec Stretch","sets":2,"reps":"45s / side","rest":"0:20","cue":"Forearm on the frame, turn away slowly."},{"nm":"Child Pose with Lat Reach","sets":2,"reps":"45s / side","rest":"0:20","cue":"Walk both hands to one side, sink the ribs."},{"nm":"Supine Chest Opener","sets":2,"reps":"60s","rest":"0:20","cue":"Foam roller along the spine, arms out wide, breathe."}]},{"label":"Cuff control","opt":false,"opts":[{"nm":"Prone Y-T-W","sets":2,"reps":"8 each","rest":"0:30","cue":"Face down, no weight. Lift from between the blades."},{"nm":"Band External Rotation","sets":2,"reps":"15 / side","rest":"0:30","cue":"Elbow at the side, rotate out slowly."},{"nm":"Bottoms-Up Kettlebell Carry","sets":2,"reps":"20 yd / side","rest":"0:30","cue":"Light bell upside down. The cuff has to fire to keep it there."}]},{"label":"Neck & wrists","opt":false,"opts":[{"nm":"Chin Tuck","sets":2,"reps":"10","rest":"0:20","cue":"Double chin, hold three seconds."},{"nm":"Wrist Rocks","sets":2,"reps":"10 each way","rest":"0:20","cue":"Palms down then up, rock gently."},{"nm":"Upper Trap Stretch","sets":2,"reps":"30s / side","rest":"0:20","cue":"Ear toward the shoulder, hand behind the back."}]},{"label":"Breathing","opt":true,"opts":[{"nm":"90/90 Breathing","sets":2,"reps":"6 breaths","rest":"0:30","cue":"Feet on a wall, exhale fully, ribs down."},{"nm":"Crocodile Breathing","sets":2,"reps":"8 breaths","rest":"0:30","cue":"Face down, breathe into the lower back."}]}],"d3s":[{"label":"Main hinge","opt":false,"opts":[{"nm":"Deadlift (conventional)","sets":4,"reps":"3–5","rest":"3:00","cue":"Take the slack out first. Reset every rep."},{"nm":"Trap-Bar Deadlift","sets":4,"reps":"4–6","rest":"3:00","cue":"Easier on the back, still brutally effective."},{"nm":"Sumo Deadlift","sets":4,"reps":"3–5","rest":"3:00","cue":"Knees out, push the floor apart."},{"nm":"Deficit Deadlift","sets":4,"reps":"4","rest":"3:00","cue":"Stand on a plate. Longer range off the floor."},{"nm":"Rack Pull","sets":4,"reps":"5","rest":"2:30","cue":"Just below the knee. Overload the lockout."}]},{"label":"Glutes","opt":false,"opts":[{"nm":"Barbell Hip Thrust","sets":3,"reps":"8–10","rest":"2:00","cue":"Chin tucked, ribs down, one-second squeeze."},{"nm":"Barbell Glute Bridge","sets":3,"reps":"12","rest":"1:30","cue":"Shorter range, same job. Easier to set up."},{"nm":"Cable Pull-Through","sets":3,"reps":"12–15","rest":"1:15","cue":"Hips back, then snap through."},{"nm":"Machine Hip Thrust","sets":3,"reps":"10","rest":"2:00","cue":"Load it heavy without the setup fight."}]},{"label":"Hamstring — knee flexion","opt":false,"opts":[{"nm":"Seated Leg Curl","sets":3,"reps":"10–12","rest":"1:30","cue":"Seated beats lying for the stretch position."},{"nm":"Lying Leg Curl","sets":3,"reps":"10–12","rest":"1:30","cue":"Hips pressed down the whole set."},{"nm":"Nordic Hamstring Curl","sets":3,"reps":"6","rest":"2:00","cue":"The strain-prevention gold standard."},{"nm":"Slider Leg Curl","sets":3,"reps":"10","rest":"1:30","cue":"Hips high, heels drag out and back."}]},{"label":"Hamstring — hip extension","opt":false,"opts":[{"nm":"Weighted Back Extension (45°)","sets":3,"reps":"10–12","rest":"1:30","cue":"Round slightly for glutes, stay flat for erectors."},{"nm":"Good Morning","sets":3,"reps":"10","rest":"1:30","cue":"Light bar. Pure hinge groove."},{"nm":"Single-Leg Romanian Deadlift","sets":3,"reps":"8 / leg","rest":"1:15","cue":"Hips square, back leg locked."},{"nm":"Stiff-Leg Deadlift","sets":3,"reps":"8","rest":"2:00","cue":"Bar close, hamstrings loaded from the first inch."}]},{"label":"Calves","opt":false,"opts":[{"nm":"Seated Calf Raise","sets":3,"reps":"12–15","rest":"1:00","cue":"Bent knee targets the soleus."},{"nm":"Standing Calf Raise","sets":3,"reps":"10–12","rest":"1:00","cue":"Pause at the top and the bottom."}]},{"label":"Core","opt":false,"opts":[{"nm":"Hanging Leg Raise","sets":3,"reps":"10–12","rest":"1:00","cue":"Curl the pelvis at the top."},{"nm":"Weighted Plank","sets":3,"reps":"45s","rest":"1:00","cue":"Plate on the back, glutes and quads switched on."},{"nm":"Cable Woodchop","sets":3,"reps":"12 / side","rest":"1:00","cue":"Rotate from the hips, arms just hold on."},{"nm":"Ab Wheel Rollout","sets":3,"reps":"10","rest":"1:00","cue":"Slow out, slower back."}]},{"label":"Carry","opt":true,"opts":[{"nm":"Suitcase Carry","sets":3,"reps":"40 yd / side","rest":"1:00","cue":"Heavy. The obliques earn their keep here."},{"nm":"Farmer's Carry","sets":3,"reps":"40 yd","rest":"1:00","cue":"Tall posture, shoulders packed down."},{"nm":"Zercher Carry","sets":3,"reps":"30 yd","rest":"1:30","cue":"Bar in the elbow crease. Everything works."}]}],"d3a":[{"label":"Horizontal power","opt":false,"opts":[{"nm":"Standing Broad Jump","sets":5,"reps":"3","rest":"1:30","cue":"Full reset between reps. Chase distance, land soft."},{"nm":"Bounding","sets":4,"reps":"20 yd","rest":"1:30","cue":"Long, floating strides. Cover ground, not steps."},{"nm":"Single-Leg Broad Jump","sets":4,"reps":"3 / side","rest":"1:30","cue":"Stick every landing before the next rep."},{"nm":"Sprint Start (10 yd)","sets":6,"reps":"1","rest":"1:30","cue":"Aggressive first three steps, then relax."}]},{"label":"Speed pull","opt":false,"opts":[{"nm":"Trap-Bar Deadlift (speed work)","sets":5,"reps":"3","rest":"1:30","cue":"Sixty to seventy percent. Every rep as fast as possible."},{"nm":"Speed Deadlift","sets":5,"reps":"2","rest":"1:30","cue":"Bar speed is the whole point. Stop when it slows."},{"nm":"Hang High Pull","sets":5,"reps":"3","rest":"1:30","cue":"Explode from the hips, elbows lead."},{"nm":"Kettlebell Snatch","sets":5,"reps":"5 / arm","rest":"1:15","cue":"One smooth arc. Punch through at the top."}]},{"label":"Ballistic hinge","opt":false,"opts":[{"nm":"Kettlebell Swing (chest height)","sets":5,"reps":"10","rest":"1:00","cue":"Snap the hips, do not squat it."},{"nm":"Single-Arm Kettlebell Swing","sets":4,"reps":"8 / arm","rest":"1:00","cue":"Resist the rotation on every rep."},{"nm":"Band-Resisted Hip Thrust","sets":4,"reps":"12","rest":"1:00","cue":"Hardest at lockout, where the glute is shortest."}]},{"label":"Hamstring durability","opt":false,"opts":[{"nm":"Nordic Hamstring Curl","sets":3,"reps":"5–6","rest":"2:00","cue":"Slow lower, push back up. Non-negotiable."},{"nm":"Slider Leg Curl","sets":3,"reps":"10","rest":"1:30","cue":"Hips stay high the entire set."},{"nm":"Single-Leg Romanian Deadlift","sets":3,"reps":"8 / leg","rest":"1:15","cue":"Balance is part of the exercise."},{"nm":"Razor Curl","sets":3,"reps":"8","rest":"1:30","cue":"Hip flexion into knee flexion. Ferocious."}]},{"label":"Glute / single leg","opt":false,"opts":[{"nm":"Single-Leg Hip Thrust","sets":3,"reps":"10 / side","rest":"1:15","cue":"Ribs down, drive through the heel."},{"nm":"High Box Step-Up","sets":3,"reps":"8 / leg","rest":"1:15","cue":"No push-off from the trailing foot."},{"nm":"Reverse Hyper","sets":3,"reps":"15","rest":"1:15","cue":"Control the swing. Great for the low back."}]},{"label":"Drive","opt":false,"opts":[{"nm":"Sled Push","sets":4,"reps":"25 yd","rest":"1:30","cue":"Low body angle, short choppy steps."},{"nm":"Backward Sled Drag","sets":4,"reps":"25 yd","rest":"1:30","cue":"Knees-over-toes loading. Kind to sore knees."},{"nm":"Hill Sprint","sets":6,"reps":"20 yd","rest":"2:00","cue":"Walk back down. Quality over quantity."},{"nm":"Weighted Incline Walk","sets":3,"reps":"3 min","rest":"1:00","cue":"Steep and steady. Builds the engine without the pounding."}]},{"label":"Core","opt":false,"opts":[{"nm":"Side Plank with Hip Lift","sets":3,"reps":"10 / side","rest":"0:45","cue":"Directly protects the low back when sprinting."},{"nm":"Pallof Press","sets":3,"reps":"10 / side","rest":"0:45","cue":"Press slow, resist the pull."},{"nm":"Dead Bug","sets":3,"reps":"8 / side","rest":"0:45","cue":"Exhale fully at end range."},{"nm":"Copenhagen Plank","sets":3,"reps":"25s / side","rest":"0:45","cue":"Adductor insurance."}]}],"d3f":[{"label":"Learn the hinge","opt":false,"opts":[{"nm":"Dowel Hip Hinge","sets":2,"reps":"10","rest":"1:00","cue":"Broomstick touching head, back and hips. Keep all three in contact."},{"nm":"Wall Hip Hinge","sets":2,"reps":"10","rest":"1:00","cue":"Stand a foot from a wall, push the hips back to tap it."},{"nm":"Seated Good Morning (dowel)","sets":2,"reps":"10","rest":"1:00","cue":"Hinge from a bench — no balance required."}]},{"label":"Loaded hinge","opt":false,"opts":[{"nm":"Kettlebell Deadlift","sets":3,"reps":"8","rest":"2:00","cue":"Weight between the feet and higher off the floor than a barbell."},{"nm":"Dumbbell Romanian Deadlift","sets":3,"reps":"10","rest":"1:30","cue":"Dumbbells brush the thighs on the way down."},{"nm":"Trap-Bar Deadlift (light)","sets":3,"reps":"8","rest":"2:00","cue":"The friendliest bar there is for a first deadlift."},{"nm":"Rack Pull (above knee)","sets":3,"reps":"8","rest":"2:00","cue":"Short range to start. Lower the pins as the hinge improves."}]},{"label":"Glutes","opt":false,"opts":[{"nm":"Glute Bridge","sets":3,"reps":"12","rest":"1:00","cue":"Ribs down, squeeze for a second at the top."},{"nm":"Machine Hip Thrust","sets":3,"reps":"12","rest":"1:30","cue":"Load it without wrestling a barbell into place."},{"nm":"Cable Pull-Through","sets":3,"reps":"12","rest":"1:15","cue":"Hips back, then snap them through."}]},{"label":"Hamstrings","opt":false,"opts":[{"nm":"Seated Leg Curl","sets":3,"reps":"12","rest":"1:15","cue":"Controlled on the way back — that half does the most."},{"nm":"Lying Leg Curl","sets":3,"reps":"12","rest":"1:15","cue":"Point the toes to shift work off the calves."},{"nm":"Slider Hamstring Curl","sets":3,"reps":"8","rest":"1:15","cue":"Hips high, heels drag out and back."}]},{"label":"Low back","opt":false,"opts":[{"nm":"Back Extension (bodyweight)","sets":2,"reps":"12","rest":"1:15","cue":"Stop level with the legs."},{"nm":"Bird Dog","sets":3,"reps":"8 / side","rest":"1:00","cue":"Slow beats far. Hips stay level."},{"nm":"Reverse Hyper","sets":2,"reps":"15","rest":"1:15","cue":"Control the swing. Kind to a sore back."}]},{"label":"Calves","opt":false,"opts":[{"nm":"Seated Calf Raise","sets":3,"reps":"15","rest":"1:00","cue":"Full stretch at the bottom."},{"nm":"Standing Calf Raise","sets":3,"reps":"15","rest":"1:00","cue":"Pause top and bottom."}]},{"label":"Carry","opt":false,"opts":[{"nm":"Suitcase Carry","sets":3,"reps":"30 yd / side","rest":"1:00","cue":"One weight, walk tall, do not lean."},{"nm":"Farmer Carry","sets":3,"reps":"30 yd","rest":"1:00","cue":"Both hands. Grip catches up fast."},{"nm":"Front-Rack Carry","sets":3,"reps":"20 yd","rest":"1:00","cue":"Dumbbells at the shoulders. The core has nowhere to hide."}]}],"d3m":[{"label":"Warm the spine","opt":false,"opts":[{"nm":"Cat-Cow","sets":2,"reps":"10","rest":"0:20","cue":"Move slowly through every segment."},{"nm":"Bird Dog","sets":2,"reps":"8 / side","rest":"0:30","cue":"Hips level, slow beats far."},{"nm":"Pelvic Tilt","sets":2,"reps":"10","rest":"0:20","cue":"Learn to move the pelvis without moving the ribs."}]},{"label":"Hip flexors","opt":false,"opts":[{"nm":"Half-Kneeling Hip Flexor Stretch","sets":2,"reps":"45s / side","rest":"0:20","cue":"Tuck first, then lean."},{"nm":"Couch Stretch","sets":2,"reps":"45s / side","rest":"0:20","cue":"Rear foot on a bench, glute squeezed."},{"nm":"Standing Lunge Stretch","sets":2,"reps":"45s / side","rest":"0:20","cue":"Back knee straight, hips pressed forward."}]},{"label":"Hamstrings","opt":false,"opts":[{"nm":"Standing Hamstring Sweep","sets":2,"reps":"10 / side","rest":"0:20","cue":"Heel out, toes up, sweep the hands past the shin."},{"nm":"Supine Hamstring Stretch (strap)","sets":2,"reps":"45s / side","rest":"0:20","cue":"Leg straight up, gentle pull, no bouncing."},{"nm":"Seated Good Morning (dowel)","sets":2,"reps":"10","rest":"0:30","cue":"Flat back, hinge from a bench."},{"nm":"Jefferson Curl (very light)","sets":2,"reps":"6","rest":"0:45","cue":"Roll down one vertebra at a time with a light weight. Advanced — start empty-handed."}]},{"label":"Glutes","opt":false,"opts":[{"nm":"Figure-4 Stretch","sets":2,"reps":"45s / side","rest":"0:20","cue":"Pull the far thigh toward you."},{"nm":"Pigeon Stretch","sets":2,"reps":"45s / side","rest":"0:20","cue":"Hips square, front shin across."},{"nm":"Glute Bridge Hold","sets":3,"reps":"30s","rest":"0:30","cue":"Glutes on, low back quiet."}]},{"label":"Adductors & groin","opt":false,"opts":[{"nm":"Adductor Rock-Back","sets":2,"reps":"10 / side","rest":"0:20","cue":"Rock the hips back slowly."},{"nm":"Butterfly Stretch","sets":2,"reps":"45s","rest":"0:20","cue":"Hinge forward from the hips."},{"nm":"Copenhagen Plank (bent knee)","sets":2,"reps":"20s / side","rest":"0:30","cue":"Start bent-knee. Strength through range beats stretching alone."}]},{"label":"Core control","opt":false,"opts":[{"nm":"Dead Bug","sets":2,"reps":"8 / side","rest":"0:30","cue":"Low back glued down."},{"nm":"Side Plank (knees down)","sets":2,"reps":"20s / side","rest":"0:30","cue":"Stack the shoulders."},{"nm":"90/90 Breathing","sets":2,"reps":"6 breaths","rest":"0:30","cue":"Exhale fully, ribs down."}]}],"d4s":[{"label":"Vertical pull","opt":false,"opts":[{"nm":"Weighted Pull-Up","sets":4,"reps":"5–6","rest":"2:30","cue":"Full hang to chin over the bar."},{"nm":"Weighted Chin-Up","sets":4,"reps":"5–6","rest":"2:30","cue":"Supinated grip brings the biceps in."},{"nm":"Heavy Lat Pulldown","sets":4,"reps":"8","rest":"2:00","cue":"Use it when bodyweight is still the ceiling."},{"nm":"Assisted Pull-Up","sets":4,"reps":"8","rest":"2:00","cue":"Least assistance that lets you finish clean."}]},{"label":"Horizontal pull","opt":false,"opts":[{"nm":"Barbell Row (bent-over)","sets":4,"reps":"6–8","rest":"2:30","cue":"Torso at forty-five degrees, bar to the navel."},{"nm":"Pendlay Row","sets":4,"reps":"5","rest":"2:30","cue":"Dead stop on the floor every rep."},{"nm":"T-Bar Row","sets":4,"reps":"8","rest":"2:00","cue":"Chest up, drive the elbows past the ribs."},{"nm":"Chest-Supported Row","sets":4,"reps":"10","rest":"2:00","cue":"Pad removes the low back from the equation."}]},{"label":"Row volume","opt":false,"opts":[{"nm":"Chest-Supported Row","sets":3,"reps":"10–12","rest":"1:30","cue":"Pure mid-back, no cheating."},{"nm":"Seated Cable Row","sets":3,"reps":"10–12","rest":"1:30","cue":"Let the shoulder blades travel forward, then squeeze."},{"nm":"Seal Row","sets":3,"reps":"10","rest":"1:30","cue":"Face down on a bench. Zero body english."},{"nm":"Single-Arm Dumbbell Row","sets":3,"reps":"10 / arm","rest":"1:30","cue":"Full stretch to full retraction."}]},{"label":"Lat volume","opt":false,"opts":[{"nm":"Neutral-Grip Lat Pulldown","sets":3,"reps":"10–12","rest":"1:30","cue":"Elbows down and back, hold the squeeze."},{"nm":"Straight-Arm Pulldown","sets":3,"reps":"12–15","rest":"1:00","cue":"Isolates the lat without the arms."},{"nm":"Wide-Grip Lat Pulldown","sets":3,"reps":"12","rest":"1:30","cue":"Thumbs over the bar, pull with the elbows."}]},{"label":"Rear delts","opt":false,"opts":[{"nm":"Face Pull","sets":3,"reps":"15","rest":"1:00","cue":"High cable, rope to eye level."},{"nm":"Reverse Pec Deck","sets":3,"reps":"15","rest":"1:00","cue":"Constant tension, no momentum."},{"nm":"Rear-Delt Dumbbell Fly","sets":3,"reps":"15","rest":"1:00","cue":"Chest on an incline bench, light weight."}]},{"label":"Biceps","opt":false,"opts":[{"nm":"Barbell Curl","sets":3,"reps":"8–10","rest":"1:15","cue":"Elbows pinned to the ribs."},{"nm":"EZ-Bar Curl","sets":3,"reps":"10","rest":"1:15","cue":"Kinder on the wrists than a straight bar."},{"nm":"Cable Curl","sets":3,"reps":"12","rest":"1:00","cue":"Tension all the way through the top."}]},{"label":"Biceps stretch","opt":false,"opts":[{"nm":"Incline Dumbbell Curl","sets":3,"reps":"10–12","rest":"1:00","cue":"Arms behind the body — the growth position."},{"nm":"Hammer Curl","sets":3,"reps":"10–12","rest":"1:00","cue":"Brachialis and forearm. Thickness."},{"nm":"Preacher Curl","sets":3,"reps":"10","rest":"1:00","cue":"No swing available. Control the bottom."},{"nm":"Spider Curl","sets":3,"reps":"12","rest":"1:00","cue":"Chest on an incline, arms hanging straight down."}]},{"label":"Traps & grip","opt":true,"opts":[{"nm":"Barbell Shrug","sets":3,"reps":"12","rest":"1:00","cue":"Straight up and down, pause at the top."},{"nm":"Farmer's Carry","sets":3,"reps":"40 yd","rest":"1:00","cue":"As heavy as you can hold."},{"nm":"Plate Pinch Hold","sets":3,"reps":"30s","rest":"0:45","cue":"Two smooth plates, fingers only."}]}],"d4a":[{"label":"Explosive pull","opt":false,"opts":[{"nm":"Explosive Pull-Up (chest to bar)","sets":5,"reps":"3","rest":"1:30","cue":"Accelerate all the way up. Stop when speed drops."},{"nm":"Kettlebell High Pull","sets":5,"reps":"5","rest":"1:15","cue":"Hips first, elbows finish it."},{"nm":"Hang Power Clean","sets":5,"reps":"3","rest":"2:00","cue":"Violent hip extension, fast elbows. Technique first."},{"nm":"Band-Resisted Pull-Up","sets":4,"reps":"5","rest":"1:30","cue":"Band adds tension at the top where you are strongest."}]},{"label":"Single-arm row","opt":false,"opts":[{"nm":"Single-Arm Dumbbell Row","sets":4,"reps":"8 / arm","rest":"1:30","cue":"Let the shoulder blade travel."},{"nm":"Meadows Row","sets":3,"reps":"8 / arm","rest":"1:15","cue":"Landmine, staggered stance. Big stretch on the lat."},{"nm":"Landmine Row","sets":3,"reps":"8 / arm","rest":"1:15","cue":"Angled path hits lat and rear delt together."},{"nm":"Single-Arm Cable Row","sets":3,"reps":"10 / arm","rest":"1:15","cue":"Rotate slightly into the stretch."}]},{"label":"Bodyweight pull","opt":false,"opts":[{"nm":"Chin-Up","sets":3,"reps":"6–8","rest":"1:30","cue":"Two-second lower on every rep."},{"nm":"Pull-Up","sets":3,"reps":"6–8","rest":"1:30","cue":"Full hang each rep. No kipping."},{"nm":"Feet-Elevated Inverted Row","sets":3,"reps":"10–12","rest":"1:15","cue":"Body rigid, chest to the bar, pause."},{"nm":"Ring Row","sets":3,"reps":"12","rest":"1:15","cue":"Rotate the rings out as you pull."}]},{"label":"Horizontal volume","opt":false,"opts":[{"nm":"Feet-Elevated Inverted Row","sets":3,"reps":"10–12","rest":"1:15","cue":"Pause at the top of every rep."},{"nm":"Seated Cable Row","sets":3,"reps":"12","rest":"1:15","cue":"Squeeze and hold for a beat."},{"nm":"Chest-Supported Row","sets":3,"reps":"12","rest":"1:15","cue":"Strict, no momentum."}]},{"label":"Carry & grip","opt":false,"opts":[{"nm":"Farmer's Carry","sets":4,"reps":"40 yd","rest":"1:30","cue":"Tall posture, shoulders packed down."},{"nm":"Suitcase Carry","sets":3,"reps":"40 yd / side","rest":"1:00","cue":"Do not lean toward the weight."},{"nm":"Plate Pinch Hold","sets":3,"reps":"30s","rest":"0:45","cue":"Grip is the last link in every pull."},{"nm":"Dead Hang","sets":3,"reps":"30s","rest":"1:00","cue":"Decompresses the shoulders and builds grip."}]},{"label":"Shoulder health","opt":false,"opts":[{"nm":"Face Pull + External Rotation","sets":3,"reps":"15","rest":"0:45","cue":"Earns you every heavy press you will do."},{"nm":"Prone Y-T-W Raise","sets":3,"reps":"10","rest":"0:45","cue":"Light. Quality only."},{"nm":"Band Pull-Apart","sets":3,"reps":"20","rest":"0:45","cue":"Straight arms, slow return."}]},{"label":"Arms","opt":false,"opts":[{"nm":"Hammer Curl","sets":3,"reps":"10","rest":"0:45","cue":"Brachialis and forearm in one movement."},{"nm":"Chin-Up Iso Hold","sets":3,"reps":"20s","rest":"1:00","cue":"Chin over the bar, hold. Grip and biceps together."},{"nm":"Zottman Curl","sets":3,"reps":"10","rest":"0:45","cue":"Curl up supinated, lower pronated."}]},{"label":"Rotational core","opt":true,"opts":[{"nm":"Cable Woodchop","sets":3,"reps":"12 / side","rest":"1:00","cue":"Rotate from the hips."},{"nm":"Med-Ball Rotational Throw","sets":4,"reps":"4 / side","rest":"1:00","cue":"Turn the back hip through."},{"nm":"Pallof Press","sets":3,"reps":"10 / side","rest":"0:45","cue":"Anti-rotation. Ribs down."}]}],"d4f":[{"label":"Vertical pull","opt":false,"opts":[{"nm":"Lat Pulldown","sets":3,"reps":"10","rest":"1:30","cue":"Bar to the collarbone, elbows down rather than back."},{"nm":"Assisted Pull-Up","sets":3,"reps":"8","rest":"1:30","cue":"Least assistance that lets you finish clean."},{"nm":"Neutral-Grip Pulldown","sets":3,"reps":"10","rest":"1:30","cue":"Palms facing — usually the most comfortable grip to start with."},{"nm":"Straight-Arm Pulldown","sets":3,"reps":"12","rest":"1:00","cue":"Teaches you to feel the lat before you can do a pull-up."}]},{"label":"Horizontal pull","opt":false,"opts":[{"nm":"Seated Cable Row","sets":3,"reps":"10","rest":"1:30","cue":"Let the shoulder blades travel forward, then squeeze them back."},{"nm":"Chest-Supported Row","sets":3,"reps":"12","rest":"1:15","cue":"The pad takes the lower back out of it entirely."},{"nm":"Machine Row","sets":3,"reps":"12","rest":"1:15","cue":"Simple, safe, and easy to add weight to each week."}]},{"label":"Row volume","opt":false,"opts":[{"nm":"Inverted Row (bar set high)","sets":3,"reps":"8","rest":"1:15","cue":"The higher the bar, the easier."},{"nm":"Single-Arm Dumbbell Row","sets":3,"reps":"10 / arm","rest":"1:15","cue":"Knee and hand on a bench for support."},{"nm":"Ring or TRX Row","sets":3,"reps":"10","rest":"1:15","cue":"Walk the feet forward to make it harder."}]},{"label":"Rear delts","opt":false,"opts":[{"nm":"Face Pull","sets":3,"reps":"15","rest":"1:00","cue":"Rope to the eyes, thumbs back at the finish."},{"nm":"Reverse Pec Deck","sets":3,"reps":"15","rest":"1:00","cue":"Light and controlled."},{"nm":"Band Pull-Apart","sets":3,"reps":"20","rest":"0:45","cue":"Do these anywhere, any day."}]},{"label":"Biceps","opt":false,"opts":[{"nm":"Dumbbell Curl","sets":2,"reps":"12","rest":"1:00","cue":"Elbows still, no swinging."},{"nm":"Cable Curl","sets":2,"reps":"12","rest":"1:00","cue":"Tension all the way through the top."},{"nm":"Hammer Curl","sets":2,"reps":"12","rest":"1:00","cue":"Neutral grip is easier on the wrists."},{"nm":"Preacher Curl (machine)","sets":2,"reps":"12","rest":"1:00","cue":"No way to cheat it."}]},{"label":"Grip & carry","opt":true,"opts":[{"nm":"Farmer Carry","sets":3,"reps":"30 yd","rest":"1:00","cue":"Heavy enough that the last steps are hard."},{"nm":"Dead Hang","sets":3,"reps":"20s","rest":"1:00","cue":"Builds grip and decompresses the shoulders."},{"nm":"Plate Pinch Hold","sets":3,"reps":"20s","rest":"0:45","cue":"Fingers only. Grip is the last link in every pull."}]},{"label":"Core","opt":false,"opts":[{"nm":"Plank","sets":3,"reps":"20–30s","rest":"0:45","cue":"Short and solid."},{"nm":"Bird Dog","sets":3,"reps":"8 / side","rest":"0:45","cue":"Opposite arm and leg."},{"nm":"Suitcase Carry","sets":3,"reps":"30 yd / side","rest":"0:45","cue":"Anti-lean. The obliques earn their keep."}]}],"d4m":[{"label":"Decompress","opt":false,"opts":[{"nm":"Dead Hang","sets":3,"reps":"20–30s","rest":"0:45","cue":"Just hang. Grip and shoulders both benefit."},{"nm":"Passive Bar Hang (feet supported)","sets":3,"reps":"30s","rest":"0:45","cue":"Toes on a box takes weight off if a full hang is too much."},{"nm":"Bench Lat Stretch","sets":2,"reps":"45s / side","rest":"0:20","cue":"Sink the chest toward the floor and breathe."}]},{"label":"Mid-back","opt":false,"opts":[{"nm":"Thread the Needle","sets":2,"reps":"8 / side","rest":"0:20","cue":"Reach one arm under the other and rotate."},{"nm":"Quadruped Thoracic Rotation","sets":2,"reps":"8 / side","rest":"0:20","cue":"Hand behind the head, elbow to the ceiling."},{"nm":"Open Book","sets":2,"reps":"8 / side","rest":"0:20","cue":"Knees stacked, follow the hand with your eyes."},{"nm":"Thoracic Extension over Foam Roller","sets":2,"reps":"10","rest":"0:20","cue":"Extend over the roller slowly."}]},{"label":"Shoulder health","opt":false,"opts":[{"nm":"Band Face Pull + External Rotation","sets":2,"reps":"15","rest":"0:30","cue":"Pull to the eyes, then rotate back and up."},{"nm":"Prone Y-T-W","sets":2,"reps":"8 each","rest":"0:30","cue":"No weight needed."},{"nm":"Band External Rotation","sets":2,"reps":"15 / side","rest":"0:30","cue":"Elbow at the side, slow and controlled."}]},{"label":"Wrists & elbows","opt":false,"opts":[{"nm":"Wrist Rocks","sets":2,"reps":"10 each way","rest":"0:20","cue":"Palms down then up, rock gently."},{"nm":"Wrist Extensor Stretch","sets":2,"reps":"30s / side","rest":"0:20","cue":"Arm straight, gently pull the hand down."},{"nm":"Forearm Pronation-Supination","sets":2,"reps":"12 / side","rest":"0:20","cue":"Light dumbbell held at one end, rotate slowly."}]},{"label":"Neck","opt":false,"opts":[{"nm":"Chin Tuck","sets":2,"reps":"10","rest":"0:20","cue":"Hold three seconds. Undoes hours of looking down."},{"nm":"Upper Trap Stretch","sets":2,"reps":"30s / side","rest":"0:20","cue":"Ear toward the shoulder."},{"nm":"Levator Scapulae Stretch","sets":2,"reps":"30s / side","rest":"0:20","cue":"Nose toward the armpit, gentle pressure."}]},{"label":"Grip","opt":true,"opts":[{"nm":"Finger Extension (band)","sets":2,"reps":"15","rest":"0:20","cue":"Band around the fingers, open the hand. Balances all the gripping."},{"nm":"Plate Pinch Hold","sets":2,"reps":"20s","rest":"0:30","cue":"Fingers only, smooth plates."}]}]};
 
 const CUSTOM_DAY = {id:'custom', title:'Custom', short:'Custom', focus:'Your own build'};
 
@@ -591,7 +903,7 @@ function dayTag(o){ return o.day.id==='custom' ? 'Your workout' : o.day.short; }
 
 /* ══════════════════════════════════════ state ═══════════════════════════ */
 const KEY = 'splitledger.v1';
-const blank = { units:'lb', theme:'auto', scheduled:{}, sessions:[], custom:[], tomb:[], draft:null };
+const blank = { units:'lb', theme:'auto', palette:'neutral', corners:'soft', scheduled:{}, sessions:[], custom:[], favs:[], weights:[], profile:null, tomb:[], draft:null };
 let S = load();
 
 function load(){
@@ -652,7 +964,27 @@ function toast(msg){
 function svgCheck(){ return '<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>'; }
 function svgTrash(){ return '<svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>'; }
 function svgX(){ return '<svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>'; }
-function styleName(st){ return st==='strength' ? 'Strength' : 'Athletic'; }
+function svgPlay(){ return '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>'; }
+
+/* A pre-filled video search rather than one hard-coded clip: search results stay
+   valid when individual videos are taken down or renamed. */
+function demoUrl(nm){
+  return 'https://www.youtube.com/results?search_query=' +
+         encodeURIComponent(String(nm).replace(/\s*\(.*?\)\s*/g,' ').trim() + ' exercise proper form');
+}
+function demoLink(nm){
+  return `<a class="demo" href="${demoUrl(nm)}" target="_blank" rel="noopener noreferrer"
+    aria-label="Watch how to do ${esc(nm)}" title="How to do this">${svgPlay()}</a>`;
+}
+const TRACKS = [
+  {id:'strength',   name:'Strength',   sfx:'s', blurb:'Barbells and machines any commercial gym has.'},
+  {id:'athletic',   name:'Athletic',   sfx:'a', blurb:'Power, single-leg work and change of direction.'},
+  {id:'foundation', name:'Foundation', sfx:'f', blurb:'Machines and dumbbells — the place to start, or to come back to.'},
+  {id:'mobility',   name:'Mobility',   sfx:'m', blurb:'Range of motion and joint control. No load needed.'}
+];
+function styleName(st){ const t = TRACKS.find(x=>x.id===st); return t ? t.name : 'Strength'; }
+function tcls(st){ return 't-' + (TRACKS.some(x=>x.id===st) ? st : 'strength'); }
+function tsfx(st){ const t = TRACKS.find(x=>x.id===st); return t ? t.sfx : 's'; }
 function volumeOf(sess){
   let v=0;
   Object.values(sess.entries||{}).forEach(sets => sets.forEach(s=>{
@@ -661,6 +993,17 @@ function volumeOf(sess){
   return Math.round(v);
 }
 function sessOn(date){ return S.sessions.find(s=>s.date===date); }
+function isFav(id){ return (S.favs||[]).includes(id); }
+function toggleFav(id){
+  S.favs = S.favs || [];
+  const i = S.favs.indexOf(id);
+  if(i>=0) S.favs.splice(i,1); else S.favs.push(id);
+  saveNow();
+  return i < 0;
+}
+function svgStar(filled){
+  return `<svg viewBox="0 0 24 24" style="${filled?'fill:currentColor':'fill:none'}"><path d="M12 3.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.6 9.7l5.8-.8z"/></svg>`;
+}
 function sessName(s){ const o = getOpt(s.workoutId); return (o && o.name) || s.name || 'Session'; }
 function fmtVol(v){ return v>=1000 ? (v/1000).toFixed(v>=10000?0:1)+'k' : String(v); }
 
@@ -699,7 +1042,8 @@ function viewToday(){
 
   const strip = wk.map(d=>{
     const dt = fromIso(d), s = S.scheduled[d], o = s?getOpt(s.workoutId):null, fin = sessOn(d);
-    const cls = ['ws', fin?'done':(o?'has':''), o&&o.style==='athletic'?'ath':'', d===t?'today':''].filter(Boolean).join(' ');
+    const fo = fin ? getOpt(fin.workoutId) : null;
+    const cls = ['ws', fin?'done':(o?'has':''), (fo||o)?tcls((fo||o).style):'', d===t?'today':''].filter(Boolean).join(' ');
     return `<button class="${cls}" data-day="${d}"><span class="d">${DOW[dt.getDay()][0]}</span><span class="n">${dt.getDate()}</span><span class="dot"></span></button>`;
   }).join('');
 
@@ -719,11 +1063,11 @@ function viewToday(){
       </div>
     </div>`;
   } else if(opt){
-    card = `<div class="card session-card ${opt.style==='athletic'?'ath':''}">
+    card = `<div class="card session-card ${tcls(opt.style)}">
       <div class="sc-head">
         <div style="flex:1">
           <div class="sc-meta" style="margin-bottom:6px">
-            <span class="pill ${opt.style}">${styleName(opt.style)}</span>
+            <span class="pill track">${styleName(opt.style)}</span>
             <span class="pill">${esc(dayTag(opt))}</span>
           </div>
           <h2>${esc(opt.name)}</h2>
@@ -765,7 +1109,7 @@ function viewToday(){
     const dr = getOpt(S.draft.workoutId);
     const mins = Math.round((S.draft.elapsed||0)/60);
     const dn = Object.values(S.draft.entries).reduce((a,arr)=>a+arr.filter(x=>x.done).length,0);
-    resume = `<div class="card session-card ${dr.style==='athletic'?'ath':''}" style="margin-top:0">
+    resume = `<div class="card session-card ${tcls(dr.style)}" style="margin-top:0">
       <div class="sc-head"><h2 style="font-size:17px">In progress · ${esc(dr.name)}</h2><span class="pill">${mins}m · ${dn} sets</span></div>
       <button class="btn" id="resumeBtn">Resume session</button></div>`;
   }
@@ -824,7 +1168,7 @@ function upcoming(){
     const s = S.scheduled[d], o = getOpt(s.workoutId); if(!o) return '';
     return `<div class="hitem">
       <button class="hitem-main" data-day="${d}">
-        <span class="rail ${o.style==='athletic'?'ath':''}"></span>
+        <span class="rail ${tcls(o.style)}"></span>
         <span class="bd"><b>${esc(o.name)}</b><i>${relDay(d)}${s.time?' · '+fmtTime(s.time):''}</i></span>
         <span class="rt">~${o.mins}m</span></button>
       <button class="hitem-x" data-unschedule="${d}" aria-label="Remove ${esc(o.name)} from the calendar">${svgTrash()}</button>
@@ -843,10 +1187,10 @@ function viewCal(){
     const key = iso(d), out = d.getMonth()!==m;
     const sch = S.scheduled[key], fin = sessOn(key);
     const o = sch?getOpt(sch.workoutId):null;
-    let dots='';
-    if(fin) dots = '<i class="dot-done"></i>';
-    else if(o) dots = `<i class="dot-${o.style==='athletic'?'ath':'str'}"></i>`;
-    cells += `<button class="cell ${out?'out':''} ${key===t?'today':''}" data-day="${key}">
+    const done = fin ? getOpt(fin.workoutId) : null;
+    const track = done ? tcls(done.style) : (o ? tcls(o.style) : '');
+    const dots = (!fin && o) ? `<i class="tdot ${tcls(o.style)}"></i>` : '';
+    cells += `<button class="cell ${out?'out':''} ${fin?'done':''} ${track} ${key===t?'today':''}" data-day="${key}">
       <span class="n">${d.getDate()}</span><span class="dots">${dots}</span></button>`;
   }
   const monthSess = S.sessions.filter(s=>s.date.slice(0,7)===`${y}-${pad(m+1)}`);
@@ -862,9 +1206,8 @@ function viewCal(){
   <div class="dow">${DOW.map(d=>`<span>${d[0]}</span>`).join('')}</div>
   <div class="grid">${cells}</div>
   <div class="legend">
-    <span><b class="dot-str"></b>Strength planned</span>
-    <span><b class="dot-ath"></b>Athletic planned</span>
-    <span><b class="dot-done"></b>Completed</span>
+    ${TRACKS.map(t=>`<span><b class="tdot ${tcls(t.id)}"></b>${t.name}</span>`).join('')}
+    <span><b class="dot-done"></b>Completed days glow</span>
   </div>
   <span class="eyebrow">${MON[m]} summary</span>
   <div class="stats">
@@ -877,44 +1220,45 @@ function viewCal(){
 }
 
 /* ══════════════════════════════════════ library ═════════════════════════ */
+function optCard(o, badge){
+  return `<div class="opt-wrap ${tcls(o.style)}">
+    <button class="opt ${tcls(o.style)}" data-open="${o.id}">
+      <div class="opt-top">
+        <h4>${esc(o.name)}</h4>
+        <span class="pill track">${styleName(o.style)}</span>
+      </div>
+      ${o.blurb?`<p>${esc(o.blurb)}</p>`:(o.focus?`<p>${esc(o.focus)}</p>`:'')}
+      <div class="opt-foot">
+        <span class="pill">~${o.mins} min</span>
+        <span class="pill">${o.ex.length} movements</span>
+        ${o.gear?`<span class="pill">${esc(o.gear)}</span>`:''}
+        ${badge?`<span class="badge">${esc(badge)}</span>`:''}
+      </div>
+    </button>
+    <button class="opt-fav" data-fav="${o.id}" aria-pressed="${isFav(o.id)}"
+      aria-label="${isFav(o.id)?'Remove':'Add'} ${esc(o.name)} ${isFav(o.id)?'from':'to'} favourites">${svgStar(isFav(o.id))}</button>
+  </div>`;
+}
 function viewLib(){
-  return `<span class="eyebrow">The split · full body</span>
+  const favs = (S.favs||[]).map(getOpt).filter(Boolean);
+  return `
+  ${favs.length ? `<span class="eyebrow">Favourites</span>
+    ${favs.map(o=>optCard(o, o.custom ? (o.rolled?'Rolled':'Built by you') : null)).join('')}` : ''}
+  <span class="eyebrow">The split · full body</span>
   <p style="color:var(--muted);font-size:13.5px;margin:0 2px 20px;line-height:1.55">
     Every major muscle is covered: two lower days (squat pattern and hinge pattern) and two upper days (push and pull).
-    Each has a <b style="color:var(--strength)">Strength</b> version built on barbells and machines any commercial gym has,
-    and an <b style="color:var(--athletic)">Athletic</b> version built on power, single-leg work, and change of direction.
+    Each comes in four versions — <b style="color:var(--strength)">Strength</b> on barbells and machines,
+    <b style="color:var(--athletic)">Athletic</b> for power and change of direction,
+    <b style="color:var(--foundation)">Foundation</b> if you are starting out or coming back,
+    and <b style="color:var(--mobility)">Mobility</b> for the range of motion the rest of it demands.
   </p>
   ${PROGRAM.map(d=>`
     <div class="day-block">
       <div class="day-hd"><div style="flex:1"><h3>${esc(d.title)}</h3><p>${esc(d.focus)}</p></div></div>
-      ${d.options.map(o=>`
-        <button class="opt ${o.style==='athletic'?'ath':''}" data-open="${o.id}">
-          <div class="opt-top">
-            <h4>${esc(o.name)}</h4>
-            <span class="pill ${o.style}">${styleName(o.style)}</span>
-          </div>
-          <p>${esc(o.blurb)}</p>
-          <div class="opt-foot">
-            <span class="pill">~${o.mins} min</span>
-            <span class="pill">${o.ex.length} movements</span>
-            <span class="pill">${esc(o.gear)}</span>
-          </div>
-        </button>`).join('')}
+      ${d.options.map(o=>optCard(o)).join('')}
     </div>`).join('')}
-  <span class="eyebrow">Your workouts</span>
-  ${(S.custom||[]).length ? (S.custom||[]).map(c=>`
-    <button class="opt ${c.style==='athletic'?'ath':''}" data-open="${c.id}">
-      <div class="opt-top">
-        <h4>${esc(c.name)}</h4>
-        <span class="pill ${c.style}">${styleName(c.style)}</span>
-      </div>
-      ${c.focus?`<p>${esc(c.focus)}</p>`:''}
-      <div class="opt-foot">
-        <span class="pill">~${c.mins} min</span>
-        <span class="pill">${c.ex.length} movements</span>
-        ${c.gear?`<span class="pill">${esc(c.gear)}</span>`:''}
-      </div>
-    </button>`).join('')
+  <span class="eyebrow">Your workouts${(S.custom||[]).length?` · ${S.custom.length}`:''}</span>
+  ${(S.custom||[]).length ? (S.custom||[]).map(c=>optCard(c, c.rolled?'Rolled':'Built by you')).join('')
   : `<p style="color:var(--muted);font-size:13.5px;margin:0 2px 12px;line-height:1.55">
       Build your own session — name it, pick a track, and list your movements with sets, reps, and rest.
       It shows up in the calendar picker and logs exactly like the built-in workouts.</p>`}
@@ -1037,7 +1381,21 @@ function viewProg(){
     <div class="card" style="padding:26px 18px">
       <div class="empty">No sessions logged yet.<br>Finish a workout and your volume, personal bests, and history will build here.</div>
       <button class="btn ghost" data-goto="lib">Browse the workouts</button>
-    </div>`;
+    </div>
+  <span class="eyebrow">Body</span>
+  <div class="stats" style="grid-template-columns:1fr 1fr">
+    <button class="stat" data-openbody style="text-align:left">
+      <div class="k">Body weight</div>
+      <div class="v">${bodyWeight() ? bodyWeight() : '—'}<small> ${bodyWeight()?S.units:''}</small></div>
+      <div class="k" style="margin-top:4px;font-size:9px">${(S.weights||[]).length} entr${(S.weights||[]).length===1?'y':'ies'} · tap to log</div>
+    </button>
+    <button class="stat" data-openprofile style="text-align:left">
+      <div class="k">Starting weights</div>
+      <div class="v" style="font-size:19px">${S.profile && S.profile.weight ? 'Set up' : 'Set up'}</div>
+      <div class="k" style="margin-top:4px;font-size:9px">${S.profile && S.profile.weight ? 'height · weight · experience' : 'get suggested loads'}</div>
+    </button>
+  </div>
+`;
   }
   const all = [...S.sessions].sort((a,b)=>a.date<b.date?1:-1);
   const totalVol = all.reduce((a,s)=>a+s.volume,0);
@@ -1051,15 +1409,35 @@ function viewProg(){
 
   const moves = movementStats();
 
-  const styleCount = {strength:0, athletic:0};
-  S.sessions.forEach(s=>{ const o=getOpt(s.workoutId); if(o) styleCount[o.style]++; });
+  const styleCount = {};
+  TRACKS.forEach(t=>styleCount[t.id]=0);
+  S.sessions.forEach(s=>{ const o=getOpt(s.workoutId); if(o && styleCount[o.style]!==undefined) styleCount[o.style]++; });
 
   return `<span class="eyebrow">All time</span>
-  <div class="stats">
+  <div class="bigstat" style="margin-bottom:10px">
+    <div class="k">Total lifted · all time</div>
+    <div class="v">${totalVol.toLocaleString()}<small> ${S.units}</small></div>
+    <p>Every completed set you have logged, weight times reps, added up since ${MON[fromIso(all[all.length-1].date).getMonth()]} ${fromIso(all[all.length-1].date).getFullYear()}.</p>
+  </div>
+  <div class="stats" style="grid-template-columns:repeat(3,1fr)">
     <div class="stat"><div class="k">Sessions</div><div class="v">${all.length}</div></div>
     <div class="stat"><div class="k">Hours</div><div class="v">${(totalMin/60).toFixed(1)}</div></div>
-    <div class="stat"><div class="k">Volume</div><div class="v">${fmtVol(totalVol)}<small> ${S.units}</small></div></div>
-    <div class="stat"><div class="k">Str / Ath</div><div class="v">${styleCount.strength}<small>/${styleCount.athletic}</small></div></div>
+    <div class="stat"><div class="k">By track</div><div class="v" style="font-size:17px">${TRACKS.map(t=>styleCount[t.id]).join(' · ')}</div>
+      <div class="k" style="margin-top:4px;font-size:9px">${TRACKS.map(t=>t.name.slice(0,3).toUpperCase()).join(' · ')}</div></div>
+  </div>
+
+  <span class="eyebrow">Body</span>
+  <div class="stats" style="grid-template-columns:1fr 1fr">
+    <button class="stat" data-openbody style="text-align:left">
+      <div class="k">Body weight</div>
+      <div class="v">${bodyWeight() ? bodyWeight() : '—'}<small> ${bodyWeight()?S.units:''}</small></div>
+      <div class="k" style="margin-top:4px;font-size:9px">${(S.weights||[]).length} entr${(S.weights||[]).length===1?'y':'ies'} · tap to log</div>
+    </button>
+    <button class="stat" data-openprofile style="text-align:left">
+      <div class="k">Starting weights</div>
+      <div class="v" style="font-size:19px">${S.profile && S.profile.weight ? 'Set up' : 'Set up'}</div>
+      <div class="k" style="margin-top:4px;font-size:9px">${S.profile && S.profile.weight ? 'height · weight · experience' : 'get suggested loads'}</div>
+    </button>
   </div>
 
   <span class="eyebrow">Weekly volume · last 8 weeks</span>
@@ -1087,7 +1465,7 @@ function viewProg(){
     const o = getOpt(s.workoutId);
     return `<div class="hitem">
       <button class="hitem-main" data-hist="${s.id}">
-        <span class="rail ${o&&o.style==='athletic'?'ath':''}"></span>
+        <span class="rail ${o?tcls(o.style):''}"></span>
         <span class="bd"><b>${esc(sessName(s))}</b><i>${relDay(s.date)} · ${s.setCount} sets</i></span>
         <span class="rt">${s.durationMin}m<br>${fmtVol(s.volume)} ${S.units}</span></button>
       <button class="hitem-x" data-delsess="${s.id}" aria-label="Delete this session">${svgTrash()}</button>
@@ -1128,7 +1506,7 @@ function openDay(date){
       <div style="margin-bottom:12px">
         <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--muted);margin-bottom:6px">${esc(d.title.toUpperCase())}</div>
         ${d.options.map(o=>`
-          <button class="pick ${o.style==='athletic'?'ath':''}" data-pick="${o.id}" aria-pressed="${pickSel===o.id}">
+          <button class="pick ${tcls(o.style)}" data-pick="${o.id}" aria-pressed="${pickSel===o.id}">
             <span class="t"><b>${esc(o.name)}</b><i>${styleName(o.style)} · ~${o.mins} min · ${o.ex.length} movements</i></span>
             <span class="check"></span>
           </button>`).join('')}
@@ -1136,7 +1514,7 @@ function openDay(date){
       ${(S.custom||[]).length ? `<div style="margin-bottom:12px">
         <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--muted);margin-bottom:6px">YOUR WORKOUTS</div>
         ${(S.custom||[]).map(c=>`
-          <button class="pick ${c.style==='athletic'?'ath':''}" data-pick="${c.id}" aria-pressed="${pickSel===c.id}">
+          <button class="pick ${tcls(c.style)}" data-pick="${c.id}" aria-pressed="${pickSel===c.id}">
             <span class="t"><b>${esc(c.name)}</b><i>${styleName(c.style)} · ~${c.mins} min · ${c.ex.length} movements</i></span>
             <span class="check"></span>
           </button>`).join('')}
@@ -1164,7 +1542,10 @@ function openWorkout(id){
       <button class="icon-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     </div>
     <div class="sc-meta" style="margin-bottom:12px">
-      <span class="pill ${o.style}">${styleName(o.style)}</span>
+      <span class="pill ${tcls(o.style)} track">${styleName(o.style)}</span>
+      <button class="pill" data-fav="${o.id}" aria-pressed="${isFav(o.id)}"
+        style="cursor:pointer;${isFav(o.id)?'color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,transparent)':''}">
+        <span style="width:11px;height:11px;display:inline-block">${svgStar(isFav(o.id))}</span>${isFav(o.id)?'Favourite':'Add to favourites'}</button>
       <span class="pill">~${o.mins} min</span>
       <span class="pill">${esc(o.gear)}</span>
     </div>
@@ -1174,7 +1555,10 @@ function openWorkout(id){
       <div class="ex">
         <span class="idx">${pad(i+1)}</span>
         <span class="body"><span class="nm">${esc(x.nm)}</span><span class="cue">${esc(x.cue)}</span></span>
-        <span class="rx">${x.sets} × ${esc(x.reps)}<span class="rest">rest ${esc(x.rest)}</span></span>
+        <span class="ex-actions">
+          <span class="rx">${x.sets} × ${esc(x.reps)}<span class="rest">rest ${esc(x.rest)}</span></span>
+          ${demoLink(x.nm)}
+        </span>
       </div>`).join('')}</div>
     <div class="row" style="margin-top:18px">
       <button class="btn ghost" data-schedpick="${o.id}" style="flex:0 0 44%">Schedule</button>
@@ -1231,6 +1615,20 @@ function openSettings(){
         <button class="chip" data-pick-theme="light" aria-pressed="${S.theme==='light'}">Light</button>
         <button class="chip" data-pick-theme="dark" aria-pressed="${S.theme==='dark'}">Dark</button>
       </div></label>
+    <label class="fld"><span class="lb">Colour</span>
+      <div class="swatches">${PALETTES.map(pl=>`
+        <button class="swatch" data-palette="${pl.id}" aria-pressed="${(S.palette||'neutral')===pl.id}"
+          aria-label="${pl.name} — ${pl.note}">
+          <span class="sw-chips" data-pv="${pl.id}"><i></i><i></i><i></i><i></i></span>
+          <span class="sw-name">${pl.name}</span>
+        </button>`).join('')}
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin:8px 0 0">${esc((PALETTES.find(x=>x.id===(S.palette||'neutral'))||PALETTES[0]).note)}</p></label>
+    <label class="fld"><span class="lb">Corners</span>
+      <div class="chip-row">
+        <button class="chip" data-corners="soft" aria-pressed="${(S.corners||'soft')==='soft'}">Rounded</button>
+        <button class="chip" data-corners="sharp" aria-pressed="${S.corners==='sharp'}">Sharp</button>
+      </div></label>
     <span class="lb" style="font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px">Your data</span>
     <p style="font-size:13px;color:var(--muted);margin:0 0 12px;line-height:1.5">
       Everything is stored on this device, in this browser. It survives closing the tab, quitting the browser, and restarting the phone.
@@ -1270,9 +1668,8 @@ function openBuilder(id){
     <label class="fld"><span class="lb">Name</span>
       <input type="text" data-b="name" value="${esc(EDIT.name)}" placeholder="Saturday Arms" autocomplete="off"></label>
     <label class="fld"><span class="lb">Track</span>
-      <div class="chip-row">
-        <button class="chip" data-bstyle="strength" aria-pressed="${EDIT.style==='strength'}">Strength</button>
-        <button class="chip" data-bstyle="athletic" aria-pressed="${EDIT.style==='athletic'}">Athletic</button>
+      <div class="chip-row">${TRACKS.map(t=>`
+        <button class="chip" data-bstyle="${t.id}" aria-pressed="${EDIT.style===t.id}">${t.name}</button>`).join('')}
       </div>
       <p style="font-size:12px;color:var(--muted);margin:8px 0 0">Sets the colour it gets on the calendar.</p></label>
     <div class="row">
@@ -1331,7 +1728,7 @@ function saveBuilder(){
   if(!ex.length){ toast('Add at least one movement.'); return; }
   const rec = {
     id: EDIT.id || 'c'+Date.now().toString(36)+Math.floor(Math.random()*1e3).toString(36),
-    style: EDIT.style==='athletic' ? 'athletic' : 'strength',
+    style: TRACKS.some(t=>t.id===EDIT.style) ? EDIT.style : 'strength',
     name, focus:(EDIT.focus||'').trim(), gear:(EDIT.gear||'').trim(),
     mins: +EDIT.mins > 0 ? Math.round(+EDIT.mins) : estimateMins(ex),
     blurb:(EDIT.focus||'').trim(), ex
@@ -1351,6 +1748,7 @@ function deleteBuilder(id){
   if(!confirm(msg)) return;
   planned.forEach(d=>delete S.scheduled[d]);
   S.custom = S.custom.filter(x=>x.id!==id);
+  S.favs = (S.favs||[]).filter(f=>f!==id);
   remember_deleted(id);
   if(S.draft && S.draft.workoutId===id) S.draft = null;
   EDIT = null; saveNow(); closeSheet(); render();
@@ -1362,7 +1760,7 @@ function deleteBuilder(id){
 let ROLLQ = {day:'d1', style:'strength'}, ROLL = null;
 
 function rollWorkout(dayId, style){
-  const key = dayId + (style==='athletic' ? 'a' : 's');
+  const key = dayId + tsfx(style);
   const slots = POOLS[key]; if(!slots) return null;
   const day = PROGRAM.find(d=>d.id===dayId);
   const ex = [];
@@ -1377,7 +1775,9 @@ function rollWorkout(dayId, style){
     style, ex, dayId,
     name: `${day.short} Roll · ${MON[now.getMonth()].slice(0,3)} ${now.getDate()}`,
     focus: day.focus,
-    gear: style==='strength' ? 'Commercial gym' : 'Mixed equipment',
+    gear: style==='strength' ? 'Commercial gym'
+        : style==='foundation' ? 'Machines · dumbbells'
+        : style==='mobility' ? 'Mat · band' : 'Mixed equipment',
     mins: estimateMins(ex)
   };
 }
@@ -1398,20 +1798,17 @@ function openRoller(){
       </div>
       <p style="font-size:12px;color:var(--muted);margin:8px 0 0">${esc(day.title)} — ${esc(day.focus)}</p></label>
     <label class="fld"><span class="lb">Track</span>
-      <div class="chip-row">
-        <button class="chip" data-rstyle="strength" aria-pressed="${ROLLQ.style==='strength'}">Strength</button>
-        <button class="chip" data-rstyle="athletic" aria-pressed="${ROLLQ.style==='athletic'}">Athletic</button>
+      <div class="chip-row">${TRACKS.map(t=>`
+        <button class="chip" data-rstyle="${t.id}" aria-pressed="${ROLLQ.style===t.id}">${t.name}</button>`).join('')}
       </div>
       <p style="font-size:12px;color:var(--muted);margin:8px 0 0">
-        ${ROLLQ.style==='strength'
-          ? 'Barbells and machines, drawn only from the strength pool.'
-          : 'Power, single-leg and reactive work, drawn only from the athletic pool.'}</p></label>
+        ${esc(TRACKS.find(t=>t.id===ROLLQ.style).blurb)} Drawn only from the ${esc(styleName(ROLLQ.style).toLowerCase())} pool.</p></label>
     ${ROLL ? `
-      <div class="card ${ROLL.style==='athletic'?'ath':''}" style="padding:14px;margin-bottom:14px;position:relative;overflow:hidden">
-        <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--${ROLL.style==='athletic'?'athletic':'strength'})"></div>
+      <div class="card ${tcls(ROLL.style)}" style="padding:14px;margin-bottom:14px;position:relative;overflow:hidden">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--track)"></div>
         <div class="opt-top" style="margin-bottom:9px">
           <h4 style="margin:0;font-family:var(--disp);font-size:16px;font-weight:700;flex:1">${esc(ROLL.name)}</h4>
-          <span class="pill ${ROLL.style}">${styleName(ROLL.style)}</span>
+          <span class="pill track">${styleName(ROLL.style)}</span>
         </div>
         <div class="opt-foot" style="margin-bottom:4px">
           <span class="pill">~${ROLL.mins} min</span>
@@ -1421,7 +1818,10 @@ function openRoller(){
           <div class="ex">
             <span class="idx">${pad(i+1)}</span>
             <span class="body"><span class="nm">${esc(x.nm)}</span>${x.cue?`<span class="cue">${esc(x.cue)}</span>`:''}</span>
-            <span class="rx">${x.sets} × ${esc(x.reps)}<span class="rest">rest ${esc(x.rest)}</span></span>
+            <span class="ex-actions">
+              <span class="rx">${x.sets} × ${esc(x.reps)}<span class="rest">rest ${esc(x.rest)}</span></span>
+              ${demoLink(x.nm)}
+            </span>
           </div>`).join('')}</div>
       </div>
       <div class="row">
@@ -1434,7 +1834,7 @@ function openRoller(){
     ` : `
       <button class="btn" data-rgo>
         <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.5 6.2L3 16M3 21v-5h5"/></svg>
-        Roll a ${ROLLQ.style} ${esc(day.short.toLowerCase())} workout</button>
+        Roll a ${esc(styleName(ROLLQ.style).toLowerCase())} ${esc(day.short.toLowerCase())} session</button>
     `}
   `);
 }
@@ -1516,8 +1916,9 @@ function runEx(x,i,d){
   const all = sets.length && sets.every(s=>s.done);
   const lp = lastPerf(x.nm);
   return `<div class="run-ex ${all?'complete':''}" data-ex="${esc(x.nm)}">
-    <h4>${pad(i+1)}. ${esc(x.nm)}</h4>
+    <h4>${pad(i+1)}. ${esc(x.nm)}${demoLink(x.nm)}</h4>
     <div class="sub"><span>${x.sets} × ${esc(x.reps)}</span><span>rest ${esc(x.rest)}</span>${lp?`<span>${lp}</span>`:''}</div>
+    ${loadHint(x.nm)}
     <div class="cue">${esc(x.cue)}</div>
     <div class="sets">${sets.map((s,j)=>`
       <div class="setrow ${s.done?'on':''}" data-set="${j}">
@@ -1590,6 +1991,14 @@ document.addEventListener('click', e=>{
   const hist = t.closest('[data-hist]'); if(hist){ openHistory(hist.dataset.hist); return; }
   const mv = t.closest('[data-mv]'); if(mv){ openMovement(mv.dataset.mv); return; }
   const bld = t.closest('[data-build]'); if(bld){ openBuilder(bld.dataset.build); return; }
+  const fav = t.closest('[data-fav]');
+  if(fav){
+    const on = toggleFav(fav.dataset.fav);
+    const o = getOpt(fav.dataset.fav);
+    render();
+    toast(on ? `${o?o.name:'Workout'} added to favourites` : `Removed from favourites`);
+    return;
+  }
   if(t.closest('[data-roll]')){ ROLL = null; openRoller(); return; }
   const rd = t.closest('[data-rday]');   if(rd){ ROLLQ.day = rd.dataset.rday; ROLL = null; openRoller(); return; }
   const rs = t.closest('[data-rstyle]'); if(rs){ ROLLQ.style = rs.dataset.rstyle; ROLL = null; openRoller(); return; }
@@ -1664,6 +2073,10 @@ document.addEventListener('click', e=>{
 
   const u = t.closest('[data-units]');
   if(u){ S.units=u.dataset.units; saveNow(); openSettings(); render(); return; }
+  const pal = t.closest('[data-palette]');
+  if(pal){ S.palette = pal.dataset.palette; applyTheme(); saveNow(); openSettings(); return; }
+  const cor = t.closest('[data-corners]');
+  if(cor){ S.corners = cor.dataset.corners; applyTheme(); saveNow(); openSettings(); return; }
   const th = t.closest('[data-pick-theme]');
   if(th){ S.theme=th.dataset.pickTheme; applyTheme(); saveNow(); openSettings(); return; }
 
@@ -1721,6 +2134,42 @@ document.addEventListener('click', e=>{
     if(k==='sync')   api.syncNow();
     if(k==='submit') api.email(AUTHMODE, ($('#authEmail').value||'').trim(), $('#authPass').value||'');
     if(k==='reset')  api.reset(($('#authEmail').value||'').trim());
+    return;
+  }
+
+  if(t.closest('[data-openbody]')){ openBody(); return; }
+  if(t.closest('[data-openprofile]')){ openProfile(); return; }
+
+  const bwAdd = t.closest('[data-bw]');
+  if(bwAdd){
+    const v = parseFloat(($('#bwInput')||{}).value);
+    if(!(v>0)){ toast('Enter a weight first.'); return; }
+    S.weights = (S.weights||[]).filter(x=>x.date!==todayIso());
+    S.weights.push({date:todayIso(), w:Math.round(v*10)/10});
+    S.weights.sort((a,b)=> a.date<b.date ? -1 : 1);
+    saveNow(); openBody(); render(); toast(`Logged ${Math.round(v*10)/10} ${S.units}`);
+    return;
+  }
+  const bwDel = t.closest('[data-bwdel]');
+  if(bwDel){
+    if(!confirm('Delete this weight entry?')) return;
+    S.weights = (S.weights||[]).filter(x=>x.date!==bwDel.dataset.bwdel);
+    saveNow(); openBody(); render();
+    return;
+  }
+  const pfl = t.closest('[data-pflevel]');
+  if(pfl){ S.profile = Object.assign({}, S.profile, {level:pfl.dataset.pflevel}); saveNow(); openProfile(); return; }
+  const pfs = t.closest('[data-pfsex]');
+  if(pfs){ S.profile = Object.assign({}, S.profile, {sex:pfs.dataset.pfsex}); saveNow(); openProfile(); return; }
+  if(t.closest('[data-pfsave]')){
+    const h = parseFloat(($('#pfHeight')||{}).value), w = parseFloat(($('#pfWeight')||{}).value);
+    S.profile = Object.assign({level:'new', sex:''}, S.profile,
+      {height: h>0 ? h : '', weight: w>0 ? w : ''});
+    if(w>0 && !(S.weights||[]).some(x=>x.date===todayIso())){
+      S.weights = (S.weights||[]).concat([{date:todayIso(), w:Math.round(w*10)/10}]);
+      S.weights.sort((a,b)=> a.date<b.date ? -1 : 1);
+    }
+    saveNow(); openProfile(); render(); toast('Profile saved');
     return;
   }
 
@@ -1809,6 +2258,166 @@ function importData(file){
     }catch(err){ toast('That file is not a Split Ledger backup.'); }
   };
   fr.readAsText(file);
+}
+
+
+/* ══════════════════════════════════════ body & loads ═══════════════════ */
+/* Starting-load estimates are multiples of bodyweight for a working set in the
+   prescribed rep range. They are a place to begin, not a target — the app
+   prefers your own logged best the moment you have one. */
+const LOAD = [
+  [/trap-bar deadlift|rack pull/i,                    1.00, 'bar'],
+  [/deadlift|stiff-leg/i,                             0.90, 'bar'],
+  [/leg press/i,                                      1.60, 'machine'],
+  [/hack squat|belt squat/i,                          0.90, 'machine'],
+  [/back squat|smith machine squat|box squat/i,       0.75, 'bar'],
+  [/front squat|safety-bar squat/i,                   0.60, 'bar'],
+  [/hip thrust|glute bridge \(barbell\)/i,            0.90, 'bar'],
+  [/romanian deadlift|good morning/i,                 0.55, 'bar'],
+  [/bench press|chest press/i,                        0.60, 'bar'],
+  [/incline barbell/i,                                0.50, 'bar'],
+  [/overhead press|push press|z-press/i,              0.40, 'bar'],
+  [/barbell row|pendlay|t-bar row/i,                  0.55, 'bar'],
+  [/lat pulldown|pulldown/i,                          0.60, 'machine'],
+  [/seated cable row|machine row|chest-supported row/i,0.55,'machine'],
+  [/leg curl/i,                                       0.28, 'machine'],
+  [/leg extension/i,                                  0.38, 'machine'],
+  [/calf raise/i,                                     0.55, 'machine'],
+  [/shrug/i,                                          0.70, 'bar'],
+  [/goblet squat|kettlebell deadlift|kettlebell swing/i,0.28,'single'],
+  [/incline dumbbell press|dumbbell press|dumbbell shoulder press/i, 0.22, 'perhand'],
+  [/dumbbell row|single-arm.*row|meadows|landmine row/i, 0.28, 'perhand'],
+  [/split squat|lunge|step-up|single-leg romanian/i,  0.15, 'perhand'],
+  [/landmine press/i,                                 0.22, 'perhand'],
+  [/farmer|suitcase|front-rack carry/i,               0.35, 'perhand'],
+  [/curl/i,                                           0.10, 'perhand'],
+  [/lateral raise/i,                                  0.045,'perhand'],
+  [/pushdown|triceps extension|skull crusher/i,       0.22, 'machine'],
+  [/face pull|pull-apart|reverse pec deck|external rotation/i, 0.12, 'machine'],
+  [/fly|pec deck/i,                                   0.14, 'perhand'],
+  [/cable crunch/i,                                   0.30, 'machine'],
+  [/back extension \(weighted\)|weighted back extension/i, 0.20, 'single'],
+  [/weighted pull-up|weighted chin-up|weighted dip/i, 0.15, 'single'],
+];
+const LEVELS = [
+  {id:'new',   name:'New to this',      f:0.65, note:'Never trained, or coming back after a long time off.'},
+  {id:'some',  name:'Some experience',  f:1.00, note:'A year or so of consistent lifting.'},
+  {id:'exp',   name:'Experienced',      f:1.30, note:'Several years, comfortable near your limits.'}
+];
+
+function bodyWeight(){
+  const w = (S.weights||[]);
+  if(w.length) return +w[w.length-1].w;
+  return S.profile && +S.profile.weight ? +S.profile.weight : 0;
+}
+function roundLoad(v){
+  if(!v) return 0;
+  const step = S.units==='kg' ? 2.5 : 5;
+  return Math.max(step, Math.round(v/step)*step);
+}
+
+/* Best logged set wins; otherwise estimate from bodyweight. Returns null when
+   the movement is not one you load. */
+function suggestLoad(nm){
+  const logged = movementStats().find(m => m.nm === nm && m.mode === 'load');
+  if(logged && logged.last && logged.last.w > 0)
+    return {w: logged.last.w, from:'log'};
+
+  const bw = bodyWeight();
+  if(!bw || !S.profile) return null;
+  const hit = LOAD.find(([re]) => re.test(nm));
+  if(!hit) return null;
+  const [, mult, kind] = hit;
+  const lvl = (LEVELS.find(l=>l.id===(S.profile.level||'new')) || LEVELS[0]).f;
+  const sex = S.profile.sex === 'f' ? (kind==='bar' && /bench|press|row/i.test(nm) ? 0.62 : 0.72)
+            : S.profile.sex === 'm' ? 1 : 0.85;
+  return {w: roundLoad(bw * mult * lvl * sex), from:'estimate', kind};
+}
+function loadHint(nm){
+  const r = suggestLoad(nm);
+  if(!r) return '';
+  const per = r.kind === 'perhand' ? ' / hand' : '';
+  return `<span class="loadhint ${r.from}">${r.from==='log'?'last':'try'} ${r.w}${per} ${S.units}</span>`;
+}
+
+function openBody(){
+  const w = [...(S.weights||[])].sort((a,b)=> a.date<b.date ? -1 : 1);
+  const cur = w.length ? w[w.length-1] : null;
+  const first = w.length ? w[0] : null;
+  const delta = (cur && first) ? +(cur.w - first.w).toFixed(1) : 0;
+  const pts = w.map(x=>({date:x.date, m:+x.w}));
+  const chart = pts.length ? bigChart({nm:'Body weight', points:pts, mode:'load'}) : '';
+  sheet(`
+    <div class="sheet-hd">
+      <div style="flex:1"><div class="sub">Body</div><h2>Body weight</h2></div>
+      <button class="icon-btn" data-close aria-label="Close">${svgX()}</button>
+    </div>
+    <label class="fld"><span class="lb">Weight today (${S.units})</span>
+      <input type="number" inputmode="decimal" id="bwInput" step="0.1" placeholder="${cur?cur.w:'e.g. 180'}"></label>
+    <button class="btn" data-bw="add">Log weight</button>
+    ${w.length ? `
+      <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-top:16px">
+        <div class="stat"><div class="k">Current</div><div class="v" style="font-size:20px">${cur.w}<small> ${S.units}</small></div></div>
+        <div class="stat"><div class="k">Entries</div><div class="v" style="font-size:20px">${w.length}</div></div>
+        <div class="stat"><div class="k">Change</div><div class="v" style="font-size:20px;color:${delta>0?'var(--warn)':delta<0?'var(--good)':'inherit'}">${delta>0?'+':''}${delta}</div></div>
+      </div>
+      <span class="eyebrow">Over time</span>
+      <div class="card" style="padding:10px 8px 4px">${chart}</div>
+      <span class="eyebrow">Entries</span>
+      <div class="card" style="padding:4px 14px"><div class="hist">
+        ${[...w].reverse().slice(0,20).map(x=>`<div class="hitem">
+          <span class="hitem-main"><span class="bd"><b>${x.w} ${S.units}</b><i>${relDay(x.date)}</i></span></span>
+          <button class="hitem-x" data-bwdel="${x.date}" aria-label="Delete this entry">${svgTrash()}</button>
+        </div>`).join('')}
+      </div></div>` : `<p style="font-size:13px;color:var(--muted);margin-top:16px;line-height:1.55">
+        Log it whenever you like — weekly is plenty. One entry per day; logging again on the same day replaces it.
+        Your bodyweight also drives the starting-load estimates in Profile.</p>`}`);
+}
+
+function openProfile(){
+  const P = S.profile || {};
+  const bw = bodyWeight();
+  const lvl = LEVELS.find(l=>l.id===(P.level||'new')) || LEVELS[0];
+  const examples = ['Barbell Back Squat','Barbell Bench Press','Deadlift (conventional)',
+                    'Standing Overhead Press','Barbell Row (bent-over)','Lat Pulldown',
+                    'Incline Dumbbell Press','Dumbbell Curl'];
+  sheet(`
+    <div class="sheet-hd">
+      <div style="flex:1"><div class="sub">Profile</div><h2>Starting weights</h2></div>
+      <button class="icon-btn" data-close aria-label="Close">${svgX()}</button>
+    </div>
+    <div class="row">
+      <label class="fld" style="flex:1"><span class="lb">Height (${S.units==='kg'?'cm':'in'})</span>
+        <input type="number" inputmode="numeric" id="pfHeight" value="${esc(P.height||'')}" placeholder="${S.units==='kg'?'178':'70'}"></label>
+      <label class="fld" style="flex:1"><span class="lb">Weight (${S.units})</span>
+        <input type="number" inputmode="decimal" id="pfWeight" step="0.1" value="${esc(P.weight||'')}" placeholder="${S.units==='kg'?'80':'180'}"></label>
+    </div>
+    <label class="fld"><span class="lb">Experience</span>
+      <div class="chip-row">${LEVELS.map(l=>`
+        <button class="chip" data-pflevel="${l.id}" aria-pressed="${(P.level||'new')===l.id}">${l.name}</button>`).join('')}
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin:8px 0 0">${esc(lvl.note)}</p></label>
+    <label class="fld"><span class="lb">Scale estimates for</span>
+      <div class="chip-row">
+        <button class="chip" data-pfsex="m" aria-pressed="${P.sex==='m'}">Male</button>
+        <button class="chip" data-pfsex="f" aria-pressed="${P.sex==='f'}">Female</button>
+        <button class="chip" data-pfsex="" aria-pressed="${!P.sex}">Rather not say</button>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin:8px 0 0">Only used to scale the upper-body numbers. "Rather not say" uses a midpoint.</p></label>
+    <button class="btn" data-pfsave>Save profile</button>
+    ${bw ? `
+      <span class="eyebrow">What that suggests</span>
+      <div class="card" style="padding:4px 14px"><div class="hist">
+        ${examples.map(nm=>{ const r=suggestLoad(nm); if(!r) return '';
+          return `<div class="hitem"><span class="hitem-main">
+            <span class="bd"><b>${esc(nm)}</b><i>${r.from==='log'?'from your log':'estimate'}</i></span>
+            <span class="rt">${r.w}${r.kind==='perhand'?' / hand':''} ${S.units}</span></span></div>`;}).join('')}
+      </div></div>` : ''}
+    <p style="font-size:12.5px;color:var(--muted);margin-top:16px;line-height:1.6">
+      These are starting points from your bodyweight, not prescriptions — treat the first set of any new
+      movement as a test and adjust. Height is stored for your own reference; it barely moves the numbers,
+      so it is not used in the maths. Once you have logged a movement, the app shows what you actually
+      lifted instead of an estimate.</p>`);
 }
 
 /* ══════════════════════════════════════ sync bridge ═════════════════════ */
@@ -1959,9 +2568,22 @@ function openAccount(){
 }
 
 /* ══════════════════════════════════════ theme / boot ════════════════════ */
+const PALETTES = [
+  {id:'neutral', name:'Neutral', note:'Warm paper and graphite. The default.'},
+  {id:'slate',   name:'Slate',   note:'Cool blues and teal.'},
+  {id:'carbon',  name:'Carbon',  note:'Pure greyscale, maximum contrast.'},
+  {id:'clay',    name:'Clay',    note:'Terracotta, ochre and olive.'},
+  {id:'forest',  name:'Forest',  note:'Deep greens with a brass accent.'},
+  {id:'ember',   name:'Ember',   note:'Plum and burnt orange.'}
+];
 function applyTheme(){
-  if(S.theme==='auto') document.documentElement.removeAttribute('data-theme');
-  else document.documentElement.setAttribute('data-theme', S.theme);
+  const r = document.documentElement;
+  if(S.theme==='auto') r.removeAttribute('data-theme');
+  else r.setAttribute('data-theme', S.theme);
+  if(!S.palette || S.palette==='neutral') r.removeAttribute('data-palette');
+  else r.setAttribute('data-palette', S.palette);
+  if(S.corners==='sharp') r.setAttribute('data-corners','sharp');
+  else r.removeAttribute('data-corners');
 }
 applyTheme();
 render();
