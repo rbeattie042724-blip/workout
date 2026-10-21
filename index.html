@@ -2085,7 +2085,7 @@ function viewProg(){
 }
 
 /* ══════════════════════════════════════ layer / sheets ══════════════════ */
-function closeSheet(){ $('#layer').innerHTML=''; }
+function closeSheet(){ $('#layer').innerHTML=''; pickerOpen = false; }
 function sheet(html){
   $('#layer').innerHTML = `<div class="scrim" data-scrim><div class="sheet" role="dialog" aria-modal="true"><div class="grab"></div>${html}</div></div>`;
 }
@@ -2095,49 +2095,83 @@ document.addEventListener('click', e=>{
 addEventListener('keydown', e=>{ if(e.key==='Escape') closeSheet(); });
 
 /* ── day sheet ─────────────────────────────────────────────────────────── */
-let pickSel = null;
+let pickSel = null, pickerOpen = false;
 function openDay(date){
   const fin = sessOn(date);
   if(fin){ openHistory(fin.id); return; }
   const sch = S.scheduled[date] || {};
+  const planned = sch.workoutId ? getOpt(sch.workoutId) : null;
   pickSel = sch.workoutId || null;
   const dt = fromIso(date);
-  sheet(`
+  const head = `
     <div class="sheet-hd">
       <div style="flex:1">
         <div class="sub">${DOW[dt.getDay()]} · ${MON[dt.getMonth()]} ${dt.getDate()}</div>
-        <h2>${relDay(date)==='Today'||relDay(date)==='Tomorrow'?relDay(date):'Plan this day'}</h2>
+        <h2>${planned && !pickerOpen ? esc(planned.name)
+             : (relDay(date)==='Today'||relDay(date)==='Tomorrow' ? relDay(date) : 'Plan this day')}</h2>
       </div>
-      <button class="icon-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
-    </div>
+      <button class="icon-btn" data-close aria-label="Close">${svgX()}</button>
+    </div>`;
+
+  /* A day that already has a session shows that session — not the whole library.
+     The picker only appears if you ask to change it. */
+  if(planned && !pickerOpen){
+    sheet(`${head}
+      <div class="sc-meta" style="margin-bottom:14px">
+        <span class="pill ${tcls(planned.style)} track">${styleName(planned.style)}</span>
+        <span class="pill">${esc(dayTag(planned))}</span>
+        <span class="pill">~${planned.mins} min</span>
+        <span class="pill">${planned.ex.length} movements</span>
+      </div>
+      <label class="fld"><span class="lb">Start time</span>
+        <input type="time" id="fTime" value="${sch.time||'17:30'}"></label>
+      <span class="lb" style="font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px">What you are doing</span>
+      <div class="ex-list">${planned.ex.map((x,i)=>`
+        <div class="ex ${equipOk(x.nm)?'':'unfit'}">
+          <span class="idx">${pad(i+1)}</span>
+          <span class="body"><span class="nm">${esc(x.nm)}</span>${x.cue?`<span class="cue">${esc(x.cue)}</span>`:''}</span>
+          <span class="ex-actions">
+            <span class="rx">${x.sets} × ${esc(x.reps)}<span class="rest">rest ${esc(x.rest)}</span></span>
+            ${demoLink(x.nm)}
+          </span>
+        </div>`).join('')}</div>
+      <label class="fld" style="margin-top:16px"><span class="lb">Note (optional)</span>
+        <textarea id="fNote" placeholder="Bump squat to 245 · shoulder felt tight last time">${esc(sch.note||'')}</textarea></label>
+      <button class="btn" data-start="${planned.id}" data-date="${date}">
+        <svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg>Start workout</button>
+      <div class="row" style="margin-top:10px">
+        <button class="btn ghost" data-changeday="${date}">Change</button>
+        <button class="btn danger" data-unschedule="${date}">Remove</button>
+      </div>
+      <button class="btn ghost" style="margin-top:10px" data-schedule="${date}">Save time &amp; note</button>`);
+    return;
+  }
+
+  // nothing planned yet, or you asked to change it — show the picker
+  const groups = [];
+  if((S.custom||[]).length) groups.push(['YOUR WORKOUTS & PLANS', S.custom]);
+  PROGRAM.forEach(d=>groups.push([d.title.toUpperCase(), d.options]));
+
+  sheet(`${head}
     <label class="fld"><span class="lb">Start time</span>
       <input type="time" id="fTime" value="${sch.time||'17:30'}"></label>
     <span class="lb" style="font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px">Session</span>
-    <div id="picker">${PROGRAM.map(d=>`
+    <div id="picker">${groups.map(([title, list])=>`
       <div style="margin-bottom:12px">
-        <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--muted);margin-bottom:6px">${esc(d.title.toUpperCase())}</div>
-        ${d.options.map(o=>`
+        <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--muted);margin-bottom:6px">${esc(title)}</div>
+        ${list.map(o=>`
           <button class="pick ${tcls(o.style)}" data-pick="${o.id}" aria-pressed="${pickSel===o.id}">
             <span class="t"><b>${esc(o.name)}</b><i>${styleName(o.style)} · ~${o.mins} min · ${o.ex.length} movements</i></span>
             <span class="check"></span>
           </button>`).join('')}
       </div>`).join('')}
-      ${(S.custom||[]).length ? `<div style="margin-bottom:12px">
-        <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--muted);margin-bottom:6px">YOUR WORKOUTS</div>
-        ${(S.custom||[]).map(c=>`
-          <button class="pick ${tcls(c.style)}" data-pick="${c.id}" aria-pressed="${pickSel===c.id}">
-            <span class="t"><b>${esc(c.name)}</b><i>${styleName(c.style)} · ~${c.mins} min · ${c.ex.length} movements</i></span>
-            <span class="check"></span>
-          </button>`).join('')}
-      </div>` : ''}
     </div>
     <label class="fld"><span class="lb">Note (optional)</span>
       <textarea id="fNote" placeholder="Bump squat to 245 · shoulder felt tight last time">${esc(sch.note||'')}</textarea></label>
     <div class="row" style="margin-top:4px">
-      ${sch.workoutId?`<button class="btn danger" data-unschedule="${date}" style="flex:0 0 44%">Remove</button>`:''}
+      ${sch.workoutId?`<button class="btn ghost" data-canceldaychange="${date}" style="flex:0 0 40%">Back</button>`:''}
       <button class="btn" data-schedule="${date}">${sch.workoutId?'Update':'Add to calendar'}</button>
     </div>
-    ${sch.workoutId?`<button class="btn ghost" style="margin-top:10px" data-start="${sch.workoutId}" data-date="${date}">Start this workout now</button>`:''}
   `);
 }
 
@@ -2703,11 +2737,17 @@ document.addEventListener('click', e=>{
     return;
   }
 
+  const chg = t.closest('[data-changeday]');
+  if(chg){ pickerOpen = true; openDay(chg.dataset.changeday); return; }
+  const cancelChg = t.closest('[data-canceldaychange]');
+  if(cancelChg){ pickerOpen = false; openDay(cancelChg.dataset.canceldaychange); return; }
+
   const sched = t.closest('[data-schedule]');
   if(sched){
     const date = sched.dataset.schedule;
     if(!pickSel){ toast('Pick a session first.'); return; }
     S.scheduled[date] = { workoutId:pickSel, time:$('#fTime').value||'', note:$('#fNote').value.trim() };
+    pickerOpen = false;
     saveNow(); closeSheet(); render();
     toast(`${getOpt(pickSel).name} · ${relDay(date)}`);
     return;
