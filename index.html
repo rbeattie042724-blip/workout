@@ -119,10 +119,10 @@ h1,h2,h3{font-family:var(--disp);margin:0;text-wrap:balance;letter-spacing:-.01e
   border-top:1px solid var(--line);
   padding:6px 8px calc(6px + env(safe-area-inset-bottom));
 }
-.nav-in{max-width:660px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.nav-in{max-width:660px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:2px}
 .nav button{
-  display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 2px 5px;
-  border-radius:12px;color:var(--muted);font-size:10.5px;letter-spacing:.03em;font-weight:500;
+  display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 1px 5px;
+  border-radius:12px;color:var(--muted);font-size:9.5px;letter-spacing:.01em;font-weight:500;
 }
 .nav button svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .nav button[aria-selected="true"]{color:var(--ink)}
@@ -1121,6 +1121,52 @@ label.btn{cursor:pointer}
 :root[data-fx="glow"] .stat .v{text-shadow:0 0 16px color-mix(in srgb,var(--ink) 35%,transparent)}
 @media (prefers-reduced-motion:reduce){:root[data-fx="glow"] *{text-shadow:none}}
 
+/* ── coach ─────────────────────────────────────────────────────────────── */
+.chat{display:flex;flex-direction:column;gap:10px;margin:14px 0 12px}
+.bub{max-width:92%;padding:12px 14px;border-radius:16px;font-size:14px;line-height:1.55}
+.bub p{margin:0}
+.bub.me{align-self:flex-end;background:var(--ink);color:var(--surface);border-bottom-right-radius:5px}
+.bub.app{align-self:flex-start;background:var(--surface);border:1px solid var(--line);
+  border-bottom-left-radius:5px;box-shadow:var(--shadow);max-width:100%;width:100%}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.chips .chip{font-size:12.5px;text-align:left;line-height:1.35}
+.composer{
+  display:flex;gap:8px;align-items:flex-end;position:sticky;bottom:calc(80px + env(safe-area-inset-bottom));
+  background:var(--bg);padding:10px 0 8px;z-index:5;
+}
+.composer::before{
+  content:"";position:absolute;left:0;right:0;top:-22px;height:22px;pointer-events:none;
+  background:linear-gradient(to top, var(--bg), transparent);
+}
+.composer textarea{flex:1;min-height:46px;max-height:140px;resize:none;border-radius:14px;padding:13px 14px;font-size:15px}
+.send{
+  width:46px;height:46px;flex:none;border-radius:14px;background:var(--ink);color:var(--surface);
+  display:grid;place-items:center;
+}
+.send svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.send:active{transform:scale(.94)}
+
+.plan{margin-top:12px}
+.plan-hd{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.plan-hd b{display:block;font-family:var(--disp);font-size:17px;font-weight:700;font-stretch:106%;line-height:1.2}
+.plan-hd i{display:block;font-style:normal;font-size:12px;color:var(--muted);margin-top:3px;line-height:1.45}
+.pday{
+  border:1px solid var(--line);border-radius:12px;background:var(--surface-2);
+  margin-bottom:7px;overflow:hidden;position:relative;
+}
+.pday::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--track,var(--strength))}
+.pday summary{
+  display:flex;align-items:center;gap:10px;padding:11px 12px 11px 14px;cursor:pointer;list-style:none;
+}
+.pday summary::-webkit-details-marker{display:none}
+.pday[open] summary{border-bottom:1px solid var(--line)}
+.pd-n{font-family:var(--mono);font-size:11px;color:var(--muted);width:14px;flex:none}
+.pd-t{flex:1;min-width:0}
+.pd-t b{display:block;font-size:14.5px;font-weight:600;line-height:1.25}
+.pd-t i{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:2px}
+.pday .ex-list{padding:4px 12px 10px 14px}
+@media (min-width:720px){.composer{bottom:0}}
+
 @media (min-width:720px){
   .wrap{padding-bottom:48px}
   .nav{position:static;background:none;backdrop-filter:none;border-top:0;border-bottom:1px solid var(--line);padding:0}
@@ -1153,6 +1199,7 @@ label.btn{cursor:pointer}
     <button data-tab="today" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>Today</button>
     <button data-tab="cal" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</button>
     <button data-tab="lib" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M2 12h2m16 0h2M6 8v8m12-8v8M9 6.5v11M15 6.5v11"/></svg>Workouts</button>
+    <button data-tab="coach" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.3-.6L3 21l1.8-5A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4Z"/></svg>Coach</button>
     <button data-tab="prog" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M4 19V9m5 10V5m5 14v-7m5 7V8"/></svg>Progress</button>
   </div>
 </nav>
@@ -1383,7 +1430,7 @@ function dayTag(o){ return o.day.id==='custom' ? 'Your workout' : o.day.short; }
 
 /* ══════════════════════════════════════ state ═══════════════════════════ */
 const KEY = 'splitledger.v1';
-const blank = { units:'lb', theme:'auto', palette:'neutral', corners:'soft', fx:'', equip:['machine','free','body','other'], hideUnfit:false, scheduled:{}, sessions:[], custom:[], favs:[], weights:[], profile:null, tomb:[], draft:null };
+const blank = { units:'lb', theme:'auto', chat:[], plans:[], palette:'neutral', corners:'soft', fx:'', equip:['machine','free','body','other'], hideUnfit:false, scheduled:{}, sessions:[], custom:[], favs:[], weights:[], profile:null, tomb:[], draft:null };
 let S = load();
 
 function load(){
@@ -1532,6 +1579,7 @@ function render(){
   if(tab==='today') v.innerHTML = viewToday();
   else if(tab==='cal') v.innerHTML = viewCal();
   else if(tab==='lib') v.innerHTML = viewLib();
+  else if(tab==='coach'){ v.innerHTML = viewCoach(); scrollChat(); }
   else v.innerHTML = viewProg();
 }
 
@@ -2566,6 +2614,32 @@ document.addEventListener('click', e=>{
     else render();
     return;
   }
+  const ask = t.closest('[data-ask]');
+  if(ask){ coachAsk(ask.dataset.ask); return; }
+  if(t.closest('#chatSend')){
+    const el = $('#chatIn'); const v = el ? el.value : '';
+    if(el) el.value = '';
+    coachAsk(v);
+    return;
+  }
+  if(t.closest('[data-chatclear]')){
+    if(!confirm('Clear the conversation? Saved workouts are kept.')) return;
+    S.chat = []; S.plans = []; saveNow(); render(); return;
+  }
+  const pSave = t.closest('[data-plansave]');
+  if(pSave){ const p=(S.plans||[]).find(x=>x.id===pSave.dataset.plansave); if(p) savePlan(p,false); return; }
+  const pWeek = t.closest('[data-planweek]');
+  if(pWeek){ const p=(S.plans||[]).find(x=>x.id===pWeek.dataset.planweek); if(p) savePlan(p,true); return; }
+  const pRedo = t.closest('[data-planredo]');
+  if(pRedo){
+    const i = (S.plans||[]).findIndex(x=>x.id===pRedo.dataset.planredo);
+    if(i<0) return;
+    const old = S.plans[i];
+    const fresh = buildPlan(parseRequest(old.sourceText || old.name));
+    fresh.id = old.id;                       // keep the chat bubble pointing at it
+    S.plans[i] = fresh; saveNow(); render(); toast('Rebuilt');
+    return;
+  }
   if(t.closest('[data-roll]')){ ROLL = null; openRoller(); return; }
   const rd = t.closest('[data-rday]');   if(rd){ ROLLQ.day = rd.dataset.rday; ROLL = null; openRoller(); return; }
   const rs = t.closest('[data-rstyle]'); if(rs){ ROLLQ.style = rs.dataset.rstyle; ROLL = null; openRoller(); return; }
@@ -2770,6 +2844,11 @@ document.addEventListener('input', e=>{
     S.draft.entries[card.dataset.ex][+row.dataset.set][f.dataset.f] = f.value;
     save(); return;
   }
+  if(e.target.id==='chatIn'){
+    e.target.style.height='auto';
+    e.target.style.height=Math.min(140, e.target.scrollHeight)+'px';
+    return;
+  }
   if(e.target.id==='runNotes' && S.draft){ S.draft.notes = e.target.value; save(); return; }
   const b = e.target.closest('[data-b]');
   if(b && EDIT){ EDIT[b.dataset.b] = b.value; return; }
@@ -2777,6 +2856,13 @@ document.addEventListener('input', e=>{
   if(ef && EDIT){
     const row = EDIT.ex.find(x=>String(x.k)===ef.dataset.k);
     if(row) row[ef.dataset.e] = ef.value;
+  }
+});
+document.addEventListener('keydown', e=>{
+  if(e.target.id==='chatIn' && e.key==='Enter' && !e.shiftKey){
+    e.preventDefault();
+    const v = e.target.value; e.target.value = '';
+    coachAsk(v);
   }
 });
 document.addEventListener('change', e=>{
@@ -2993,6 +3079,377 @@ function openProfile(){
       movement as a test and adjust. Height is stored for your own reference; it barely moves the numbers,
       so it is not used in the maths. Once you have logged a movement, the app shows what you actually
       lifted instead of an estimate.</p>`);
+}
+
+
+/* ══════════════════════════════════════ coach ═══════════════════════════
+   Reads a plain-English request and composes a plan out of the movement
+   library. No model, no network — a parser plus a set of split templates,
+   so it works offline and costs nothing. renderPlan() takes a plain plan
+   object, so a real model could replace buildPlan() without touching the UI.
+   ════════════════════════════════════════════════════════════════════════ */
+
+const GOALS = {
+  mass:     {id:'mass',     name:'Size & aesthetics', track:'strength',   sets:4, reps:'8–12',  rest:'1:30', iso:2},
+  strength: {id:'strength', name:'Maximal strength',  track:'strength',   sets:4, reps:'4–6',   rest:'3:00', iso:0},
+  athletic: {id:'athletic', name:'Athleticism',       track:'athletic',   sets:3, reps:'5–8',   rest:'1:30', iso:0},
+  lean:     {id:'lean',     name:'Lean & conditioned',track:'strength',   sets:3, reps:'12–15', rest:'1:00', iso:2},
+  base:     {id:'base',     name:'Building a base',   track:'foundation', sets:3, reps:'10–12', rest:'1:15', iso:1},
+  mobility: {id:'mobility', name:'Mobility',          track:'mobility',   sets:2, reps:'',      rest:'0:30', iso:0}
+};
+const NUMWORD = {one:1,two:2,three:3,four:4,five:5,six:6,seven:7,a:1};
+
+/* "deadlifts" must match "Deadlift (conventional)", so compare on stems. */
+function stemWord(w){ return String(w).toLowerCase().replace(/(?:es|s)$/,''); }
+function mentions(name, term){
+  const n = ' ' + name.toLowerCase().replace(/[^a-z ]/g,' ') + ' ';
+  return term.split(/\s+/).filter(Boolean).every(w=>{
+    const st = stemWord(w);
+    return st.length>2 && new RegExp('\\b' + st.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).test(n);
+  });
+}
+
+const FOCUS_SLOTS = {
+  arms:      [['d4','Biceps'],['d2','Triceps'],['d4','Biceps stretch']],
+  chest:     [['d2','Chest volume'],['d2','Second chest']],
+  back:      [['d4','Row volume'],['d4','Lat volume']],
+  shoulders: [['d2','Side delts'],['d2','Overhead']],
+  legs:      [['d1','Single leg'],['d1','Quads']],
+  glutes:    [['d3','Glutes'],['d3','Hamstring — hip extension']],
+  core:      [['d1','Core'],['d3','Core']],
+  calves:    [['d1','Calves'],['d3','Calves']]
+};
+
+function parseRequest(text){
+  const t = ' ' + text.toLowerCase() + ' ';
+  const r = {raw:text, days:0, goal:null, focus:[], avoid:[], split:null, mins:0, equip:null};
+
+  // days per week
+  let m = t.match(/(\d+)\s*(?:x|times?|days?)\s*(?:a|per|\/)?\s*(?:week|wk)?/);
+  if(m) r.days = +m[1];
+  if(!r.days){
+    m = t.match(/\b(one|two|three|four|five|six|seven)\s*(?:x|days?|times?)/);
+    if(m) r.days = NUMWORD[m[1]];
+  }
+  if(r.days < 1 || r.days > 7) r.days = 0;
+
+  // goal
+  if(/\bmass\b|hypertroph|\bsize\b|bulk|aesthet|asthet|athstet|muscle|jacked|bigger/.test(t)) r.goal = 'mass';
+  else if(/\bstrength\b|stronger|powerlift|1rm|max\b|heavy/.test(t))                          r.goal = 'strength';
+  else if(/athletic|explosive|speed|sprint|vertical|jump|sport|agil/.test(t))                 r.goal = 'athletic';
+  else if(/lean|cut|shred|tone|fat loss|conditioning|endurance/.test(t))                      r.goal = 'lean';
+  else if(/beginner|new to|starting out|never|coming back|returning|out of shape/.test(t))    r.goal = 'base';
+  else if(/mobility|flexib|stretch|recovery/.test(t))                                         r.goal = 'mobility';
+  else r.goal = 'mass';
+
+  // explicit split
+  if(/push.?pull.?legs|\bppl\b/.test(t))      r.split = 'ppl';
+  else if(/upper.?lower/.test(t))             r.split = 'ul';
+  else if(/full.?body/.test(t))               r.split = 'full';
+  else if(/bro split|body ?part/.test(t))     r.split = 'ppl';
+
+  // emphasis — strip the split name first so "push pull legs" is not a legs focus
+  const ft = t.replace(/push.?pull.?legs|\bppl\b|upper.?lower|full.?body|leg day|arm day|push day|pull day/g,' ');
+  Object.keys(FOCUS_SLOTS).forEach(k=>{
+    const alt = {arms:'arm|bicep|tricep', chest:'chest|pec', back:'back|lat', shoulders:'shoulder|delt',
+                 legs:'leg|quad|thigh', glutes:'glute|butt', core:'core|abs|ab\\b', calves:'calf|calves'}[k];
+    if(new RegExp(alt).test(ft)) r.focus.push(k);
+  });
+
+  // things to leave out
+  const avoid = t.match(/\b(?:no|without|avoid|can't do|cant do|skip|hate)\s+([a-z \-]{3,40})/g) || [];
+  avoid.forEach(a=>{
+    const term = a.replace(/\b(?:no|without|avoid|can't do|cant do|skip|hate)\s+/,'').trim();
+    term.split(/\s+(?:and|or)\s+/).forEach(x=>{
+      x = x.trim().replace(/\b(?:please|thanks|at all|exercises?|movements?|work)\b/g,'').trim();
+      if(x.length>2) r.avoid.push(stemWord(x));
+    });
+  });
+
+  // equipment named in the request overrides the global filter
+  if(/dumbbell|free ?weight|barbell only|just (?:a )?barbell/.test(t))        r.equip = ['free'];
+  else if(/machines? only|just machines|machine ?based/.test(t))             r.equip = ['machine'];
+  else if(/body ?weight|no (?:equipment|gym|weights)|at home|home workout|calisthenic/.test(t)) r.equip = ['body'];
+  else if(/bands? only|resistance bands? only/.test(t))                      r.equip = ['other'];
+  else if(/\bgym\b|commercial gym|full gym|everything/.test(t))              r.equip = EQUIP.map(e=>e.id);
+
+  // session length
+  m = t.match(/(\d+)\s*(?:min|minute)/);
+  if(m) r.mins = +m[1];
+  else if(/half (?:an )?hour/.test(t)) r.mins = 30;
+  else if(/\ban hour\b|60/.test(t))    r.mins = 60;
+
+  if(!r.days) r.days = r.goal==='mobility' ? 3 : 4;
+  return r;
+}
+
+/* Which pools each training day draws from. */
+function splitTemplate(req){
+  const d = req.days, g = req.goal;
+  const P = (label, src, emph) => ({label, src, emph:emph||[]});
+  const T = g==='mobility' ? 'm' : null;   // mobility plans stay in mobility pools
+
+  if(req.split==='full' || d<=2){
+    const rota = [ [['d1',4],['d2',3]], [['d3',4],['d4',3]], [['d2',3],['d3',2],['d1',2]] ];
+    const out=[];
+    for(let i=0;i<Math.max(1,d);i++) out.push(P('Full Body ' + 'ABCDEFG'[i], rota[i%3]));
+    return out;
+  }
+  if(req.split==='ul' || (d===4 && req.split==='ul')){
+    return [P('Upper A',[['d2',4],['d4',3]]), P('Lower A',[['d1',4],['d3',3]]),
+            P('Upper B',[['d4',4],['d2',3]]), P('Lower B',[['d3',4],['d1',3]])].slice(0,d);
+  }
+  if(d===3) return [P('Push',[['d2',6]]), P('Pull',[['d4',6]]), P('Legs',[['d1',4],['d3',3]])];
+  if(d===4) return [P('Lower — Squat',[['d1',7]]), P('Upper — Push',[['d2',7]]),
+                    P('Lower — Hinge',[['d3',7]]), P('Upper — Pull',[['d4',7]])];
+  if(d===5) return [P('Push',[['d2',6]]), P('Pull',[['d4',6]]), P('Legs — Squat',[['d1',6]]),
+                    P('Legs — Hinge',[['d3',6]]), P('Arms & Shoulders',[['d4',3],['d2',3]], ['arms','shoulders'])];
+  if(d===6) return [P('Push A',[['d2',6]]), P('Pull A',[['d4',6]]), P('Legs A',[['d1',6]]),
+                    P('Push B',[['d2',6]]), P('Pull B',[['d4',6]]), P('Legs B',[['d3',6]])];
+  return [P('Push A',[['d2',6]]), P('Pull A',[['d4',6]]), P('Legs A',[['d1',6]]),
+          P('Push B',[['d2',6]]), P('Pull B',[['d4',6]]), P('Legs B',[['d3',6]]),
+          P('Mobility & Recovery',[['d1',3],['d2',3]], [])];
+}
+
+/* Reps and sets follow the goal, except where the movement's own prescription
+   is the point — jumps, throws, carries and timed holds. */
+function applyGoal(x, goal, isMobilityDay){
+  const G = GOALS[goal];
+  const ownPrescription = /yd|s$|s\b|breath|each way/.test(String(x.reps)) ||
+                          /jump|bound|throw|slam|sprint|carry|hop|snatch|clean|hang|plank|hold|stretch|shuttle/i.test(x.nm);
+  if(isMobilityDay || ownPrescription || !G.reps) return {...x};
+  return {...x, sets:G.sets, reps:G.reps, rest:G.rest};
+}
+
+/* The goal picks a preferred track, but if the equipment filter guts that
+   track we use whichever one actually has movements to give. */
+const TRACK_PREF = {
+  mass:['strength','foundation','athletic'], strength:['strength','foundation'],
+  athletic:['athletic','foundation','strength'], lean:['strength','athletic','foundation'],
+  base:['foundation','strength','athletic'], mobility:['mobility']
+};
+function trackCoverage(track, allowed){
+  let have = 0, total = 0;
+  ['d1','d2','d3','d4'].forEach(d=>{
+    (POOLS[d + tsfx(track)] || []).forEach(sl=>{
+      total++;
+      if(sl.opts.some(o=>allowed.includes(equipOf(o.nm)))) have++;
+    });
+  });
+  return total ? have/total : 0;
+}
+function pickTrack(req, allowed){
+  const prefs = TRACK_PREF[req.goal] || ['strength'];
+  const scored = prefs.map(t=>({t, c:trackCoverage(t, allowed)}));
+  const first = scored[0];
+  if(first.c >= 0.6) return {track:first.t, swapped:false};
+  const best = scored.slice().sort((a,b)=>b.c-a.c)[0];
+  return {track:best.t, swapped:best.t !== first.t, coverage:best.c};
+}
+
+function buildPlan(req){
+  const tpl = splitTemplate(req);
+  const G = GOALS[req.goal];
+  const avoid = req.avoid.filter(Boolean);
+  const allowed = req.equip && req.equip.length ? req.equip : (S.equip || EQUIP.map(e=>e.id));
+  const blocked = nm => avoid.some(a => mentions(nm, a)) || !allowed.includes(equipOf(nm));
+  const chosen = pickTrack(req, allowed);
+  const TRACK = chosen.track;
+
+  const days = tpl.map(day=>{
+    const ex = [], used = new Set();
+    const isMob = req.goal === 'mobility';
+
+    day.src.forEach(([dayId, take])=>{
+      const key = dayId + tsfx(TRACK);
+      const slots = POOLS[key] || [];
+      let got = 0;
+      slots.forEach(sl=>{
+        if(got >= take) return;
+        const pick = sl.opts.filter(o=>!blocked(o.nm) && !used.has(o.nm));
+        if(!pick.length) return;
+        const o = pick[Math.floor(Math.random()*pick.length)];
+        used.add(o.nm); ex.push(applyGoal(o, req.goal, isMob)); got++;
+      });
+    });
+
+    // emphasis: add the requested body parts on top
+    const wanted = day.emph.length ? day.emph : req.focus;
+    wanted.forEach(f=>{
+      (FOCUS_SLOTS[f]||[]).forEach(([dayId, label])=>{
+        if(ex.length >= 10) return;
+        const key = dayId + tsfx(TRACK);
+        const sl = (POOLS[key]||[]).find(s=>s.label===label);
+        if(!sl) return;
+        const pick = sl.opts.filter(o=>!blocked(o.nm) && !used.has(o.nm));
+        if(!pick.length) return;
+        const o = pick[Math.floor(Math.random()*pick.length)];
+        used.add(o.nm); ex.push(applyGoal(o, req.goal, isMob));
+      });
+    });
+
+    // trim to the requested length, or to a sane ceiling for the goal
+    const CAP = {strength:75, mass:70, athletic:60, lean:50, base:50, mobility:30};
+    const limit = req.mins || CAP[req.goal] || 65;
+    let out = ex;
+    while(out.length > 3 && estimateMins(out) > limit + 5) out = out.slice(0, -1);
+
+    return {label:day.label, style:TRACK, ex:out, mins:estimateMins(out)};
+  }).filter(d=>d.ex.length >= 3);       // a two-movement day is not a session
+
+  return {
+    id:'p'+Date.now().toString(36),
+    name:`${req.days}-day ${G.name}`,
+    goal:req.goal, goalName:G.name, days:req.days,
+    focus:req.focus, avoid, equip:(S.equip||[]).slice(),
+    created:todayIso(), sessions:days,
+    track:TRACK, trackSwapped:chosen.swapped, asked:req.days
+  };
+}
+
+
+/* ── coach UI ──────────────────────────────────────────────────────────── */
+const PROMPTS = [
+  'A 6 day a week plan for gaining mass and aesthetics',
+  '4 days a week, strictly strength, no deadlifts',
+  '3 day full body, I am new to the gym',
+  'Athletic 5 day plan with an arms focus',
+  '45 minute sessions, dumbbells only, 4 days'
+];
+
+function planSummary(p){
+  const G = GOALS[p.goal];
+  const bits = [`${p.sessions.length} sessions a week`, G.name.toLowerCase()];
+  if(p.focus.length) bits.push('extra ' + p.focus.join(' & '));
+  if(p.avoid.length) bits.push('no ' + p.avoid.join(', '));
+  if((p.equip||[]).length < EQUIP.length) bits.push((p.equip||[]).map(equipName).join(', ').toLowerCase());
+  return bits.join(' · ');
+}
+
+function renderPlan(p){
+  return `<div class="plan">
+    <div class="plan-hd">
+      <div style="flex:1">
+        <b>${esc(p.name)}</b>
+        <i>${esc(planSummary(p))}</i>
+      </div>
+    </div>
+    ${p.sessions.map((d,i)=>`
+      <details class="pday ${tcls(d.style)}">
+        <summary>
+          <span class="pd-n">${i+1}</span>
+          <span class="pd-t"><b>${esc(d.label)}</b><i>${d.ex.length} movements · ~${d.mins} min</i></span>
+          <span class="pill track">${styleName(d.style)}</span>
+        </summary>
+        <div class="ex-list">${d.ex.map((x,j)=>`
+          <div class="ex">
+            <span class="idx">${pad(j+1)}</span>
+            <span class="body"><span class="nm">${esc(x.nm)}</span>${x.cue?`<span class="cue">${esc(x.cue)}</span>`:''}</span>
+            <span class="ex-actions">
+              <span class="rx">${x.sets} × ${esc(x.reps)}<span class="rest">rest ${esc(x.rest)}</span></span>
+              ${demoLink(x.nm)}
+            </span>
+          </div>`).join('')}</div>
+      </details>`).join('')}
+    <div class="row" style="margin-top:12px">
+      <button class="btn ghost" data-planredo="${p.id}" style="flex:0 0 38%">Redo</button>
+      <button class="btn" data-plansave="${p.id}">Save all ${p.sessions.length}</button>
+    </div>
+    <button class="btn ghost" style="margin-top:8px" data-planweek="${p.id}">Save &amp; fill my calendar</button>
+  </div>`;
+}
+
+function viewCoach(){
+  const log = S.chat || [];
+  return `
+  <section class="hero" style="padding:18px 0 2px">
+    <div class="date">Coach</div>
+    <h1 style="font-size:clamp(23px,6.4vw,30px)">Describe the plan<br>you want.</h1>
+  </section>
+  <div class="chat" id="chatLog">
+    ${log.length ? log.map(m=>
+        m.role==='user'
+          ? `<div class="bub me">${esc(m.text)}</div>`
+          : `<div class="bub app">${m.text ? `<p>${esc(m.text)}</p>` : ''}${m.planId ? renderPlan((S.plans||[]).find(p=>p.id===m.planId) || {}) : ''}</div>`
+      ).join('')
+    : `<div class="bub app"><p>Tell me how many days a week you can train, what you are training for, and anything to leave out. I will build it from the ${Object.values(POOLS).reduce((a,v)=>a+v.reduce((b,s)=>b+s.opts.length,0),0)} movements in your library, with a demonstration link on every one.</p></div>`}
+  </div>
+  ${log.length ? '' : `<div class="chips">${PROMPTS.map(t=>`<button class="chip" data-ask="${esc(t)}">${esc(t)}</button>`).join('')}</div>`}
+  <div class="composer">
+    <textarea id="chatIn" rows="1" placeholder="Describe your plan…" aria-label="Describe your plan"></textarea>
+    <button class="send" id="chatSend" aria-label="Send">
+      <svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+  </div>
+  ${log.length ? `<button class="chip" data-chatclear style="margin-top:12px">Clear conversation</button>` : ''}
+  `;
+}
+
+function scrollChat(){
+  const el = $('#chatLog'); if(el) el.scrollTop = el.scrollHeight;
+}
+
+function coachAsk(text){
+  text = (text||'').trim();
+  if(!text) return;
+  S.chat = S.chat || []; S.plans = S.plans || [];
+  S.chat.push({role:'user', text});
+
+  const req = parseRequest(text);
+  const plan = buildPlan(req);
+
+  let note;
+  if(!plan.sessions.length){
+    note = 'Nothing in your library fits that. Widen the equipment filter in Workouts, or drop one of the exclusions.';
+    S.chat.push({role:'app', text:note});
+  } else {
+    const G = GOALS[plan.goal];
+    note = `${plan.sessions.length} days a week, built for ${G.name.toLowerCase()}.` +
+      (plan.focus.length ? ` Extra ${plan.focus.join(' and ')} work added.` : '') +
+      (plan.avoid.length ? ` Leaving out ${plan.avoid.join(', ')}.` : '') +
+      (plan.trackSwapped ? ` Your equipment does not support the usual ${GOALS[plan.goal].track} movements for this, so it is drawn from the ${styleName(plan.track).toLowerCase()} pool instead.` : '') +
+      (plan.sessions.length < plan.asked ? ` I could only fill ${plan.sessions.length} of the ${plan.asked} days you asked for — widen the equipment or drop an exclusion for the rest.` : '') +
+      ` Tap a day to see the movements; the ▶ on each opens a demonstration.`;
+    plan.sourceText = text;
+    S.plans.push(plan);
+    if(S.plans.length > 12) S.plans = S.plans.slice(-12);
+    S.chat.push({role:'app', text:note, planId:plan.id});
+  }
+  if(S.chat.length > 40) S.chat = S.chat.slice(-40);
+  saveNow(); render();
+  setTimeout(scrollChat, 30);
+}
+
+function savePlan(p, schedule){
+  S.custom = S.custom || [];
+  const made = [];
+  p.sessions.forEach(d=>{
+    const rec = {
+      id:'c'+Date.now().toString(36)+Math.floor(Math.random()*1e4).toString(36),
+      style:d.style, name:`${d.label} · ${p.name}`, focus:p.goalName,
+      gear:(p.equip||[]).length<EQUIP.length ? (p.equip||[]).map(equipName).join(' · ') : '',
+      mins:d.mins, blurb:p.goalName, planned:true,
+      ex:d.ex.map(x=>({nm:x.nm, sets:x.sets, reps:x.reps, rest:x.rest, cue:x.cue||''}))
+    };
+    S.custom.push(rec); made.push(rec);
+  });
+
+  if(schedule){
+    // next 4 weeks, training days first, resting on the days the plan does not use
+    const order = [1,2,3,5,6,4,0];                       // Mon,Tue,Wed,Fri,Sat,Thu,Sun
+    const slots = order.slice(0, made.length).sort((a,b)=>a-b);
+    const start = new Date();
+    for(let w=0; w<4; w++){
+      made.forEach((rec,i)=>{
+        const d = new Date(start);
+        d.setDate(start.getDate() - start.getDay() + slots[i] + w*7);
+        if(d < start && w===0) return;                   // never backfill
+        S.scheduled[iso(d)] = {workoutId:rec.id, time:'17:30', note:''};
+      });
+    }
+  }
+  saveNow(); render();
+  toast(schedule ? `${made.length} workouts saved and scheduled for 4 weeks`
+                 : `${made.length} workouts saved to Your workouts`);
 }
 
 /* ══════════════════════════════════════ sync bridge ═════════════════════ */
